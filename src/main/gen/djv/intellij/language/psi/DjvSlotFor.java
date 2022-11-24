@@ -7,11 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public interface DjvSlotFor extends PsiElement {
 
-  @Nullable
-  DjvSlotExpression getSlotExpression();
+  @NotNull
+  List<DjvSlotExpression> getSlotExpressionList();
 
-  @Nullable
-  DjvSlotFor getSlotFor();
+  @NotNull
+  List<DjvSlotFor> getSlotForList();
 
   @Nullable
   DjvSlotForElse getSlotForElse();
@@ -22,7 +22,7 @@ public interface DjvSlotFor extends PsiElement {
   @NotNull
   DjvSlotForStart getSlotForStart();
 
-  @Nullable
-  DjvTextStatement getTextStatement();
+  @NotNull
+  List<DjvTextStatement> getTextStatementList();
 
 }

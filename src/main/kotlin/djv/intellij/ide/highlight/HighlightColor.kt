@@ -8,7 +8,7 @@ import com.intellij.openapi.options.colors.AttributesDescriptor
 import com.intellij.openapi.util.NlsContexts
 import java.util.function.Supplier
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors as Default
-import djv.intellij.language.file.DJBundle.messagePointer as keyof
+import djv.intellij.language.file.DjvBundle.messagePointer as keyof
 
 
 enum class HighlightColor(

@@ -3,7 +3,7 @@ package djv.intellij.ide.highlight
 
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
-import djv.intellij.language.file.DJBundle
+import djv.intellij.language.file.DjvBundle
 import djv.intellij.language.file.DJIcon
 
 class YggHighlightSettingPage : ColorSettingsPage {
@@ -20,7 +20,7 @@ class YggHighlightSettingPage : ColorSettingsPage {
 
     override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
 
-    override fun getDisplayName() = DJBundle.message("filetype.name")
+    override fun getDisplayName() = DjvBundle.message("filetype.name")
 
     override fun getIcon() = DJIcon.FILE
 

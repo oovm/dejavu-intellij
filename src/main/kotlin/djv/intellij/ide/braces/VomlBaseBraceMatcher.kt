@@ -7,7 +7,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
-import djv.intellij.language.DJParserDefinition
+import djv.intellij.language.DjvParserDefinition
 import djv.intellij.language.psi.DjvTypes.*
 
 class VomlBaseBraceMatcher : PairedBraceMatcher {
@@ -27,7 +27,7 @@ class VomlBaseBraceMatcher : PairedBraceMatcher {
         )
 
         private val InsertPairBraceBefore = TokenSet.orSet(
-            DJParserDefinition.COMMENTS, TokenSet.create(
+            DjvParserDefinition.COMMENTS, TokenSet.create(
                 TokenType.WHITE_SPACE, COMMA, PARENTHESIS_R, BRACKET_R, BRACE_R, BRACE_L
             )
         )

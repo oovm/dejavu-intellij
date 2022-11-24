@@ -28,15 +28,15 @@ public class DjvSlotForNode extends ASTWrapperPsiElement implements DjvSlotFor {
   }
 
   @Override
-  @Nullable
-  public DjvSlotExpression getSlotExpression() {
-    return findChildByClass(DjvSlotExpression.class);
+  @NotNull
+  public List<DjvSlotExpression> getSlotExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvSlotExpression.class);
   }
 
   @Override
-  @Nullable
-  public DjvSlotFor getSlotFor() {
-    return findChildByClass(DjvSlotFor.class);
+  @NotNull
+  public List<DjvSlotFor> getSlotForList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvSlotFor.class);
   }
 
   @Override
@@ -58,9 +58,9 @@ public class DjvSlotForNode extends ASTWrapperPsiElement implements DjvSlotFor {
   }
 
   @Override
-  @Nullable
-  public DjvTextStatement getTextStatement() {
-    return findChildByClass(DjvTextStatement.class);
+  @NotNull
+  public List<DjvTextStatement> getTextStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvTextStatement.class);
   }
 
 }

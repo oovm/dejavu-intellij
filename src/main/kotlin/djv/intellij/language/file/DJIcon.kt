@@ -11,6 +11,6 @@ class DJIcon : IconProvider() {
     }
 
     companion object {
-        val FILE = IconLoader.getIcon("/icons/DjIcon.svg", DJIcon::class.java)
+        val FILE = IconLoader.getIcon("/icons/DjvIcon.svg", DJIcon::class.java)
     }
 }

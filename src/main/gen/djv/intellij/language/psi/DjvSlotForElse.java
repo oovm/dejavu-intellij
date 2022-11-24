@@ -10,13 +10,13 @@ public interface DjvSlotForElse extends PsiElement {
   @NotNull
   DjvSlotElse getSlotElse();
 
-  @Nullable
-  DjvSlotExpression getSlotExpression();
+  @NotNull
+  List<DjvSlotExpression> getSlotExpressionList();
 
-  @Nullable
-  DjvSlotFor getSlotFor();
+  @NotNull
+  List<DjvSlotFor> getSlotForList();
 
-  @Nullable
-  DjvTextStatement getTextStatement();
+  @NotNull
+  List<DjvTextStatement> getTextStatementList();
 
 }

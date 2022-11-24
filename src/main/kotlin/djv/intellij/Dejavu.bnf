@@ -68,11 +68,11 @@ private statements ::=
 text_statement ::= SAHA_TEXT;
 // ---------------------------------------------------------------------------------------------------------------------
 // {% slot %}
-slot_for ::= slot_for_start statements slot_for_else? slot_for_end {
+slot_for ::= slot_for_start statements* slot_for_else? slot_for_end {
     pin = slot_for_start
 };
 slot_for_start ::= slot_start kw_for kw_in slot_end;
-slot_for_else  ::= slot_else statements;
+slot_for_else  ::= slot_else statements*;
 slot_for_end   ::= slot_start kw_end_for slot_end;
 
 kw_for     ::= "for";

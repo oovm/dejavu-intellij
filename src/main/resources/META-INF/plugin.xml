@@ -4,17 +4,17 @@
 	<vendor>Saha Language</vendor>
 	<depends>com.intellij.modules.platform</depends>
 	<!--	<depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
-	<resource-bundle>messages.DJBundle</resource-bundle>
+	<resource-bundle>messages.DjvBundle</resource-bundle>
 	<extensions defaultExtensionNs="com.intellij">
 		<fileType
-			name="Saha"
+			name="DejaVu"
 			language="DejaVu"
-			extensions="saha"
-			implementationClass="djv.intellij.language.file.SahaFileType"
+			extensions="dj;djv;dejavu;"
+			implementationClass="djv.intellij.language.file.DjvFileType"
 			fieldName="INSTANCE"/>
 		<lang.parserDefinition
 			language="DejaVu"
-			implementationClass="djv.intellij.language.SahaParserDefinition"/>
+			implementationClass="djv.intellij.language.DjvParserDefinition"/>
 		<!-- Highlighter -->
 		<colorSettingsPage implementation="djv.intellij.ide.highlight.YggHighlightSettingPage"/>
 		<lang.syntaxHighlighter

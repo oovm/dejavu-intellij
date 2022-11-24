@@ -4,10 +4,10 @@ package djv.intellij.ide.braces
 import com.intellij.codeInsight.highlighting.PairedBraceMatcherAdapter
 import com.intellij.openapi.editor.highlighter.HighlighterIterator
 import com.intellij.openapi.fileTypes.FileType
-import djv.intellij.language.DJLanguage
-import djv.intellij.language.file.SahaFileType
+import djv.intellij.language.DjvLanguage
+import djv.intellij.language.file.DjvFileType
 
-class VomlBraceMatcher : PairedBraceMatcherAdapter(VomlBaseBraceMatcher(), DJLanguage) {
+class VomlBraceMatcher : PairedBraceMatcherAdapter(VomlBaseBraceMatcher(), DjvLanguage) {
     override fun isLBraceToken(iterator: HighlighterIterator, fileText: CharSequence, fileType: FileType): Boolean =
         isBrace(iterator, fileText, fileType, true)
 
@@ -20,7 +20,7 @@ class VomlBraceMatcher : PairedBraceMatcherAdapter(VomlBaseBraceMatcher(), DJLan
         fileType: FileType,
         left: Boolean
     ): Boolean {
-        if (fileType != SahaFileType) return false
+        if (fileType != DjvFileType) return false
         val pair = findPair(left, iterator, fileText, fileType)
         return pair != null
     }

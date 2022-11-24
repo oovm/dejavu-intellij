@@ -17,11 +17,11 @@ import djv.intellij.language.parser.DjvParser
 import djv.intellij.language.psi.DjvTypes.*
 
 
-class DJParserDefinition : ParserDefinition {
+class DjvParserDefinition : ParserDefinition {
     companion object {
         val COMMENTS = TokenSet.create(COMMENT_LINE, COMMENT_BLOCK, COMMENT_BLOCK)
         val STRING_LITERALS = TokenSet.create(STRING_LITERAL)
-        val FILE = IFileElementType(DJLanguage)
+        val FILE = IFileElementType(DjvLanguage)
     }
 
     override fun createLexer(project: Project): Lexer = DjvLexerAdapter()

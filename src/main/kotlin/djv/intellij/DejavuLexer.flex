@@ -45,8 +45,6 @@ HEX = [0-9a-fA-F]
 RAW_L = \{#(=-_\!)?
 RAW_R = (=-_\!)?#\}
 
-COMMENT_DOC=("///")[^\r\n]*
-COMMENT_LINE=("//")[^\r\n]*
 COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 
 SLOT_L = \{%(=-_\!)?
@@ -56,24 +54,18 @@ SAHA_TEXT = (!({RAW_L}|{SLOT_L}) .)+
 
 %%
 <YYINITIAL> {
+    {SLOT_L}    { yybegin(CODE); return SLOT_L; }
     {SAHA_TEXT} { return SAHA_TEXT; }
-    {SLOT_L}    {
-        yybegin(CODE);
-        return SLOT_L;
-    }
 }
 
 <CODE> {
     {WHITE_SPACE} { return WHITE_SPACE; }
-    {SLOT_R}      {
-        yybegin(YYINITIAL);
-        return SLOT_R;
-    }
+    {SLOT_R}      { yybegin(YYINITIAL); return SLOT_R; }
+    \'            { yybegin(StringSQ); return STRING_SQ; }
+    \"            { yybegin(StringDQ); return STRING_DQ; }
 }
 
 <CODE> {
-    //
-
     "("  { return PARENTHESIS_L; }
     ")"  { return PARENTHESIS_R; }
     "["  { return BRACKET_L; }
@@ -116,10 +108,6 @@ SAHA_TEXT = (!({RAW_L}|{SLOT_L}) .)+
     {SIGN}        { return SIGN; }
 }
 // String Mode =========================================================================================================
-<CODE> {
-    \' {yybegin(StringSQ);return STRING_SQ;}
-    \" {yybegin(StringDQ);return STRING_DQ;}
-}
 <StringSQ, StringDQ, CODE> {ESCAPE_SPECIAL} {
     return ESCAPE_SPECIAL;
 }

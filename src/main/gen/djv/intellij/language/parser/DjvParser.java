@@ -1013,7 +1013,7 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_for_start statements slot_for_else? slot_for_end
+  // slot_for_start statements* slot_for_else? slot_for_end
   public static boolean slot_for(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_for")) return false;
     if (!nextTokenIs(b, SLOT_L)) return false;
@@ -1021,11 +1021,22 @@ public class DjvParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, SLOT_FOR, null);
     r = slot_for_start(b, l + 1);
     p = r; // pin = slot_for_start
-    r = r && report_error_(b, statements(b, l + 1));
+    r = r && report_error_(b, slot_for_1(b, l + 1));
     r = p && report_error_(b, slot_for_2(b, l + 1)) && r;
     r = p && slot_for_end(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // statements*
+  private static boolean slot_for_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_for_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!statements(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "slot_for_1", c)) break;
+    }
+    return true;
   }
 
   // slot_for_else?
@@ -1036,16 +1047,27 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_else statements
+  // slot_else statements*
   public static boolean slot_for_else(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_for_else")) return false;
     if (!nextTokenIs(b, SLOT_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = slot_else(b, l + 1);
-    r = r && statements(b, l + 1);
+    r = r && slot_for_else_1(b, l + 1);
     exit_section_(b, m, SLOT_FOR_ELSE, r);
     return r;
+  }
+
+  // statements*
+  private static boolean slot_for_else_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_for_else_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!statements(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "slot_for_else_1", c)) break;
+    }
+    return true;
   }
 
   /* ********************************************************** */
