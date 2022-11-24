@@ -30,9 +30,8 @@ public _DjvLexer() {
 EOL=\R
 WHITE_SPACE=\s+
 
-
 BOOLEAN=true|false|null
-SYMBOL=[\p{XID_Start}_][\p{XID_Continue}_]*
+SYMBOL=[\p{XID_Start}_-][\p{XID_Continue}-]*
 BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
 INTEGER=(0|[1-9][0-9_]*)
 DECIMAL=([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)
@@ -50,19 +49,27 @@ COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 SLOT_L = \{%(=-_\!)?
 SLOT_R = (=-_\!)?%\}
 
-SAHA_TEXT = (!({RAW_L}|{SLOT_L}) .)+
+KW_ELSE = "else"
+KW_END_FOR = "end-for" | "end"
+
+SAHA_TEXT = [^{]+
 
 %%
 <YYINITIAL> {
-    {SLOT_L}    { yybegin(CODE); return SLOT_L; }
+    {SLOT_L}    { yybegin(CODE); return SLOT_START; }
     {SAHA_TEXT} { return SAHA_TEXT; }
 }
 
 <CODE> {
     {WHITE_SPACE} { return WHITE_SPACE; }
-    {SLOT_R}      { yybegin(YYINITIAL); return SLOT_R; }
+    {SLOT_R}      { yybegin(YYINITIAL); return SLOT_END; }
     \'            { yybegin(StringSQ); return STRING_SQ; }
     \"            { yybegin(StringDQ); return STRING_DQ; }
+}
+
+<CODE> {
+    {KW_ELSE}    { return KW_ELSE; }
+    {KW_END_FOR} { return KW_END_FOR; }
 }
 
 <CODE> {

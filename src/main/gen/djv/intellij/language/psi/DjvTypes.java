@@ -14,6 +14,7 @@ public interface DjvTypes {
   IElementType DEFINE = new DjvElementType("DEFINE");
   IElementType EXPORT_STATEMENT = new DjvElementType("EXPORT_STATEMENT");
   IElementType EXPR = new DjvElementType("EXPR");
+  IElementType EXPRESSION = new DjvElementType("EXPRESSION");
   IElementType FIELD_MARK = new DjvElementType("FIELD_MARK");
   IElementType FIELD_RHS = new DjvElementType("FIELD_RHS");
   IElementType FUNCTION_CALL = new DjvElementType("FUNCTION_CALL");
@@ -23,8 +24,6 @@ public interface DjvTypes {
   IElementType INFIX = new DjvElementType("INFIX");
   IElementType KEY = new DjvElementType("KEY");
   IElementType KEY_SYMBOL = new DjvElementType("KEY_SYMBOL");
-  IElementType KW_ELSE = new DjvElementType("KW_ELSE");
-  IElementType KW_END_FOR = new DjvElementType("KW_END_FOR");
   IElementType KW_FOR = new DjvElementType("KW_FOR");
   IElementType KW_IMPORT = new DjvElementType("KW_IMPORT");
   IElementType KW_IN = new DjvElementType("KW_IN");
@@ -39,19 +38,20 @@ public interface DjvTypes {
   IElementType OBJECT_KEY = new DjvElementType("OBJECT_KEY");
   IElementType PAIR = new DjvElementType("PAIR");
   IElementType PARENTHESIS = new DjvElementType("PARENTHESIS");
+  IElementType PATTERN = new DjvElementType("PATTERN");
   IElementType PREFIX = new DjvElementType("PREFIX");
   IElementType RULE_ARGUMENT = new DjvElementType("RULE_ARGUMENT");
   IElementType RULE_BODY = new DjvElementType("RULE_BODY");
   IElementType RULE_STATEMENT = new DjvElementType("RULE_STATEMENT");
   IElementType RULE_TYPE = new DjvElementType("RULE_TYPE");
   IElementType SLOT_ELSE = new DjvElementType("SLOT_ELSE");
-  IElementType SLOT_END = new DjvElementType("SLOT_END");
   IElementType SLOT_EXPRESSION = new DjvElementType("SLOT_EXPRESSION");
   IElementType SLOT_FOR = new DjvElementType("SLOT_FOR");
   IElementType SLOT_FOR_ELSE = new DjvElementType("SLOT_FOR_ELSE");
   IElementType SLOT_FOR_END = new DjvElementType("SLOT_FOR_END");
   IElementType SLOT_FOR_START = new DjvElementType("SLOT_FOR_START");
-  IElementType SLOT_START = new DjvElementType("SLOT_START");
+  IElementType SLOT_L = new DjvElementType("SLOT_L");
+  IElementType SLOT_R = new DjvElementType("SLOT_R");
   IElementType STRING_LITERAL = new DjvElementType("STRING_LITERAL");
   IElementType SUFFIX = new DjvElementType("SUFFIX");
   IElementType SYMBOL_PATH = new DjvElementType("SYMBOL_PATH");
@@ -91,6 +91,9 @@ public interface DjvTypes {
   IElementType HASH = new DjvElementType("HASH");
   IElementType HYPHEN = new DjvElementType("-");
   IElementType INTEGER = new DjvElementType("INTEGER");
+  IElementType KW_ELSE = new DjvElementType("else");
+  IElementType KW_END_FOR = new DjvElementType("end-for");
+  IElementType KW_END_IF = new DjvElementType("end-if");
   IElementType MANY = new DjvElementType("*");
   IElementType MANY1 = new DjvElementType("+");
   IElementType NOT = new DjvElementType("!");
@@ -103,8 +106,8 @@ public interface DjvTypes {
   IElementType SAHA_TEXT = new DjvElementType("<TEXT>");
   IElementType SEMICOLON = new DjvElementType(";");
   IElementType SIGN = new DjvElementType("SIGN");
-  IElementType SLOT_L = new DjvElementType("{%");
-  IElementType SLOT_R = new DjvElementType("%}");
+  IElementType SLOT_END = new DjvElementType("%}");
+  IElementType SLOT_START = new DjvElementType("{%");
   IElementType SOFT_CONNECT = new DjvElementType("~");
   IElementType STRING_DQ = new DjvElementType("STRING_DQ");
   IElementType STRING_SQ = new DjvElementType("STRING_SQ");
@@ -133,6 +136,9 @@ public interface DjvTypes {
       else if (type == EXPR) {
         return new DjvExprNode(node);
       }
+      else if (type == EXPRESSION) {
+        return new DjvExpressionNode(node);
+      }
       else if (type == FIELD_MARK) {
         return new DjvFieldMarkNode(node);
       }
@@ -159,12 +165,6 @@ public interface DjvTypes {
       }
       else if (type == KEY_SYMBOL) {
         return new DjvKeySymbolNode(node);
-      }
-      else if (type == KW_ELSE) {
-        return new DjvKwElseNode(node);
-      }
-      else if (type == KW_END_FOR) {
-        return new DjvKwEndForNode(node);
       }
       else if (type == KW_FOR) {
         return new DjvKwForNode(node);
@@ -208,6 +208,9 @@ public interface DjvTypes {
       else if (type == PARENTHESIS) {
         return new DjvParenthesisNode(node);
       }
+      else if (type == PATTERN) {
+        return new DjvPatternNode(node);
+      }
       else if (type == PREFIX) {
         return new DjvPrefixNode(node);
       }
@@ -226,9 +229,6 @@ public interface DjvTypes {
       else if (type == SLOT_ELSE) {
         return new DjvSlotElseNode(node);
       }
-      else if (type == SLOT_END) {
-        return new DjvSlotEndNode(node);
-      }
       else if (type == SLOT_EXPRESSION) {
         return new DjvSlotExpressionNode(node);
       }
@@ -244,8 +244,11 @@ public interface DjvTypes {
       else if (type == SLOT_FOR_START) {
         return new DjvSlotForStartNode(node);
       }
-      else if (type == SLOT_START) {
-        return new DjvSlotStartNode(node);
+      else if (type == SLOT_L) {
+        return new DjvSlotLNode(node);
+      }
+      else if (type == SLOT_R) {
+        return new DjvSlotRNode(node);
       }
       else if (type == STRING_LITERAL) {
         return new DjvStringLiteralNode(node);

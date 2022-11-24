@@ -29,6 +29,12 @@ public class DjvSlotForStartNode extends ASTWrapperPsiElement implements DjvSlot
 
   @Override
   @NotNull
+  public DjvExpression getExpression() {
+    return findNotNullChildByClass(DjvExpression.class);
+  }
+
+  @Override
+  @NotNull
   public DjvKwFor getKwFor() {
     return findNotNullChildByClass(DjvKwFor.class);
   }
@@ -41,14 +47,20 @@ public class DjvSlotForStartNode extends ASTWrapperPsiElement implements DjvSlot
 
   @Override
   @NotNull
-  public DjvSlotEnd getSlotEnd() {
-    return findNotNullChildByClass(DjvSlotEnd.class);
+  public DjvPattern getPattern() {
+    return findNotNullChildByClass(DjvPattern.class);
   }
 
   @Override
   @NotNull
-  public DjvSlotStart getSlotStart() {
-    return findNotNullChildByClass(DjvSlotStart.class);
+  public DjvSlotL getSlotL() {
+    return findNotNullChildByClass(DjvSlotL.class);
+  }
+
+  @Override
+  @NotNull
+  public DjvSlotR getSlotR() {
+    return findNotNullChildByClass(DjvSlotR.class);
   }
 
 }

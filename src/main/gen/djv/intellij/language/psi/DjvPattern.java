@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface DjvSlotElse extends PsiElement {
+public interface DjvPattern extends PsiElement {
 
   @NotNull
-  DjvSlotL getSlotL();
-
-  @NotNull
-  DjvSlotR getSlotR();
+  DjvIdentifier getIdentifier();
 
 }

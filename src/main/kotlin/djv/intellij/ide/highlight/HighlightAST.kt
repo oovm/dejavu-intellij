@@ -31,6 +31,15 @@ class HighlightAST : DjvVisitor(), HighlightVisitor {
 //        }
 //    }
 
+    override fun visitKwFor(o: DjvKwFor) {
+        highlight(o, HighlightColor.KEYWORD)
+    }
+
+    override fun visitKwIn(o: DjvKwIn) {
+        highlight(o, HighlightColor.KEYWORD)
+    }
+
+
 
     override fun analyze(
         file: PsiFile,

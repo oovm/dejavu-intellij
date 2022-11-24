@@ -8,15 +8,21 @@ import com.intellij.psi.PsiElement;
 public interface DjvSlotForStart extends PsiElement {
 
   @NotNull
+  DjvExpression getExpression();
+
+  @NotNull
   DjvKwFor getKwFor();
 
   @NotNull
   DjvKwIn getKwIn();
 
   @NotNull
-  DjvSlotEnd getSlotEnd();
+  DjvPattern getPattern();
 
   @NotNull
-  DjvSlotStart getSlotStart();
+  DjvSlotL getSlotL();
+
+  @NotNull
+  DjvSlotR getSlotR();
 
 }

@@ -29,20 +29,14 @@ public class DjvSlotForEndNode extends ASTWrapperPsiElement implements DjvSlotFo
 
   @Override
   @NotNull
-  public DjvKwEndFor getKwEndFor() {
-    return findNotNullChildByClass(DjvKwEndFor.class);
+  public DjvSlotL getSlotL() {
+    return findNotNullChildByClass(DjvSlotL.class);
   }
 
   @Override
   @NotNull
-  public DjvSlotEnd getSlotEnd() {
-    return findNotNullChildByClass(DjvSlotEnd.class);
-  }
-
-  @Override
-  @NotNull
-  public DjvSlotStart getSlotStart() {
-    return findNotNullChildByClass(DjvSlotStart.class);
+  public DjvSlotR getSlotR() {
+    return findNotNullChildByClass(DjvSlotR.class);
   }
 
 }

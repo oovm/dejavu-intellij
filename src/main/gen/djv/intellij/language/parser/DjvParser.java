@@ -228,6 +228,18 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // identifier
+  public static boolean expression(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expression")) return false;
+    if (!nextTokenIs(b, SYMBOL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = identifier(b, l + 1);
+    exit_section_(b, m, EXPRESSION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // identifier COLON field_rhs
   public static boolean field_mark(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "field_mark")) return false;
@@ -398,29 +410,6 @@ public class DjvParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, SYMBOL);
     exit_section_(b, m, KEY_SYMBOL, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // "for"
-  public static boolean kw_else(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_else")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_ELSE, "<kw else>");
-    r = consumeToken(b, "for");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // "end-for" | "end"
-  public static boolean kw_end_for(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_end_for")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_END_FOR, "<kw end for>");
-    r = consumeToken(b, "end-for");
-    if (!r) r = consumeToken(b, "end");
-    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -859,6 +848,18 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // identifier
+  public static boolean pattern(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pattern")) return false;
+    if (!nextTokenIs(b, SYMBOL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = identifier(b, l + 1);
+    exit_section_(b, m, PATTERN, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // ACCENT
   public static boolean prefix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "prefix")) return false;
@@ -965,44 +966,33 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_start kw_else slot_end
+  // slot_l KW_ELSE slot_r
   public static boolean slot_else(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_else")) return false;
-    if (!nextTokenIs(b, SLOT_L)) return false;
+    if (!nextTokenIs(b, SLOT_START)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = slot_start(b, l + 1);
-    r = r && kw_else(b, l + 1);
-    r = r && slot_end(b, l + 1);
+    r = slot_l(b, l + 1);
+    r = r && consumeToken(b, KW_ELSE);
+    r = r && slot_r(b, l + 1);
     exit_section_(b, m, SLOT_ELSE, r);
     return r;
   }
 
   /* ********************************************************** */
-  // SLOT_R
-  public static boolean slot_end(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slot_end")) return false;
-    if (!nextTokenIs(b, SLOT_R)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, SLOT_R);
-    exit_section_(b, m, SLOT_END, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // slot_start identifier? slot_end
+  // slot_l identifier? slot_r {
+  // }
   public static boolean slot_expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_expression")) return false;
-    if (!nextTokenIs(b, SLOT_L)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, SLOT_EXPRESSION, null);
-    r = slot_start(b, l + 1);
-    p = r; // pin = slot_start
-    r = r && report_error_(b, slot_expression_1(b, l + 1));
-    r = p && slot_end(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    if (!nextTokenIs(b, SLOT_START)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = slot_l(b, l + 1);
+    r = r && slot_expression_1(b, l + 1);
+    r = r && slot_r(b, l + 1);
+    r = r && slot_expression_3(b, l + 1);
+    exit_section_(b, m, SLOT_EXPRESSION, r);
+    return r;
   }
 
   // identifier?
@@ -1012,11 +1002,17 @@ public class DjvParser implements PsiParser, LightPsiParser {
     return true;
   }
 
+  // {
+  // }
+  private static boolean slot_expression_3(PsiBuilder b, int l) {
+    return true;
+  }
+
   /* ********************************************************** */
   // slot_for_start statements* slot_for_else? slot_for_end
   public static boolean slot_for(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_for")) return false;
-    if (!nextTokenIs(b, SLOT_L)) return false;
+    if (!nextTokenIs(b, SLOT_START)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, SLOT_FOR, null);
     r = slot_for_start(b, l + 1);
@@ -1050,13 +1046,14 @@ public class DjvParser implements PsiParser, LightPsiParser {
   // slot_else statements*
   public static boolean slot_for_else(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_for_else")) return false;
-    if (!nextTokenIs(b, SLOT_L)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    if (!nextTokenIs(b, SLOT_START)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, SLOT_FOR_ELSE, null);
     r = slot_else(b, l + 1);
+    p = r; // pin = slot_else
     r = r && slot_for_else_1(b, l + 1);
-    exit_section_(b, m, SLOT_FOR_ELSE, r);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // statements*
@@ -1071,43 +1068,57 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_start kw_end_for slot_end
+  // slot_l KW_END_FOR slot_r
   public static boolean slot_for_end(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_for_end")) return false;
-    if (!nextTokenIs(b, SLOT_L)) return false;
+    if (!nextTokenIs(b, SLOT_START)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = slot_start(b, l + 1);
-    r = r && kw_end_for(b, l + 1);
-    r = r && slot_end(b, l + 1);
+    r = slot_l(b, l + 1);
+    r = r && consumeToken(b, KW_END_FOR);
+    r = r && slot_r(b, l + 1);
     exit_section_(b, m, SLOT_FOR_END, r);
     return r;
   }
 
   /* ********************************************************** */
-  // slot_start kw_for kw_in slot_end
+  // slot_l kw_for pattern kw_in expression slot_r
   public static boolean slot_for_start(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_for_start")) return false;
-    if (!nextTokenIs(b, SLOT_L)) return false;
+    if (!nextTokenIs(b, SLOT_START)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = slot_start(b, l + 1);
+    r = slot_l(b, l + 1);
     r = r && kw_for(b, l + 1);
+    r = r && pattern(b, l + 1);
     r = r && kw_in(b, l + 1);
-    r = r && slot_end(b, l + 1);
+    r = r && expression(b, l + 1);
+    r = r && slot_r(b, l + 1);
     exit_section_(b, m, SLOT_FOR_START, r);
     return r;
   }
 
   /* ********************************************************** */
-  // SLOT_L
-  public static boolean slot_start(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slot_start")) return false;
-    if (!nextTokenIs(b, SLOT_L)) return false;
+  // SLOT_START
+  public static boolean slot_l(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_l")) return false;
+    if (!nextTokenIs(b, SLOT_START)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, SLOT_L);
-    exit_section_(b, m, SLOT_START, r);
+    r = consumeToken(b, SLOT_START);
+    exit_section_(b, m, SLOT_L, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // SLOT_END
+  public static boolean slot_r(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_r")) return false;
+    if (!nextTokenIs(b, SLOT_END)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SLOT_END);
+    exit_section_(b, m, SLOT_R, r);
     return r;
   }
 
@@ -1117,7 +1128,7 @@ public class DjvParser implements PsiParser, LightPsiParser {
   //     | text_statement
   static boolean statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statements")) return false;
-    if (!nextTokenIs(b, "", SAHA_TEXT, SLOT_L)) return false;
+    if (!nextTokenIs(b, "", SAHA_TEXT, SLOT_START)) return false;
     boolean r;
     r = slot_for(b, l + 1);
     if (!r) r = slot_expression(b, l + 1);

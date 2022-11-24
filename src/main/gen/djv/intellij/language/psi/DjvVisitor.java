@@ -35,6 +35,10 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitExpression(@NotNull DjvExpression o) {
+    visitPsiElement(o);
+  }
+
   public void visitFieldMark(@NotNull DjvFieldMark o) {
     visitPsiElement(o);
   }
@@ -68,14 +72,6 @@ public class DjvVisitor extends PsiElementVisitor {
   }
 
   public void visitKeySymbol(@NotNull DjvKeySymbol o) {
-    visitPsiElement(o);
-  }
-
-  public void visitKwElse(@NotNull DjvKwElse o) {
-    visitPsiElement(o);
-  }
-
-  public void visitKwEndFor(@NotNull DjvKwEndFor o) {
     visitPsiElement(o);
   }
 
@@ -135,6 +131,10 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPattern(@NotNull DjvPattern o) {
+    visitPsiElement(o);
+  }
+
   public void visitPrefix(@NotNull DjvPrefix o) {
     visitPsiElement(o);
   }
@@ -159,10 +159,6 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitSlotEnd(@NotNull DjvSlotEnd o) {
-    visitPsiElement(o);
-  }
-
   public void visitSlotExpression(@NotNull DjvSlotExpression o) {
     visitPsiElement(o);
   }
@@ -183,7 +179,11 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitSlotStart(@NotNull DjvSlotStart o) {
+  public void visitSlotL(@NotNull DjvSlotL o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotR(@NotNull DjvSlotR o) {
     visitPsiElement(o);
   }
 

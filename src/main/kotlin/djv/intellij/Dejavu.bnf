@@ -36,8 +36,11 @@
 
         EQ = '='
         SAHA_TEXT = "<TEXT>"
-        SLOT_L = '{%'
-        SLOT_R = '%}'
+        SLOT_START = '{%'
+        SLOT_END = '%}'
+        KW_ELSE = 'else'
+        KW_END_FOR = 'end-for'
+        KW_END_IF = 'end-if'
         COLON = ':'
         SEMICOLON = ';'
         COMMA = ','
@@ -71,23 +74,27 @@ text_statement ::= SAHA_TEXT;
 slot_for ::= slot_for_start statements* slot_for_else? slot_for_end {
     pin = slot_for_start
 };
-slot_for_start ::= slot_start kw_for kw_in slot_end;
-slot_for_else  ::= slot_else statements*;
-slot_for_end   ::= slot_start kw_end_for slot_end;
+slot_for_start ::= slot_l kw_for pattern kw_in expression slot_r;
+slot_for_else  ::= slot_else statements* {
+    pin = slot_else
+};
+slot_for_end   ::= slot_l KW_END_FOR slot_r;
 
 kw_for     ::= "for";
 kw_in      ::= "in";
-kw_else    ::= "for";
-kw_end_for ::= "end-for" | "end";
 // ---------------------------------------------------------------------------------------------------------------------
-slot_else ::= slot_start kw_else slot_end;
+slot_else ::= slot_l KW_ELSE slot_r;
+// ---------------------------------------------------------------------------------------------------------------------
+pattern ::= identifier;
+// ---------------------------------------------------------------------------------------------------------------------
+expression ::= identifier;
 // ---------------------------------------------------------------------------------------------------------------------
 // {% slot %}
-slot_expression ::= slot_start identifier? slot_end {
-    pin = slot_start
+slot_expression ::= slot_l identifier? slot_r {
+
 };
-slot_start ::= SLOT_L;
-slot_end ::= SLOT_R;
+slot_l ::= SLOT_START;
+slot_r ::= SLOT_END;
 // ---------------------------------------------------------------------------------------------------------------------
 // @import
 export_statement ::= "codegen" identifier object {
