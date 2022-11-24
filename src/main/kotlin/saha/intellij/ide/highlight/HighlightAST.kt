@@ -9,7 +9,7 @@ import com.intellij.psi.PsiFile
 import saha.intellij.language.file.YggdrasilFileNode
 import saha.intellij.language.psi.*
 
-class HighlightAST : saha.intellij.language.psi.SahaVisitor(), HighlightVisitor {
+class HighlightAST : SahaVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
     override fun clone(): HighlightVisitor = HighlightAST()
@@ -18,58 +18,18 @@ class HighlightAST : saha.intellij.language.psi.SahaVisitor(), HighlightVisitor 
 
     override fun visit(element: PsiElement) = element.accept(this)
 
-    override fun visitGrammarStatement(o: saha.intellij.language.psi.YggGrammarStatement) {
-        highlight(o.firstChild, HighlightColor.KEYWORD)
-        highlight(o.identifier, HighlightColor.MACRO_SYMBOL)
-    }
-
-    override fun visitExportStatement(o: saha.intellij.language.psi.YggExportStatement) {
-        highlight(o.firstChild, HighlightColor.KEYWORD)
-        highlight(o.identifier, HighlightColor.MACRO_SYMBOL)
-    }
-
-    override fun visitImportStatement(o: saha.intellij.language.psi.YggImportStatement) {
-        highlight(o.firstChild, HighlightColor.KEYWORD)
-    }
-
-    override fun visitRuleStatement(o: saha.intellij.language.psi.YggRuleStatement) {
-        highlight(o.define, HighlightColor.KEYWORD)
-        if (o.ruleArgument == null) {
-            highlight(o.identifier, HighlightColor.RULE_SYMBOL)
-        }
-        else {
-            highlight(o.identifier, HighlightColor.FUNCTION_SYMBOL)
-        }
-        o.ruleType?.let {
-            highlight(it.identifier, HighlightColor.RULE_SYMBOL)
-        }
-    }
-
-    override fun visitMacroCall(o: saha.intellij.language.psi.YggMacroCall) {
-        highlight(o.firstChild, HighlightColor.MACRO_SYMBOL)
-        highlight(o.identifier, HighlightColor.MACRO_SYMBOL)
-    }
-
-    override fun visitFunctionCall(o: saha.intellij.language.psi.YggFunctionCall) {
-        highlight(o.firstChild, HighlightColor.FUNCTION_SYMBOL)
-        highlight(o.identifier, HighlightColor.FUNCTION_SYMBOL)
-    }
-
-    override fun visitBranchMark(o: saha.intellij.language.psi.YggBranchMark) {
-        highlight(o, HighlightColor.BRANCH_MARK)
-    }
-
-    override fun visitFieldMark(o: saha.intellij.language.psi.YggFieldMark) {
-        highlight(o.firstChild, HighlightColor.FIELD_MARK)
-    }
-
-    override fun visitObjectKey(o: saha.intellij.language.psi.YggObjectKey) {
-        highlight(o, HighlightColor.FIELD_MARK)
-    }
-
-    override fun visitIdentifier(o: saha.intellij.language.psi.YggIdentifier) {
-
-    }
+//    override fun visitRuleStatement(o: saha.intellij.language.psi.YggRuleStatement) {
+//        highlight(o.define, HighlightColor.KEYWORD)
+//        if (o.ruleArgument == null) {
+//            highlight(o.identifier, HighlightColor.RULE_SYMBOL)
+//        }
+//        else {
+//            highlight(o.identifier, HighlightColor.FUNCTION_SYMBOL)
+//        }
+//        o.ruleType?.let {
+//            highlight(it.identifier, HighlightColor.RULE_SYMBOL)
+//        }
+//    }
 
 
     override fun analyze(

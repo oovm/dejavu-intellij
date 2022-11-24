@@ -35,6 +35,8 @@
         CHOOSE='|'
 
         EQ = '='
+        SLOT_L = '{%'
+        SLOT_R = '%}'
         COLON = ':'
         SEMICOLON = ';'
         COMMA = ','
@@ -57,20 +59,12 @@ private comment ::= COMMENT_LINE | COMMENT_BLOCK | COMMENT_DOC;
 
 private statements ::=
       grammar_statement
-    | export_statement
-    | import_statement
-    | macro_statement
-    | macro_call
-    | rule_statement
     | SEMICOLON;
 // ---------------------------------------------------------------------------------------------------------------------
-// @grammar ygg {"*.yg","*.ygg", "*.grammar"}
-// @grammar ygg;
-grammar_statement ::= "grammar" identifier object {
+// {% %}
+grammar_statement ::= SLOT_L identifier SLOT_R {
     pin = identifier
-    recoverWhile = end_brace
 };
-private end_brace ::= BRACE_R;
 // ---------------------------------------------------------------------------------------------------------------------
 // @import
 export_statement ::= "codegen" identifier object {

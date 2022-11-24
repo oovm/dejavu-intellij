@@ -13,6 +13,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
 import saha.intellij.language.file.YggdrasilFileNode
+import saha.intellij.language.parser.SahaParser
 import saha.intellij.language.psi.SahaTypes.*
 
 
@@ -25,7 +26,7 @@ class YggParserDefinition : ParserDefinition {
 
     override fun createLexer(project: Project): Lexer = YggLexerAdapter()
 
-    override fun createParser(project: Project): PsiParser = saha.intellij.language.parser.YggParser()
+    override fun createParser(project: Project): PsiParser = SahaParser()
 
     override fun getFileNodeType(): IFileElementType = FILE
 

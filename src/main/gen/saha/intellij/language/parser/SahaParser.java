@@ -147,12 +147,6 @@ public class SahaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BRACE_R
-  static boolean end_brace(PsiBuilder b, int l) {
-    return consumeToken(b, BRACE_R);
-  }
-
-  /* ********************************************************** */
   // EQ | COLON
   static boolean eq(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "eq")) return false;
@@ -184,7 +178,7 @@ public class SahaParser implements PsiParser, LightPsiParser {
     r = r && identifier(b, l + 1);
     p = r; // pin = identifier
     r = r && object(b, l + 1);
-    exit_section_(b, l, m, r, p, SahaParser::end_brace);
+    exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
@@ -275,16 +269,17 @@ public class SahaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "grammar" identifier object
+  // SLOT_L identifier SLOT_R
   public static boolean grammar_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "grammar_statement")) return false;
+    if (!nextTokenIs(b, SLOT_L)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, GRAMMAR_STATEMENT, "<grammar statement>");
-    r = consumeToken(b, "grammar");
+    Marker m = enter_section_(b, l, _NONE_, GRAMMAR_STATEMENT, null);
+    r = consumeToken(b, SLOT_L);
     r = r && identifier(b, l + 1);
     p = r; // pin = identifier
-    r = r && object(b, l + 1);
-    exit_section_(b, l, m, r, p, SahaParser::end_brace);
+    r = r && consumeToken(b, SLOT_R);
+    exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
@@ -372,7 +367,7 @@ public class SahaParser implements PsiParser, LightPsiParser {
     r = r && string_literal(b, l + 1);
     p = r; // pin = string_literal
     r = r && import_statement_2(b, l + 1);
-    exit_section_(b, l, m, r, p, SahaParser::end_brace);
+    exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
@@ -899,7 +894,7 @@ public class SahaParser implements PsiParser, LightPsiParser {
     r = r && report_error_(b, rule_statement_3(b, l + 1));
     r = p && report_error_(b, rule_statement_4(b, l + 1)) && r;
     r = p && rule_body(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, SahaParser::end_brace);
+    exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
@@ -941,24 +936,13 @@ public class SahaParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // grammar_statement
-  //     | export_statement
-  //     | import_statement
-  //     | macro_statement
-  //     | macro_call
-  //     | rule_statement
   //     | SEMICOLON
   static boolean statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statements")) return false;
+    if (!nextTokenIs(b, "", SEMICOLON, SLOT_L)) return false;
     boolean r;
-    Marker m = enter_section_(b);
     r = grammar_statement(b, l + 1);
-    if (!r) r = export_statement(b, l + 1);
-    if (!r) r = import_statement(b, l + 1);
-    if (!r) r = macro_statement(b, l + 1);
-    if (!r) r = macro_call(b, l + 1);
-    if (!r) r = rule_statement(b, l + 1);
     if (!r) r = consumeToken(b, SEMICOLON);
-    exit_section_(b, m, null, r);
     return r;
   }
 

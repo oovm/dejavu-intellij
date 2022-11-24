@@ -1,6 +1,6 @@
 package saha.intellij.ide.annotator.checkers
 
-import saha.intellij.language.psi.YggPair
+
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.psi.PsiElement
 

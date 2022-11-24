@@ -10,7 +10,4 @@ public interface SahaGrammarStatement extends PsiElement {
   @NotNull
   SahaIdentifier getIdentifier();
 
-  @Nullable
-  SahaObject getObject();
-
 }

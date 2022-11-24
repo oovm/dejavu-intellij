@@ -33,10 +33,4 @@ public class SahaGrammarStatementNode extends ASTWrapperPsiElement implements Sa
     return findNotNullChildByClass(SahaIdentifier.class);
   }
 
-  @Override
-  @Nullable
-  public SahaObject getObject() {
-    return findChildByClass(SahaObject.class);
-  }
-
 }

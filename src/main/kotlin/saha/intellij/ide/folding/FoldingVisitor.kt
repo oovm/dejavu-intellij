@@ -16,20 +16,20 @@ class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : 
             super.visitComment(comment)
         }
     }
-
-    override fun visitObject(o: saha.intellij.language.psi.YggObject) {
-        foldInner(o)
-    }
-
-
-    override fun visitImportBody(o: saha.intellij.language.psi.YggImportBody) {
-        foldInner(o)
-    }
-
-
-    override fun visitRuleBody(o: saha.intellij.language.psi.YggRuleBody) {
-        foldInner(o)
-    }
+//
+//    override fun visitObject(o: saha.intellij.language.psi.YggObject) {
+//        foldInner(o)
+//    }
+//
+//
+//    override fun visitImportBody(o: saha.intellij.language.psi.YggImportBody) {
+//        foldInner(o)
+//    }
+//
+//
+//    override fun visitRuleBody(o: saha.intellij.language.psi.YggRuleBody) {
+//        foldInner(o)
+//    }
 
 
     private fun fold(element: PsiElement) {

@@ -44,16 +44,21 @@ ESCAPE_SPECIAL = \\[^xuU]
 ESCAPE_UNICODE = \\(x{HEX}{2}|u{HEX}{4}|U\{{HEX}+\})
 HEX = [0-9a-fA-F]
 
+COMMENT_L = \{#(=-_\!)?
+COMMENT_R = (=-_\!)?#\}
+
+SLOT_L = \{%(=-_\!)?
+SLOT_R = (=-_\!)?%\}
+
 %%
 <YYINITIAL> {
 	{WHITE_SPACE}   { return WHITE_SPACE; }
-	{COMMENT_DOC}   { return COMMENT_DOC; }
-	{COMMENT_LINE}  { return COMMENT_LINE; }
-	{COMMENT_BLOCK} { return COMMENT_BLOCK; }
 }
 
 <YYINITIAL> {
 	//
+	{SLOT_L}  { return SLOT_L; }
+	{SLOT_R}  { return SLOT_R; }
 	"("  { return PARENTHESIS_L; }
 	")"  { return PARENTHESIS_R; }
 	"["  { return BRACKET_L; }
@@ -88,7 +93,6 @@ HEX = [0-9a-fA-F]
 }
 <YYINITIAL> {
 	// literal
-	{REGEX_RANGE} { return REGEX_RANGE; }
 	{BOOLEAN}     { return BOOLEAN; }
 	{SYMBOL}      { return SYMBOL; }
 	{BYTE}        { return BYTE; }

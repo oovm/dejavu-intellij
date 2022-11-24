@@ -90,6 +90,8 @@ public interface SahaTypes {
   IElementType REGEX_RANGE = new SahaElementType("REGEX_RANGE");
   IElementType SEMICOLON = new SahaElementType(";");
   IElementType SIGN = new SahaElementType("SIGN");
+  IElementType SLOT_L = new SahaElementType("{%");
+  IElementType SLOT_R = new SahaElementType("%}");
   IElementType SOFT_CONNECT = new SahaElementType("~");
   IElementType STRING_DQ = new SahaElementType("STRING_DQ");
   IElementType STRING_SQ = new SahaElementType("STRING_SQ");
