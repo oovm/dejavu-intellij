@@ -163,6 +163,10 @@ public class SahaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitTextStatement(@NotNull SahaTextStatement o) {
+    visitPsiElement(o);
+  }
+
   public void visitTypeHint(@NotNull SahaTypeHint o) {
     visitPsiElement(o);
   }

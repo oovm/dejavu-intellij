@@ -11,6 +11,6 @@ class YggdrasilIcon : IconProvider() {
     }
 
     companion object {
-        val FILE = IconLoader.getIcon("/icons/vomlIcon.svg", YggdrasilIcon::class.java)
+        val FILE = IconLoader.getIcon("/icons/sahaIcon.svg", YggdrasilIcon::class.java)
     }
 }

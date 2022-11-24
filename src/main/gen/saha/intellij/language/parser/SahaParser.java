@@ -936,12 +936,13 @@ public class SahaParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // grammar_statement
+  //     | text_statement
   //     | SEMICOLON
   static boolean statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statements")) return false;
-    if (!nextTokenIs(b, "", SEMICOLON, SLOT_L)) return false;
     boolean r;
     r = grammar_statement(b, l + 1);
+    if (!r) r = text_statement(b, l + 1);
     if (!r) r = consumeToken(b, SEMICOLON);
     return r;
   }
@@ -1182,6 +1183,18 @@ public class SahaParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = suffix(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // SAHA_TEXT
+  public static boolean text_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "text_statement")) return false;
+    if (!nextTokenIs(b, SAHA_TEXT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SAHA_TEXT);
+    exit_section_(b, m, TEXT_STATEMENT, r);
     return r;
   }
 

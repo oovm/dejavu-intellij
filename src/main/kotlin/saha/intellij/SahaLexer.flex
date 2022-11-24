@@ -50,10 +50,12 @@ COMMENT_R = (=-_\!)?#\}
 SLOT_L = \{%(=-_\!)?
 SLOT_R = (=-_\!)?%\}
 
+SAHA_TEXT = (!({COMMENT_L}|{SLOT_L}) .)+
+
 %%
-<YYINITIAL> {
-	{WHITE_SPACE}   { return WHITE_SPACE; }
-}
+//<YYINITIAL> {
+//	{WHITE_SPACE}   { return WHITE_SPACE; }
+//}
 
 <YYINITIAL> {
 	//

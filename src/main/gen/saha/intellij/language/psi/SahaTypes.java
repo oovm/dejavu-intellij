@@ -46,6 +46,7 @@ public interface SahaTypes {
   IElementType SYMBOL_PATH = new SahaElementType("SYMBOL_PATH");
   IElementType TABLE = new SahaElementType("TABLE");
   IElementType TERM = new SahaElementType("TERM");
+  IElementType TEXT_STATEMENT = new SahaElementType("TEXT_STATEMENT");
   IElementType TYPE_HINT = new SahaElementType("TYPE_HINT");
   IElementType VALUE = new SahaElementType("VALUE");
 
@@ -88,6 +89,7 @@ public interface SahaTypes {
   IElementType PARENTHESIS_R = new SahaElementType(")");
   IElementType QUOTATION = new SahaElementType("\"");
   IElementType REGEX_RANGE = new SahaElementType("REGEX_RANGE");
+  IElementType SAHA_TEXT = new SahaElementType("<TEXT>");
   IElementType SEMICOLON = new SahaElementType(";");
   IElementType SIGN = new SahaElementType("SIGN");
   IElementType SLOT_L = new SahaElementType("{%");
@@ -215,6 +217,9 @@ public interface SahaTypes {
       }
       else if (type == TERM) {
         return new SahaTermNode(node);
+      }
+      else if (type == TEXT_STATEMENT) {
+        return new SahaTextStatementNode(node);
       }
       else if (type == TYPE_HINT) {
         return new SahaTypeHintNode(node);

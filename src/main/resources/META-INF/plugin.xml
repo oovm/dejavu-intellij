@@ -1,26 +1,26 @@
 <idea-plugin>
-	<id>Yggdrasil</id>
-	<name>Yggdrasil Support</name>
-	<vendor>Yggdrasil</vendor>
+	<id>Saha Language</id>
+	<name>Saha Language Support</name>
+	<vendor>Saha Language</vendor>
 	<depends>com.intellij.modules.platform</depends>
 	<!--	<depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
 	<resource-bundle>messages.SahaBundle</resource-bundle>
 	<extensions defaultExtensionNs="com.intellij">
 		<fileType
 			name="Yggdrasil"
-			language="Yggdrasil"
-			extensions="ygg"
+			language="Saha"
+			extensions="saha"
 			implementationClass="saha.intellij.language.file.YggdrasilFileType"
 			fieldName="INSTANCE"
 		/>
 		<lang.parserDefinition
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.language.SahaParserDefinition"
 		/>
 		<!-- Highlighter -->
 		<colorSettingsPage implementation="saha.intellij.ide.highlight.YggHighlightSettingPage"/>
 		<lang.syntaxHighlighter
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.highlight.HighlightToken"
 		/>
 		<highlightVisitor implementation="saha.intellij.ide.highlight.HighlightAST"/>
@@ -31,20 +31,20 @@
 			implementation="saha.intellij.ide.codeStyle.LanguageCodeStyleSettingsProvider"
 		/>
 		<lang.commenter
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.VomlCommenter"
 		/>
 		<lang.braceMatcher
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.braces.VomlBraceMatcher"
 		/>
 		<lang.quoteHandler
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.YggQuoteHandler"
 		/>
 		<!-- Structure View -->
 		<lang.foldingBuilder
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.folding.FoldingBuilder"
 		/>
 		<indexPatternBuilder
@@ -55,28 +55,28 @@
 			implementationClass="saha.intellij.ide.todo.VomlTodoIndexer"
 		/>
 		<completion.contributor
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.completion.YCompletionContributor"
 		/>
 		<annotator
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.annotator.VomlHighlightingAnnotator"
 		/>
 		<annotator
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.annotator.checkers.YggScopeCheckerAnnotator"
 		/>
 		<annotator
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.annotator.checkers.YggTableCheckerAnnotator"
 		/>
 
 		<lang.formatter
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.formatter.FormatModel"
 		/>
 		<lang.smartEnterProcessor
-			language="Yggdrasil"
+			language="Saha"
 			implementationClass="saha.intellij.ide.assist.fixers.VomlSmartEnterProcessor"
 		/>
 	</extensions>

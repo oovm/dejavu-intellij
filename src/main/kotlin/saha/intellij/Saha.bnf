@@ -35,6 +35,7 @@
         CHOOSE='|'
 
         EQ = '='
+        SAHA_TEXT = "<TEXT>"
         SLOT_L = '{%'
         SLOT_R = '%}'
         COLON = ':'
@@ -58,13 +59,16 @@ fake comment_doc ::= COMMENT_DOC;
 private comment ::= COMMENT_LINE | COMMENT_BLOCK | COMMENT_DOC;
 
 private statements ::=
-      grammar_statement
+      slot_expression
+    | text_statement
     | SEMICOLON;
 // ---------------------------------------------------------------------------------------------------------------------
-// {% %}
-grammar_statement ::= SLOT_L identifier SLOT_R {
+// {% and %}
+slot_expression ::= SLOT_L identifier SLOT_R {
     pin = identifier
 };
+text_statement ::= SAHA_TEXT;
+
 // ---------------------------------------------------------------------------------------------------------------------
 // @import
 export_statement ::= "codegen" identifier object {
