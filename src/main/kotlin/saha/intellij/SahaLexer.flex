@@ -5,18 +5,18 @@ import com.intellij.psi.tree.IElementType;
 
 import static com.intellij.psi.TokenType.BAD_CHARACTER;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
-import static saha.intellij.language.psi.YggTypes.*;
+import static saha.intellij.language.psi.SahaTypes.*;
 
 %%
 
 %{
-public _YggLexer() {
+public _SahaLexer() {
 	this((java.io.Reader)null);
 }
 %}
 
 %public
-%class _YggLexer
+%class _SahaLexer
 %implements FlexLexer
 %function advance
 %type IElementType

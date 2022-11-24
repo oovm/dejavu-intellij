@@ -13,7 +13,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
 import saha.intellij.language.file.YggdrasilFileNode
-import saha.intellij.language.psi.YggTypes.*
+import saha.intellij.language.psi.SahaTypes.*
 
 
 class YggParserDefinition : ParserDefinition {

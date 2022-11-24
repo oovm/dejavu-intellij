@@ -1,18 +1,18 @@
 {
-    parserClass = "saha.intellij.language.parser.YggParser"
+    parserClass = "saha.intellij.language.parser.SahaParser"
     parserUtilClass = "com.intellij.lang.parser.GeneratedParserUtilBase"
 
-    psiClassPrefix = "Ygg"
+    psiClassPrefix = "Saha"
     psiImplClassSuffix = "Node"
     psiPackage = "saha.intellij.language.psi"
     psiImplPackage = "saha.intellij.language.psi_node"
 
-    elementTypeHolderClass = "saha.intellij.language.psi.YggTypes"
-    elementTypeClass = "saha.intellij.language.psi.YggElementType"
-    tokenTypeClass = "saha.intellij.language.psi.YggElementType"
+    elementTypeHolderClass = "saha.intellij.language.psi.SahaTypes"
+    elementTypeClass = "saha.intellij.language.psi.SahaElementType"
+    tokenTypeClass = "saha.intellij.language.psi.SahaElementType"
 
     extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
-    psiImplUtilClass = "saha.intellij.language.psi_node.YggPsiExtension"
+    psiImplUtilClass = "saha.intellij.language.psi_node.SahaPsiExtension"
 
     tokens = [
         AS = "as"

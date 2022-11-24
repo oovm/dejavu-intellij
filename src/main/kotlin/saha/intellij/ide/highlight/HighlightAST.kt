@@ -9,7 +9,7 @@ import com.intellij.psi.PsiFile
 import saha.intellij.language.file.YggdrasilFileNode
 import saha.intellij.language.psi.*
 
-class HighlightAST : saha.intellij.language.psi.YggVisitor(), HighlightVisitor {
+class HighlightAST : saha.intellij.language.psi.SahaVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
     override fun clone(): HighlightVisitor = HighlightAST()

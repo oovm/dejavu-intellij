@@ -7,7 +7,7 @@ import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.TokenType
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings
 import com.intellij.psi.formatter.FormatterUtil
-import saha.intellij.language.psi.YggTypes
+import saha.intellij.language.psi.SahaTypes
 
 class FormatBlock(
     private val node: ASTNode,
@@ -34,7 +34,7 @@ class FormatBlock(
 
     override fun getChildAttributes(newChildIndex: Int): ChildAttributes {
         val indent = when (node.elementType) {
-            saha.intellij.language.psi.YggTypes.TABLE -> Indent.getNormalIndent()
+            saha.intellij.language.psi.SahaTypes.TABLE -> Indent.getNormalIndent()
             else -> Indent.getNoneIndent()
         }
         return ChildAttributes(indent, null)
@@ -55,17 +55,17 @@ class FormatBlock(
 fun createSpacingBuilder(commonSettings: CommonCodeStyleSettings): SpacingBuilder =
     SpacingBuilder(commonSettings)
         // ,
-        .after(saha.intellij.language.psi.YggTypes.COMMA).spacing(1, 1, 0, true, 0)
-        .before(saha.intellij.language.psi.YggTypes.COMMA).spaceIf(false)
+        .after(saha.intellij.language.psi.SahaTypes.COMMA).spacing(1, 1, 0, true, 0)
+        .before(saha.intellij.language.psi.SahaTypes.COMMA).spaceIf(false)
         // [ ]
-        .after(saha.intellij.language.psi.YggTypes.BRACKET_L).spaceIf(false)
-        .before(saha.intellij.language.psi.YggTypes.BRACKET_R).spaceIf(false)
+        .after(saha.intellij.language.psi.SahaTypes.BRACKET_L).spaceIf(false)
+        .before(saha.intellij.language.psi.SahaTypes.BRACKET_R).spaceIf(false)
         // { }
-        .after(saha.intellij.language.psi.YggTypes.BRACE_L).spaceIf(false)
-        .before(saha.intellij.language.psi.YggTypes.BRACE_R).spaceIf(false)
+        .after(saha.intellij.language.psi.SahaTypes.BRACE_L).spaceIf(false)
+        .before(saha.intellij.language.psi.SahaTypes.BRACE_R).spaceIf(false)
         // ( )
-        .after(saha.intellij.language.psi.YggTypes.PARENTHESIS_L).spaceIf(false)
-        .before(saha.intellij.language.psi.YggTypes.PARENTHESIS_R).spaceIf(false)
+        .after(saha.intellij.language.psi.SahaTypes.PARENTHESIS_L).spaceIf(false)
+        .before(saha.intellij.language.psi.SahaTypes.PARENTHESIS_R).spaceIf(false)
 
 private fun Block.computeSpacing(child1: Block?, child2: Block, ctx: FormatContext): Spacing? {
     return ctx.spacingBuilder.getSpacing(this, child1, child2)
@@ -76,8 +76,8 @@ private fun ASTNode?.isWhitespaceOrEmpty() = this == null || textLength == 0 || 
 private fun FormatBlock.computeIndent(child: ASTNode): Indent? {
     val isCornerChild = node.firstChildNode == child || node.lastChildNode == child
     return when (node.elementType) {
-        saha.intellij.language.psi.YggTypes.TABLE -> when {
-            isCornerChild || child.elementType == saha.intellij.language.psi.YggTypes.COMMA -> Indent.getNoneIndent()
+        saha.intellij.language.psi.SahaTypes.TABLE -> when {
+            isCornerChild || child.elementType == saha.intellij.language.psi.SahaTypes.COMMA -> Indent.getNoneIndent()
             else -> Indent.getNormalIndent()
         }
         else -> Indent.getNoneIndent()

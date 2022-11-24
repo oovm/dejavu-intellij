@@ -11,7 +11,7 @@ import saha.intellij.language.psi.*
 class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : YggRecursiveVisitor() {
 
     override fun visitComment(comment: PsiComment) {
-        if (comment.tokenType == saha.intellij.language.psi.YggTypes.COMMENT_BLOCK) {
+        if (comment.tokenType == saha.intellij.language.psi.SahaTypes.COMMENT_BLOCK) {
             fold(comment)
             super.visitComment(comment)
         }

@@ -11,12 +11,12 @@ class YggTableCheckerAnnotator : CheckerAnnotator() {
             CheckerAnnotatorResult.Ok
         } else {
             when (element) {
-                is saha.intellij.language.psi.YggPair -> checkPair(element)
+                is saha.intellij.language.psi.SahaPair -> checkPair(element)
                 else -> CheckerAnnotatorResult.Ok
             }
         }
 
-    private fun checkPair(mapEntry: saha.intellij.language.psi.YggPair): CheckerAnnotatorResult {
+    private fun checkPair(mapEntry: saha.intellij.language.psi.SahaPair): CheckerAnnotatorResult {
 //        val filteredEntries = (mapEntry.parent as YggMap)
 //            .mapEntryList
 //            .asSequence()

@@ -8,7 +8,7 @@ import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
 import saha.intellij.language.YggParserDefinition
-import saha.intellij.language.psi.YggTypes.*
+import saha.intellij.language.psi.SahaTypes.*
 
 class VomlBaseBraceMatcher : PairedBraceMatcher {
     override fun getPairs(): Array<BracePair> = PAIRS
