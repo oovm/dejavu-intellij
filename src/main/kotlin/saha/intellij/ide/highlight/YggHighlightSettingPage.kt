@@ -3,8 +3,8 @@ package saha.intellij.ide.highlight
 
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
-import saha.intellij.language.file.YggdrasilBundle
-import saha.intellij.language.file.YggdrasilIcon
+import saha.intellij.language.file.SahaBundle
+import saha.intellij.language.file.SahaIcon
 
 class YggHighlightSettingPage : ColorSettingsPage {
     private val attrs = HighlightColor
@@ -20,9 +20,9 @@ class YggHighlightSettingPage : ColorSettingsPage {
 
     override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
 
-    override fun getDisplayName() = YggdrasilBundle.message("filetype.name")
+    override fun getDisplayName() = SahaBundle.message("filetype.name")
 
-    override fun getIcon() = YggdrasilIcon.FILE
+    override fun getIcon() = SahaIcon.FILE
 
     override fun getHighlighter() = HighlightToken()
 

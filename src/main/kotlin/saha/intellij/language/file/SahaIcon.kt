@@ -5,12 +5,12 @@ import com.intellij.openapi.util.IconLoader
 import com.intellij.psi.PsiElement
 import javax.swing.Icon
 
-class YggdrasilIcon : IconProvider() {
+class SahaIcon : IconProvider() {
     override fun getIcon(element: PsiElement, flags: Int): Icon? {
         return null
     }
 
     companion object {
-        val FILE = IconLoader.getIcon("/icons/sahaIcon.svg", YggdrasilIcon::class.java)
+        val FILE = IconLoader.getIcon("/icons/sahaIcon.svg", SahaIcon::class.java)
     }
 }

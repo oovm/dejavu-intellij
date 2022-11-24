@@ -71,7 +71,23 @@ public class SahaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitKwElse(@NotNull SahaKwElse o) {
+    visitPsiElement(o);
+  }
+
+  public void visitKwEndFor(@NotNull SahaKwEndFor o) {
+    visitPsiElement(o);
+  }
+
+  public void visitKwFor(@NotNull SahaKwFor o) {
+    visitPsiElement(o);
+  }
+
   public void visitKwImport(@NotNull SahaKwImport o) {
+    visitPsiElement(o);
+  }
+
+  public void visitKwIn(@NotNull SahaKwIn o) {
     visitPsiElement(o);
   }
 
@@ -139,11 +155,31 @@ public class SahaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitSlotElse(@NotNull SahaSlotElse o) {
+    visitPsiElement(o);
+  }
+
   public void visitSlotEnd(@NotNull SahaSlotEnd o) {
     visitPsiElement(o);
   }
 
   public void visitSlotExpression(@NotNull SahaSlotExpression o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotFor(@NotNull SahaSlotFor o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotForElse(@NotNull SahaSlotForElse o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotForEnd(@NotNull SahaSlotForEnd o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotForStart(@NotNull SahaSlotForStart o) {
     visitPsiElement(o);
   }
 

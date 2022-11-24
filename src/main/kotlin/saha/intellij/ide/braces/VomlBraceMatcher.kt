@@ -4,9 +4,10 @@ package saha.intellij.ide.braces
 import com.intellij.codeInsight.highlighting.PairedBraceMatcherAdapter
 import com.intellij.openapi.editor.highlighter.HighlighterIterator
 import com.intellij.openapi.fileTypes.FileType
+import saha.intellij.language.SahaLanguage
 import saha.intellij.language.file.SahaFileType
 
-class VomlBraceMatcher : PairedBraceMatcherAdapter(VomlBaseBraceMatcher(), saha.intellij.SahaLanguage) {
+class VomlBraceMatcher : PairedBraceMatcherAdapter(VomlBaseBraceMatcher(), SahaLanguage) {
     override fun isLBraceToken(iterator: HighlighterIterator, fileText: CharSequence, fileType: FileType): Boolean =
         isBrace(iterator, fileText, fileType, true)
 

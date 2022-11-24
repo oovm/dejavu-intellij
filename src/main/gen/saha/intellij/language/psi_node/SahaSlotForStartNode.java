@@ -11,14 +11,14 @@ import static saha.intellij.language.psi.SahaTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import saha.intellij.language.psi.*;
 
-public class SahaSlotExpressionNode extends ASTWrapperPsiElement implements SahaSlotExpression {
+public class SahaSlotForStartNode extends ASTWrapperPsiElement implements SahaSlotForStart {
 
-  public SahaSlotExpressionNode(@NotNull ASTNode node) {
+  public SahaSlotForStartNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull SahaVisitor visitor) {
-    visitor.visitSlotExpression(this);
+    visitor.visitSlotForStart(this);
   }
 
   @Override
@@ -28,15 +28,21 @@ public class SahaSlotExpressionNode extends ASTWrapperPsiElement implements Saha
   }
 
   @Override
-  @Nullable
-  public SahaIdentifier getIdentifier() {
-    return findChildByClass(SahaIdentifier.class);
+  @NotNull
+  public SahaKwFor getKwFor() {
+    return findNotNullChildByClass(SahaKwFor.class);
   }
 
   @Override
-  @Nullable
+  @NotNull
+  public SahaKwIn getKwIn() {
+    return findNotNullChildByClass(SahaKwIn.class);
+  }
+
+  @Override
+  @NotNull
   public SahaSlotEnd getSlotEnd() {
-    return findChildByClass(SahaSlotEnd.class);
+    return findNotNullChildByClass(SahaSlotEnd.class);
   }
 
   @Override

@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface SahaSlotExpression extends PsiElement {
+public interface SahaSlotForEnd extends PsiElement {
 
-  @Nullable
-  SahaIdentifier getIdentifier();
+  @NotNull
+  SahaKwEndFor getKwEndFor();
 
-  @Nullable
+  @NotNull
   SahaSlotEnd getSlotEnd();
 
   @NotNull

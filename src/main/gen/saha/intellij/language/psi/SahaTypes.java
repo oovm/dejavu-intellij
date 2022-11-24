@@ -23,7 +23,11 @@ public interface SahaTypes {
   IElementType INFIX = new SahaElementType("INFIX");
   IElementType KEY = new SahaElementType("KEY");
   IElementType KEY_SYMBOL = new SahaElementType("KEY_SYMBOL");
+  IElementType KW_ELSE = new SahaElementType("KW_ELSE");
+  IElementType KW_END_FOR = new SahaElementType("KW_END_FOR");
+  IElementType KW_FOR = new SahaElementType("KW_FOR");
   IElementType KW_IMPORT = new SahaElementType("KW_IMPORT");
+  IElementType KW_IN = new SahaElementType("KW_IN");
   IElementType MACRO_ARG = new SahaElementType("MACRO_ARG");
   IElementType MACRO_CALL = new SahaElementType("MACRO_CALL");
   IElementType MACRO_STATEMENT = new SahaElementType("MACRO_STATEMENT");
@@ -40,8 +44,13 @@ public interface SahaTypes {
   IElementType RULE_BODY = new SahaElementType("RULE_BODY");
   IElementType RULE_STATEMENT = new SahaElementType("RULE_STATEMENT");
   IElementType RULE_TYPE = new SahaElementType("RULE_TYPE");
+  IElementType SLOT_ELSE = new SahaElementType("SLOT_ELSE");
   IElementType SLOT_END = new SahaElementType("SLOT_END");
   IElementType SLOT_EXPRESSION = new SahaElementType("SLOT_EXPRESSION");
+  IElementType SLOT_FOR = new SahaElementType("SLOT_FOR");
+  IElementType SLOT_FOR_ELSE = new SahaElementType("SLOT_FOR_ELSE");
+  IElementType SLOT_FOR_END = new SahaElementType("SLOT_FOR_END");
+  IElementType SLOT_FOR_START = new SahaElementType("SLOT_FOR_START");
   IElementType SLOT_START = new SahaElementType("SLOT_START");
   IElementType STRING_LITERAL = new SahaElementType("STRING_LITERAL");
   IElementType SUFFIX = new SahaElementType("SUFFIX");
@@ -151,8 +160,20 @@ public interface SahaTypes {
       else if (type == KEY_SYMBOL) {
         return new SahaKeySymbolNode(node);
       }
+      else if (type == KW_ELSE) {
+        return new SahaKwElseNode(node);
+      }
+      else if (type == KW_END_FOR) {
+        return new SahaKwEndForNode(node);
+      }
+      else if (type == KW_FOR) {
+        return new SahaKwForNode(node);
+      }
       else if (type == KW_IMPORT) {
         return new SahaKwImportNode(node);
+      }
+      else if (type == KW_IN) {
+        return new SahaKwInNode(node);
       }
       else if (type == MACRO_ARG) {
         return new SahaMacroArgNode(node);
@@ -202,11 +223,26 @@ public interface SahaTypes {
       else if (type == RULE_TYPE) {
         return new SahaRuleTypeNode(node);
       }
+      else if (type == SLOT_ELSE) {
+        return new SahaSlotElseNode(node);
+      }
       else if (type == SLOT_END) {
         return new SahaSlotEndNode(node);
       }
       else if (type == SLOT_EXPRESSION) {
         return new SahaSlotExpressionNode(node);
+      }
+      else if (type == SLOT_FOR) {
+        return new SahaSlotForNode(node);
+      }
+      else if (type == SLOT_FOR_ELSE) {
+        return new SahaSlotForElseNode(node);
+      }
+      else if (type == SLOT_FOR_END) {
+        return new SahaSlotForEndNode(node);
+      }
+      else if (type == SLOT_FOR_START) {
+        return new SahaSlotForStartNode(node);
       }
       else if (type == SLOT_START) {
         return new SahaSlotStartNode(node);

@@ -59,16 +59,32 @@ fake comment_doc ::= COMMENT_DOC;
 private comment ::= COMMENT_LINE | COMMENT_BLOCK | COMMENT_DOC;
 
 private statements ::=
-      slot_expression
+      slot_for
+    | slot_expression
     | text_statement
-    | SEMICOLON;
+    ;
 // ---------------------------------------------------------------------------------------------------------------------
 // text is not surrounded by `{%   %}`
 text_statement ::= SAHA_TEXT;
 // ---------------------------------------------------------------------------------------------------------------------
 // {% slot %}
-slot_expression ::= slot_start identifier slot_end {
-    pin = identifier
+slot_for ::= slot_for_start statements slot_for_else? slot_for_end {
+    pin = slot_for_start
+};
+slot_for_start ::= slot_start kw_for kw_in slot_end;
+slot_for_else  ::= slot_else statements;
+slot_for_end   ::= slot_start kw_end_for slot_end;
+
+kw_for     ::= "for";
+kw_in      ::= "in";
+kw_else    ::= "for";
+kw_end_for ::= "end-for" | "end";
+// ---------------------------------------------------------------------------------------------------------------------
+slot_else ::= slot_start kw_else slot_end;
+// ---------------------------------------------------------------------------------------------------------------------
+// {% slot %}
+slot_expression ::= slot_start identifier? slot_end {
+    pin = slot_start
 };
 slot_start ::= SLOT_L;
 slot_end ::= SLOT_R;

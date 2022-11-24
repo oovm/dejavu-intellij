@@ -30,9 +30,7 @@ public _SahaLexer() {
 EOL=\R
 WHITE_SPACE=\s+
 
-COMMENT_DOC=("///")[^\r\n]*
-COMMENT_LINE=("//")[^\r\n]*
-COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
+
 BOOLEAN=true|false|null
 SYMBOL=[\p{XID_Start}_][\p{XID_Continue}_]*
 BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
@@ -44,13 +42,17 @@ ESCAPE_SPECIAL = \\[^xuU]
 ESCAPE_UNICODE = \\(x{HEX}{2}|u{HEX}{4}|U\{{HEX}+\})
 HEX = [0-9a-fA-F]
 
-COMMENT_L = \{#(=-_\!)?
-COMMENT_R = (=-_\!)?#\}
+RAW_L = \{#(=-_\!)?
+RAW_R = (=-_\!)?#\}
+
+COMMENT_DOC=("///")[^\r\n]*
+COMMENT_LINE=("//")[^\r\n]*
+COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 
 SLOT_L = \{%(=-_\!)?
 SLOT_R = (=-_\!)?%\}
 
-SAHA_TEXT = (!({COMMENT_L}|{SLOT_L}) .)+
+SAHA_TEXT = (!({RAW_L}|{SLOT_L}) .)+
 
 %%
 <YYINITIAL> {

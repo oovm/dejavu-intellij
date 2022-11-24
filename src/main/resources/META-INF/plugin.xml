@@ -11,18 +11,15 @@
 			language="Saha"
 			extensions="saha"
 			implementationClass="saha.intellij.language.file.SahaFileType"
-			fieldName="INSTANCE"
-		/>
+			fieldName="INSTANCE"/>
 		<lang.parserDefinition
 			language="Saha"
-			implementationClass="saha.intellij.language.SahaParserDefinition"
-		/>
+			implementationClass="saha.intellij.language.SahaParserDefinition"/>
 		<!-- Highlighter -->
 		<colorSettingsPage implementation="saha.intellij.ide.highlight.YggHighlightSettingPage"/>
 		<lang.syntaxHighlighter
 			language="Saha"
-			implementationClass="saha.intellij.ide.highlight.HighlightToken"
-		/>
+			implementationClass="saha.intellij.ide.highlight.HighlightToken"/>
 		<highlightVisitor implementation="saha.intellij.ide.highlight.HighlightAST"/>
 		<additionalTextAttributes scheme="Default" file="colors/VomlDefault.xml"/>
 		<additionalTextAttributes scheme="Darcula" file="colors/VomlDarcula.xml"/>

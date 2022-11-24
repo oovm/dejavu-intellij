@@ -11,14 +11,14 @@ import static saha.intellij.language.psi.SahaTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import saha.intellij.language.psi.*;
 
-public class SahaSlotExpressionNode extends ASTWrapperPsiElement implements SahaSlotExpression {
+public class SahaSlotForElseNode extends ASTWrapperPsiElement implements SahaSlotForElse {
 
-  public SahaSlotExpressionNode(@NotNull ASTNode node) {
+  public SahaSlotForElseNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull SahaVisitor visitor) {
-    visitor.visitSlotExpression(this);
+    visitor.visitSlotForElse(this);
   }
 
   @Override
@@ -28,21 +28,27 @@ public class SahaSlotExpressionNode extends ASTWrapperPsiElement implements Saha
   }
 
   @Override
-  @Nullable
-  public SahaIdentifier getIdentifier() {
-    return findChildByClass(SahaIdentifier.class);
-  }
-
-  @Override
-  @Nullable
-  public SahaSlotEnd getSlotEnd() {
-    return findChildByClass(SahaSlotEnd.class);
-  }
-
-  @Override
   @NotNull
-  public SahaSlotStart getSlotStart() {
-    return findNotNullChildByClass(SahaSlotStart.class);
+  public SahaSlotElse getSlotElse() {
+    return findNotNullChildByClass(SahaSlotElse.class);
+  }
+
+  @Override
+  @Nullable
+  public SahaSlotExpression getSlotExpression() {
+    return findChildByClass(SahaSlotExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public SahaSlotFor getSlotFor() {
+    return findChildByClass(SahaSlotFor.class);
+  }
+
+  @Override
+  @Nullable
+  public SahaTextStatement getTextStatement() {
+    return findChildByClass(SahaTextStatement.class);
   }
 
 }

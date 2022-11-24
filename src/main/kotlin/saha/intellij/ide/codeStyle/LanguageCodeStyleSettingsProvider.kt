@@ -6,9 +6,10 @@ import com.intellij.application.options.SmartIndentOptionsEditor
 import com.intellij.psi.codeStyle.*
 import com.intellij.psi.codeStyle.CodeStyleSettings
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider
+import saha.intellij.language.SahaLanguage
 
 class LanguageCodeStyleSettingsProvider : LanguageCodeStyleSettingsProvider() {
-    override fun getLanguage() = saha.intellij.SahaLanguage
+    override fun getLanguage() = SahaLanguage
 
     override fun getIndentOptionsEditor() = SmartIndentOptionsEditor()
 

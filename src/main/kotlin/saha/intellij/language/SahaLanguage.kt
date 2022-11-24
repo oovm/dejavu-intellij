@@ -1,4 +1,4 @@
-package saha.intellij
+package saha.intellij.language
 
 import com.intellij.lang.Language
 

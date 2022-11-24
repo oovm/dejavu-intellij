@@ -402,6 +402,40 @@ public class SahaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // "for"
+  public static boolean kw_else(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "kw_else")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, KW_ELSE, "<kw else>");
+    r = consumeToken(b, "for");
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // "end-for" | "end"
+  public static boolean kw_end_for(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "kw_end_for")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, KW_END_FOR, "<kw end for>");
+    r = consumeToken(b, "end-for");
+    if (!r) r = consumeToken(b, "end");
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // "for"
+  public static boolean kw_for(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "kw_for")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, KW_FOR, "<kw for>");
+    r = consumeToken(b, "for");
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // "import" | "use" | "using"
   public static boolean kw_import(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_import")) return false;
@@ -410,6 +444,17 @@ public class SahaParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, "import");
     if (!r) r = consumeToken(b, "use");
     if (!r) r = consumeToken(b, "using");
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // "in"
+  public static boolean kw_in(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "kw_in")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, KW_IN, "<kw in>");
+    r = consumeToken(b, "in");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -920,6 +965,20 @@ public class SahaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // slot_start kw_else slot_end
+  public static boolean slot_else(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_else")) return false;
+    if (!nextTokenIs(b, SLOT_L)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = slot_start(b, l + 1);
+    r = r && kw_else(b, l + 1);
+    r = r && slot_end(b, l + 1);
+    exit_section_(b, m, SLOT_ELSE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // SLOT_R
   public static boolean slot_end(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_end")) return false;
@@ -932,18 +991,90 @@ public class SahaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_start identifier slot_end
+  // slot_start identifier? slot_end
   public static boolean slot_expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_expression")) return false;
     if (!nextTokenIs(b, SLOT_L)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, SLOT_EXPRESSION, null);
     r = slot_start(b, l + 1);
-    r = r && identifier(b, l + 1);
-    p = r; // pin = identifier
-    r = r && slot_end(b, l + 1);
+    p = r; // pin = slot_start
+    r = r && report_error_(b, slot_expression_1(b, l + 1));
+    r = p && slot_end(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // identifier?
+  private static boolean slot_expression_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_expression_1")) return false;
+    identifier(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // slot_for_start statements slot_for_else? slot_for_end
+  public static boolean slot_for(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_for")) return false;
+    if (!nextTokenIs(b, SLOT_L)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, SLOT_FOR, null);
+    r = slot_for_start(b, l + 1);
+    p = r; // pin = slot_for_start
+    r = r && report_error_(b, statements(b, l + 1));
+    r = p && report_error_(b, slot_for_2(b, l + 1)) && r;
+    r = p && slot_for_end(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // slot_for_else?
+  private static boolean slot_for_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_for_2")) return false;
+    slot_for_else(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // slot_else statements
+  public static boolean slot_for_else(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_for_else")) return false;
+    if (!nextTokenIs(b, SLOT_L)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = slot_else(b, l + 1);
+    r = r && statements(b, l + 1);
+    exit_section_(b, m, SLOT_FOR_ELSE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // slot_start kw_end_for slot_end
+  public static boolean slot_for_end(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_for_end")) return false;
+    if (!nextTokenIs(b, SLOT_L)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = slot_start(b, l + 1);
+    r = r && kw_end_for(b, l + 1);
+    r = r && slot_end(b, l + 1);
+    exit_section_(b, m, SLOT_FOR_END, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // slot_start kw_for kw_in slot_end
+  public static boolean slot_for_start(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_for_start")) return false;
+    if (!nextTokenIs(b, SLOT_L)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = slot_start(b, l + 1);
+    r = r && kw_for(b, l + 1);
+    r = r && kw_in(b, l + 1);
+    r = r && slot_end(b, l + 1);
+    exit_section_(b, m, SLOT_FOR_START, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -959,15 +1090,16 @@ public class SahaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_expression
+  // slot_for
+  //     | slot_expression
   //     | text_statement
-  //     | SEMICOLON
   static boolean statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statements")) return false;
+    if (!nextTokenIs(b, "", SAHA_TEXT, SLOT_L)) return false;
     boolean r;
-    r = slot_expression(b, l + 1);
+    r = slot_for(b, l + 1);
+    if (!r) r = slot_expression(b, l + 1);
     if (!r) r = text_statement(b, l + 1);
-    if (!r) r = consumeToken(b, SEMICOLON);
     return r;
   }
 
