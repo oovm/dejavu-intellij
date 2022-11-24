@@ -63,12 +63,15 @@ private statements ::=
     | text_statement
     | SEMICOLON;
 // ---------------------------------------------------------------------------------------------------------------------
-// {% and %}
-slot_expression ::= SLOT_L identifier SLOT_R {
+// text is not surrounded by `{%   %}`
+text_statement ::= SAHA_TEXT;
+// ---------------------------------------------------------------------------------------------------------------------
+// {% slot %}
+slot_expression ::= slot_start identifier slot_end {
     pin = identifier
 };
-text_statement ::= SAHA_TEXT;
-
+slot_start ::= SLOT_L;
+slot_end ::= SLOT_R;
 // ---------------------------------------------------------------------------------------------------------------------
 // @import
 export_statement ::= "codegen" identifier object {

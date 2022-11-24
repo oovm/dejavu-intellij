@@ -269,21 +269,6 @@ public class SahaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // SLOT_L identifier SLOT_R
-  public static boolean grammar_statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "grammar_statement")) return false;
-    if (!nextTokenIs(b, SLOT_L)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, GRAMMAR_STATEMENT, null);
-    r = consumeToken(b, SLOT_L);
-    r = r && identifier(b, l + 1);
-    p = r; // pin = identifier
-    r = r && consumeToken(b, SLOT_R);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  /* ********************************************************** */
   // SYMBOL
   public static boolean identifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "identifier")) return false;
@@ -935,13 +920,52 @@ public class SahaParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // grammar_statement
+  // SLOT_R
+  public static boolean slot_end(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_end")) return false;
+    if (!nextTokenIs(b, SLOT_R)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SLOT_R);
+    exit_section_(b, m, SLOT_END, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // slot_start identifier slot_end
+  public static boolean slot_expression(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_expression")) return false;
+    if (!nextTokenIs(b, SLOT_L)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, SLOT_EXPRESSION, null);
+    r = slot_start(b, l + 1);
+    r = r && identifier(b, l + 1);
+    p = r; // pin = identifier
+    r = r && slot_end(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // SLOT_L
+  public static boolean slot_start(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_start")) return false;
+    if (!nextTokenIs(b, SLOT_L)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SLOT_L);
+    exit_section_(b, m, SLOT_START, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // slot_expression
   //     | text_statement
   //     | SEMICOLON
   static boolean statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statements")) return false;
     boolean r;
-    r = grammar_statement(b, l + 1);
+    r = slot_expression(b, l + 1);
     if (!r) r = text_statement(b, l + 1);
     if (!r) r = consumeToken(b, SEMICOLON);
     return r;

@@ -7,10 +7,10 @@
 	<resource-bundle>messages.SahaBundle</resource-bundle>
 	<extensions defaultExtensionNs="com.intellij">
 		<fileType
-			name="Yggdrasil"
+			name="Saha"
 			language="Saha"
 			extensions="saha"
-			implementationClass="saha.intellij.language.file.YggdrasilFileType"
+			implementationClass="saha.intellij.language.file.SahaFileType"
 			fieldName="INSTANCE"
 		/>
 		<lang.parserDefinition

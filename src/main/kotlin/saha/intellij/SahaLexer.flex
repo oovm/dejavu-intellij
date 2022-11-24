@@ -11,7 +11,7 @@ import static saha.intellij.language.psi.SahaTypes.*;
 
 %{
 public _SahaLexer() {
-	this((java.io.Reader)null);
+    this((java.io.Reader)null);
 }
 %}
 
@@ -24,7 +24,7 @@ public _SahaLexer() {
 
 %state StringSQ
 %state StringDQ
-%state Regex
+%state CODE
 %state RegexRange
 
 EOL=\R
@@ -53,90 +53,101 @@ SLOT_R = (=-_\!)?%\}
 SAHA_TEXT = (!({COMMENT_L}|{SLOT_L}) .)+
 
 %%
-//<YYINITIAL> {
-//	{WHITE_SPACE}   { return WHITE_SPACE; }
-//}
-
 <YYINITIAL> {
-	//
-	{SLOT_L}  { return SLOT_L; }
-	{SLOT_R}  { return SLOT_R; }
-	"("  { return PARENTHESIS_L; }
-	")"  { return PARENTHESIS_R; }
-	"["  { return BRACKET_L; }
-	"]"  { return BRACKET_R; }
-	"{"  { return BRACE_L; }
-	"}"  { return BRACE_R; }
-	"->" { return ARROW; }
-	"<"  { return ANGLE_L; }
-	">"  { return ANGLE_R; }
-	//
-	::   { return DOUBLE_COLON; }
-	:    { return COLON; }
-	;    { return SEMICOLON; }
-	,    { return COMMA; }
-	@    { return AT; }
-	#    { return HASH; }
-	\^   { return ACCENT; }
-	\~   { return SOFT_CONNECT;}
-	\|   { return CHOOSE;}
-	\!   { return NOT;}
-	\\   { return ESCAPE; }
-	\$   { return DOLLAR; }
-	\.   { return DOT; }
+    {SAHA_TEXT} { return SAHA_TEXT; }
+    {SLOT_L}    {
+        yybegin(CODE);
+        return SLOT_L;
+    }
+}
 
-	\?   { return OPTIONAL;}
-	\+   { return MANY1; }
-	\-   { return HYPHEN; }
-	\*   { return MANY; }
+<CODE> {
+    {WHITE_SPACE} { return WHITE_SPACE; }
+    {SLOT_R}      {
+        yybegin(YYINITIAL);
+        return SLOT_R;
+    }
 }
-<YYINITIAL> [\^\]$@]*= {
-	return EQ;
+
+<CODE> {
+    //
+
+    "("  { return PARENTHESIS_L; }
+    ")"  { return PARENTHESIS_R; }
+    "["  { return BRACKET_L; }
+    "]"  { return BRACKET_R; }
+    "{"  { return BRACE_L; }
+    "}"  { return BRACE_R; }
+    "->" { return ARROW; }
+    "<"  { return ANGLE_L; }
+    ">"  { return ANGLE_R; }
+    //
+    ::   { return DOUBLE_COLON; }
+    :    { return COLON; }
+    ;    { return SEMICOLON; }
+    ,    { return COMMA; }
+    @    { return AT; }
+    #    { return HASH; }
+    \^   { return ACCENT; }
+    \~   { return SOFT_CONNECT;}
+    \|   { return CHOOSE;}
+    \!   { return NOT;}
+    \\   { return ESCAPE; }
+    \$   { return DOLLAR; }
+    \.   { return DOT; }
+
+    \?   { return OPTIONAL;}
+    \+   { return MANY1; }
+    \-   { return HYPHEN; }
+    \*   { return MANY; }
 }
-<YYINITIAL> {
-	// literal
-	{BOOLEAN}     { return BOOLEAN; }
-	{SYMBOL}      { return SYMBOL; }
-	{BYTE}        { return BYTE; }
-	{INTEGER}     { return INTEGER; }
-	{DECIMAL}     { return DECIMAL; }
-	{SIGN}        { return SIGN; }
+<CODE> [\^\]$@]*= {
+    return EQ;
+}
+<CODE> {
+    // literal
+    {BOOLEAN}     { return BOOLEAN; }
+    {SYMBOL}      { return SYMBOL; }
+    {BYTE}        { return BYTE; }
+    {INTEGER}     { return INTEGER; }
+    {DECIMAL}     { return DECIMAL; }
+    {SIGN}        { return SIGN; }
 }
 // String Mode =========================================================================================================
-<YYINITIAL> {
-	\' {yybegin(StringSQ);return STRING_SQ;}
-	\" {yybegin(StringDQ);return STRING_DQ;}
+<CODE> {
+    \' {yybegin(StringSQ);return STRING_SQ;}
+    \" {yybegin(StringDQ);return STRING_DQ;}
 }
-<StringSQ, StringDQ, YYINITIAL> {ESCAPE_SPECIAL} {
-	return ESCAPE_SPECIAL;
+<StringSQ, StringDQ, CODE> {ESCAPE_SPECIAL} {
+    return ESCAPE_SPECIAL;
 }
-<StringSQ, StringDQ, YYINITIAL> {ESCAPE_UNICODE} {
-	return ESCAPE_UNICODE;
+<StringSQ, StringDQ, CODE> {ESCAPE_UNICODE} {
+    return ESCAPE_UNICODE;
 }
 <StringSQ> {
-	[^\\\'] {return CHARACTER;}
-	\' {yybegin(YYINITIAL);return STRING_SQ;}
+    [^\\\'] {return CHARACTER;}
+    \' {yybegin(YYINITIAL);return STRING_SQ;}
 }
 <StringDQ> {
-	[^\\\"] {return CHARACTER;}
-	\" {yybegin(YYINITIAL);return STRING_DQ;}
+    [^\\\"] {return CHARACTER;}
+    \" {yybegin(YYINITIAL);return STRING_DQ;}
 }
 // Regex Mode ==========================================================================================================
 //<YYINITIAL> \/ {
-//	yybegin(Regex);
-//	return REGEX_QUOTE;
+//    yybegin(Regex);
+//    return REGEX_QUOTE;
 //}
 //<Regex> {
-//	[^\\\/] {return CHARACTER;}
-//	\/ {yybegin(YYINITIAL);return REGEX_QUOTE;}
+//    [^\\\/] {return CHARACTER;}
+//    \/ {yybegin(YYINITIAL);return REGEX_QUOTE;}
 //}
 //<YYINITIAL> \[ {
-//	yybegin(RegexRange);
-//	return REGEX_RANGE_L;
+//    yybegin(RegexRange);
+//    return REGEX_RANGE_L;
 //}
 //<RegexRange> {
-//	[^\\\[\]] {return REGEX_CHARACTER;}
-//	\] {yybegin(YYINITIAL);return REGEX_RANGE_R;}
+//    [^\\\[\]] {return REGEX_CHARACTER;}
+//    \] {yybegin(YYINITIAL);return REGEX_RANGE_R;}
 //}
 // Otherwisw ===========================================================================================================
 [^] { return BAD_CHARACTER; }

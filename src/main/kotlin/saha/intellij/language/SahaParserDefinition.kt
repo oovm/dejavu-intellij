@@ -13,7 +13,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
 import saha.intellij.SahaLanguage
-import saha.intellij.language.file.YggdrasilFileNode
+import saha.intellij.language.file.SahaFileNode
 import saha.intellij.language.parser.SahaParser
 import saha.intellij.language.psi.SahaTypes.*
 
@@ -37,7 +37,7 @@ class SahaParserDefinition : ParserDefinition {
 
     override fun createElement(node: ASTNode): PsiElement = Factory.createElement(node)
 
-    override fun createFile(viewProvider: FileViewProvider): PsiFile = YggdrasilFileNode(viewProvider)
+    override fun createFile(viewProvider: FileViewProvider): PsiFile = SahaFileNode(viewProvider)
 
     override fun spaceExistenceTypeBetweenTokens(left: ASTNode, right: ASTNode): SpaceRequirements {
         return SpaceRequirements.MAY

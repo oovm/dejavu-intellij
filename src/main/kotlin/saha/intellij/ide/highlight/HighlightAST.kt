@@ -6,7 +6,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import saha.intellij.language.file.YggdrasilFileNode
+import saha.intellij.language.file.SahaFileNode
 import saha.intellij.language.psi.*
 
 class HighlightAST : SahaVisitor(), HighlightVisitor {
@@ -14,7 +14,7 @@ class HighlightAST : SahaVisitor(), HighlightVisitor {
 
     override fun clone(): HighlightVisitor = HighlightAST()
 
-    override fun suitableForFile(file: PsiFile): Boolean = file is YggdrasilFileNode
+    override fun suitableForFile(file: PsiFile): Boolean = file is SahaFileNode
 
     override fun visit(element: PsiElement) = element.accept(this)
 

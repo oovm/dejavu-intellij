@@ -17,7 +17,6 @@ public interface SahaTypes {
   IElementType FIELD_MARK = new SahaElementType("FIELD_MARK");
   IElementType FIELD_RHS = new SahaElementType("FIELD_RHS");
   IElementType FUNCTION_CALL = new SahaElementType("FUNCTION_CALL");
-  IElementType GRAMMAR_STATEMENT = new SahaElementType("GRAMMAR_STATEMENT");
   IElementType IDENTIFIER = new SahaElementType("IDENTIFIER");
   IElementType IMPORT_BODY = new SahaElementType("IMPORT_BODY");
   IElementType IMPORT_STATEMENT = new SahaElementType("IMPORT_STATEMENT");
@@ -41,6 +40,9 @@ public interface SahaTypes {
   IElementType RULE_BODY = new SahaElementType("RULE_BODY");
   IElementType RULE_STATEMENT = new SahaElementType("RULE_STATEMENT");
   IElementType RULE_TYPE = new SahaElementType("RULE_TYPE");
+  IElementType SLOT_END = new SahaElementType("SLOT_END");
+  IElementType SLOT_EXPRESSION = new SahaElementType("SLOT_EXPRESSION");
+  IElementType SLOT_START = new SahaElementType("SLOT_START");
   IElementType STRING_LITERAL = new SahaElementType("STRING_LITERAL");
   IElementType SUFFIX = new SahaElementType("SUFFIX");
   IElementType SYMBOL_PATH = new SahaElementType("SYMBOL_PATH");
@@ -131,9 +133,6 @@ public interface SahaTypes {
       else if (type == FUNCTION_CALL) {
         return new SahaFunctionCallNode(node);
       }
-      else if (type == GRAMMAR_STATEMENT) {
-        return new SahaGrammarStatementNode(node);
-      }
       else if (type == IDENTIFIER) {
         return new SahaIdentifierNode(node);
       }
@@ -202,6 +201,15 @@ public interface SahaTypes {
       }
       else if (type == RULE_TYPE) {
         return new SahaRuleTypeNode(node);
+      }
+      else if (type == SLOT_END) {
+        return new SahaSlotEndNode(node);
+      }
+      else if (type == SLOT_EXPRESSION) {
+        return new SahaSlotExpressionNode(node);
+      }
+      else if (type == SLOT_START) {
+        return new SahaSlotStartNode(node);
       }
       else if (type == STRING_LITERAL) {
         return new SahaStringLiteralNode(node);

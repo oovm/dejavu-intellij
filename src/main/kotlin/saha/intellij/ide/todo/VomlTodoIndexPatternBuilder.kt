@@ -7,14 +7,14 @@ import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
 import saha.intellij.language.SahaLexerAdapter
 import saha.intellij.language.SahaParserDefinition
-import saha.intellij.language.file.YggdrasilFileNode
+import saha.intellij.language.file.SahaFileNode
 
 class VomlTodoIndexPatternBuilder : IndexPatternBuilder {
     override fun getIndexingLexer(file: PsiFile): Lexer? =
-        if (file is YggdrasilFileNode) SahaLexerAdapter() else null
+        if (file is SahaFileNode) SahaLexerAdapter() else null
 
     override fun getCommentTokenSet(file: PsiFile): TokenSet? =
-        if (file is YggdrasilFileNode) SahaParserDefinition.COMMENTS else null
+        if (file is SahaFileNode) SahaParserDefinition.COMMENTS else null
 
     override fun getCommentStartDelta(tokenType: IElementType?): Int =
         if (tokenType in SahaParserDefinition.COMMENTS) 2 else 0

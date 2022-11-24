@@ -47,10 +47,6 @@ public class SahaVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitGrammarStatement(@NotNull SahaGrammarStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitIdentifier(@NotNull SahaIdentifier o) {
     visitPsiElement(o);
   }
@@ -140,6 +136,18 @@ public class SahaVisitor extends PsiElementVisitor {
   }
 
   public void visitRuleType(@NotNull SahaRuleType o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotEnd(@NotNull SahaSlotEnd o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotExpression(@NotNull SahaSlotExpression o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotStart(@NotNull SahaSlotStart o) {
     visitPsiElement(o);
   }
 
