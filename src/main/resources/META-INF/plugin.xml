@@ -1,0 +1,93 @@
+<idea-plugin>
+	<id>Yggdrasil</id>
+	<name>Yggdrasil Support</name>
+	<vendor>Yggdrasil</vendor>
+	<depends>com.intellij.modules.platform</depends>
+	<!--	<depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
+	<resource-bundle>messages.YggBundle</resource-bundle>
+	<extensions defaultExtensionNs="com.intellij">
+		<fileType
+			name="Yggdrasil"
+			language="Yggdrasil"
+			extensions="ygg"
+			implementationClass="ygg.intellij.language.file.YggdrasilFileType"
+			fieldName="INSTANCE"
+		/>
+		<lang.parserDefinition
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.language.YggParserDefinition"
+		/>
+		<!-- Highlighter -->
+		<colorSettingsPage implementation="ygg.intellij.ide.highlight.YggHighlightSettingPage"/>
+		<lang.syntaxHighlighter
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.highlight.HighlightToken"
+		/>
+		<highlightVisitor implementation="ygg.intellij.ide.highlight.HighlightAST"/>
+		<additionalTextAttributes scheme="Default" file="colors/VomlDefault.xml"/>
+		<additionalTextAttributes scheme="Darcula" file="colors/VomlDarcula.xml"/>
+		<!-- Formatter -->
+		<langCodeStyleSettingsProvider
+			implementation="ygg.intellij.ide.codeStyle.LanguageCodeStyleSettingsProvider"
+		/>
+		<lang.commenter
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.VomlCommenter"
+		/>
+		<lang.braceMatcher
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.braces.VomlBraceMatcher"
+		/>
+		<lang.quoteHandler
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.YggQuoteHandler"
+		/>
+		<!-- Structure View -->
+		<lang.foldingBuilder
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.folding.FoldingBuilder"
+		/>
+		<indexPatternBuilder
+			implementation="ygg.intellij.ide.todo.VomlTodoIndexPatternBuilder"
+		/>
+		<todoIndexer
+			filetype="Yggdrasil"
+			implementationClass="ygg.intellij.ide.todo.VomlTodoIndexer"
+		/>
+		<completion.contributor
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.completion.YCompletionContributor"
+		/>
+		<annotator
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.annotator.VomlHighlightingAnnotator"
+		/>
+		<annotator
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.annotator.checkers.YggScopeCheckerAnnotator"
+		/>
+		<annotator
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.annotator.checkers.YggTableCheckerAnnotator"
+		/>
+
+		<lang.formatter
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.formatter.FormatModel"
+		/>
+		<lang.smartEnterProcessor
+			language="Yggdrasil"
+			implementationClass="ygg.intellij.ide.assist.fixers.VomlSmartEnterProcessor"
+		/>
+	</extensions>
+	<actions>
+		<action
+			id="ygg.intellij.ide.actions.YggCreateFile"
+			class="ygg.intellij.ide.actions.YggCreateFile"
+			text="Voml File"
+			description="Create new Voml file"
+		>
+			<add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewFile"/>
+		</action>
+	</actions>
+</idea-plugin>
