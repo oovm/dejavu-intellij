@@ -4,19 +4,19 @@ import com.intellij.ide.actions.CreateFileFromTemplateAction
 import com.intellij.ide.actions.CreateFileFromTemplateDialog
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiDirectory
-import saha.intellij.language.SahaLanguage
-import saha.intellij.language.file.SahaBundle
-import saha.intellij.language.file.SahaIcon
+import djv.intellij.language.DJLanguage
+import djv.intellij.language.file.DJBundle
+import djv.intellij.language.file.DJIcon
 
-class YggCreateFile : CreateFileFromTemplateAction(Name, Description, SahaIcon.FILE) {
+class YggCreateFile : CreateFileFromTemplateAction(Name, Description, DJIcon.FILE) {
     companion object {
-        val Name = SahaLanguage.id
+        val Name = DJLanguage.id
         const val TemplateName = "Voml File";
-        val Description = SahaBundle.message("action.create.description")
+        val Description = DJBundle.message("action.create.description")
     }
 
     override fun buildDialog(project: Project, directory: PsiDirectory, builder: CreateFileFromTemplateDialog.Builder) {
-        builder.setTitle(Name).addKind("Empty file", SahaIcon.FILE, TemplateName)
+        builder.setTitle(Name).addKind("Empty file", DJIcon.FILE, TemplateName)
     }
 
     override fun getActionName(directory: PsiDirectory, newName: String, templateName: String): String = Name

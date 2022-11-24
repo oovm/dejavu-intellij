@@ -1,12 +1,12 @@
 package djv.intellij.language.file
 
 import com.intellij.openapi.fileTypes.LanguageFileType
-import saha.intellij.language.SahaLanguage
+import djv.intellij.language.DJLanguage
 import javax.swing.Icon
 
-object SahaFileType : LanguageFileType(SahaLanguage) {
-    override fun getName(): String = SahaLanguage.id
-    override fun getDescription(): String = SahaBundle.message("filetype.description")
-    override fun getDefaultExtension(): String = SahaLanguage.FileExtension
-    override fun getIcon(): Icon = SahaIcon.FILE
+object SahaFileType : LanguageFileType(DJLanguage) {
+    override fun getName(): String = DJLanguage.id
+    override fun getDescription(): String = DJBundle.message("filetype.description")
+    override fun getDefaultExtension(): String = DJLanguage.FileExtension
+    override fun getIcon(): Icon = DJIcon.FILE
 }

@@ -1,6 +1,6 @@
 package djv.intellij.ide
 
 import com.intellij.codeInsight.editorActions.SimpleTokenSetQuoteHandler
-import djv.intellij.language.psi.SahaTypes
+import djv.intellij.language.psi.DjvTypes
 
-class YggQuoteHandler : SimpleTokenSetQuoteHandler(_root_ide_package_.djv.intellij.language.psi.SahaTypes.STRING_LITERAL)
+class YggQuoteHandler : SimpleTokenSetQuoteHandler(DjvTypes.STRING_LITERAL)

@@ -7,7 +7,7 @@ import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.TokenType
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings
 import com.intellij.psi.formatter.FormatterUtil
-import djv.intellij.language.psi.SahaTypes
+import djv.intellij.language.psi.DjvTypes
 
 class FormatBlock(
     private val node: ASTNode,
@@ -34,7 +34,7 @@ class FormatBlock(
 
     override fun getChildAttributes(newChildIndex: Int): ChildAttributes {
         val indent = when (node.elementType) {
-            _root_ide_package_.djv.intellij.language.psi.SahaTypes.TABLE -> Indent.getNormalIndent()
+            DjvTypes.TABLE -> Indent.getNormalIndent()
             else -> Indent.getNoneIndent()
         }
         return ChildAttributes(indent, null)
@@ -55,17 +55,17 @@ class FormatBlock(
 fun createSpacingBuilder(commonSettings: CommonCodeStyleSettings): SpacingBuilder =
     SpacingBuilder(commonSettings)
         // ,
-        .after(_root_ide_package_.djv.intellij.language.psi.SahaTypes.COMMA).spacing(1, 1, 0, true, 0)
-        .before(_root_ide_package_.djv.intellij.language.psi.SahaTypes.COMMA).spaceIf(false)
+        .after(DjvTypes.COMMA).spacing(1, 1, 0, true, 0)
+        .before(DjvTypes.COMMA).spaceIf(false)
         // [ ]
-        .after(_root_ide_package_.djv.intellij.language.psi.SahaTypes.BRACKET_L).spaceIf(false)
-        .before(_root_ide_package_.djv.intellij.language.psi.SahaTypes.BRACKET_R).spaceIf(false)
+        .after(DjvTypes.BRACKET_L).spaceIf(false)
+        .before(DjvTypes.BRACKET_R).spaceIf(false)
         // { }
-        .after(_root_ide_package_.djv.intellij.language.psi.SahaTypes.BRACE_L).spaceIf(false)
-        .before(_root_ide_package_.djv.intellij.language.psi.SahaTypes.BRACE_R).spaceIf(false)
+        .after(DjvTypes.BRACE_L).spaceIf(false)
+        .before(DjvTypes.BRACE_R).spaceIf(false)
         // ( )
-        .after(_root_ide_package_.djv.intellij.language.psi.SahaTypes.PARENTHESIS_L).spaceIf(false)
-        .before(_root_ide_package_.djv.intellij.language.psi.SahaTypes.PARENTHESIS_R).spaceIf(false)
+        .after(DjvTypes.PARENTHESIS_L).spaceIf(false)
+        .before(DjvTypes.PARENTHESIS_R).spaceIf(false)
 
 private fun Block.computeSpacing(child1: Block?, child2: Block, ctx: FormatContext): Spacing? {
     return ctx.spacingBuilder.getSpacing(this, child1, child2)
@@ -76,8 +76,8 @@ private fun ASTNode?.isWhitespaceOrEmpty() = this == null || textLength == 0 || 
 private fun FormatBlock.computeIndent(child: ASTNode): Indent? {
     val isCornerChild = node.firstChildNode == child || node.lastChildNode == child
     return when (node.elementType) {
-        _root_ide_package_.djv.intellij.language.psi.SahaTypes.TABLE -> when {
-            isCornerChild || child.elementType == _root_ide_package_.djv.intellij.language.psi.SahaTypes.COMMA -> Indent.getNoneIndent()
+        DjvTypes.TABLE -> when {
+            isCornerChild || child.elementType == DjvTypes.COMMA -> Indent.getNoneIndent()
             else -> Indent.getNormalIndent()
         }
         else -> Indent.getNoneIndent()

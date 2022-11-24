@@ -6,28 +6,28 @@ import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.util.elementType
-import saha.intellij.language.psi.*
+import djv.intellij.language.psi.*
 
-class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : YggRecursiveVisitor() {
+class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : DJRecursiveVisitor() {
 
     override fun visitComment(comment: PsiComment) {
-        if (comment.tokenType == _root_ide_package_.djv.intellij.language.psi.SahaTypes.COMMENT_BLOCK) {
+        if (comment.tokenType == DjvTypes.COMMENT_BLOCK) {
             fold(comment)
             super.visitComment(comment)
         }
     }
 //
-//    override fun visitObject(o: saha.intellij.language.psi.YggObject) {
+//    override fun visitObject(o: djv.intellij.language.psi.YggObject) {
 //        foldInner(o)
 //    }
 //
 //
-//    override fun visitImportBody(o: saha.intellij.language.psi.YggImportBody) {
+//    override fun visitImportBody(o: djv.intellij.language.psi.YggImportBody) {
 //        foldInner(o)
 //    }
 //
 //
-//    override fun visitRuleBody(o: saha.intellij.language.psi.YggRuleBody) {
+//    override fun visitRuleBody(o: djv.intellij.language.psi.YggRuleBody) {
 //        foldInner(o)
 //    }
 

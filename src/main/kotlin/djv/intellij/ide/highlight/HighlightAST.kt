@@ -6,19 +6,19 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import saha.intellij.language.file.SahaFileNode
-import saha.intellij.language.psi.*
+import djv.intellij.language.file.DJFileNode
+import djv.intellij.language.psi.*
 
-class HighlightAST : _root_ide_package_.djv.intellij.language.psi.SahaVisitor(), HighlightVisitor {
+class HighlightAST : DjvVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
     override fun clone(): HighlightVisitor = HighlightAST()
 
-    override fun suitableForFile(file: PsiFile): Boolean = file is SahaFileNode
+    override fun suitableForFile(file: PsiFile): Boolean = file is DJFileNode
 
     override fun visit(element: PsiElement) = element.accept(this)
 
-//    override fun visitRuleStatement(o: saha.intellij.language.psi.YggRuleStatement) {
+//    override fun visitRuleStatement(o: djv.intellij.language.psi.YggRuleStatement) {
 //        highlight(o.define, HighlightColor.KEYWORD)
 //        if (o.ruleArgument == null) {
 //            highlight(o.identifier, HighlightColor.RULE_SYMBOL)

@@ -7,10 +7,10 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.tree.LeafPsiElement
-import saha.intellij.language.psi.endOffset
-import saha.intellij.language.psi.getNextNonCommentSibling
-import saha.intellij.language.psi.getPrevNonCommentSibling
-import saha.intellij.language.psi.getPrevNonWhitespaceSibling
+import djv.intellij.language.psi.endOffset
+import djv.intellij.language.psi.getNextNonCommentSibling
+import djv.intellij.language.psi.getPrevNonCommentSibling
+import djv.intellij.language.psi.getPrevNonWhitespaceSibling
 
 class CommaFixer : SmartEnterProcessorWithFixers.Fixer<VomlSmartEnterProcessor>() {
     override fun apply(editor: Editor, processor: VomlSmartEnterProcessor, element: PsiElement) {

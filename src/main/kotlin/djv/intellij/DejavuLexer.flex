@@ -1,21 +1,22 @@
-package saha.intellij.language;
+package djv.intellij.language;
 
 import com.intellij.psi.tree.IElementType;
 
 import static com.intellij.psi.TokenType.BAD_CHARACTER;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
-import static djv.intellij.language.psi.SahaTypes.*;
+import static djv.intellij.language.psi.DjvTypes.*;
+import com.intellij.lexer.FlexLexer;
 
 %%
 
 %{
-public _DJLexer() {
+public _DjvLexer() {
     this((java.io.Reader)null);
 }
 %}
 
 %public
-%class _DJLexer
+%class _DjvLexer
 %implements FlexLexer
 %function advance
 %type IElementType

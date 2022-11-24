@@ -4,83 +4,83 @@
 	<vendor>Saha Language</vendor>
 	<depends>com.intellij.modules.platform</depends>
 	<!--	<depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
-	<resource-bundle>messages.SahaBundle</resource-bundle>
+	<resource-bundle>messages.DJBundle</resource-bundle>
 	<extensions defaultExtensionNs="com.intellij">
 		<fileType
 			name="Saha"
-			language="Saha"
+			language="DejaVu"
 			extensions="saha"
-			implementationClass="saha.intellij.language.file.SahaFileType"
+			implementationClass="djv.intellij.language.file.SahaFileType"
 			fieldName="INSTANCE"/>
 		<lang.parserDefinition
-			language="Saha"
-			implementationClass="saha.intellij.language.SahaParserDefinition"/>
+			language="DejaVu"
+			implementationClass="djv.intellij.language.SahaParserDefinition"/>
 		<!-- Highlighter -->
-		<colorSettingsPage implementation="saha.intellij.ide.highlight.YggHighlightSettingPage"/>
+		<colorSettingsPage implementation="djv.intellij.ide.highlight.YggHighlightSettingPage"/>
 		<lang.syntaxHighlighter
-			language="Saha"
-			implementationClass="saha.intellij.ide.highlight.HighlightToken"/>
-		<highlightVisitor implementation="saha.intellij.ide.highlight.HighlightAST"/>
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.highlight.HighlightToken"/>
+		<highlightVisitor implementation="djv.intellij.ide.highlight.HighlightAST"/>
 		<additionalTextAttributes scheme="Default" file="colors/VomlDefault.xml"/>
 		<additionalTextAttributes scheme="Darcula" file="colors/VomlDarcula.xml"/>
 		<!-- Formatter -->
 		<langCodeStyleSettingsProvider
-			implementation="saha.intellij.ide.codeStyle.LanguageCodeStyleSettingsProvider"
+			implementation="djv.intellij.ide.codeStyle.LanguageCodeStyleSettingsProvider"
 		/>
 		<lang.commenter
-			language="Saha"
-			implementationClass="saha.intellij.ide.VomlCommenter"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.VomlCommenter"
 		/>
 		<lang.braceMatcher
-			language="Saha"
-			implementationClass="saha.intellij.ide.braces.VomlBraceMatcher"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.braces.VomlBraceMatcher"
 		/>
 		<lang.quoteHandler
-			language="Saha"
-			implementationClass="saha.intellij.ide.YggQuoteHandler"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.YggQuoteHandler"
 		/>
 		<!-- Structure View -->
 		<lang.foldingBuilder
-			language="Saha"
-			implementationClass="saha.intellij.ide.folding.FoldingBuilder"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.folding.FoldingBuilder"
 		/>
 		<indexPatternBuilder
-			implementation="saha.intellij.ide.todo.VomlTodoIndexPatternBuilder"
+			implementation="djv.intellij.ide.todo.VomlTodoIndexPatternBuilder"
 		/>
 		<todoIndexer
 			filetype="Yggdrasil"
-			implementationClass="saha.intellij.ide.todo.VomlTodoIndexer"
+			implementationClass="djv.intellij.ide.todo.VomlTodoIndexer"
 		/>
 		<completion.contributor
-			language="Saha"
-			implementationClass="saha.intellij.ide.completion.YCompletionContributor"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.completion.YCompletionContributor"
 		/>
 		<annotator
-			language="Saha"
-			implementationClass="saha.intellij.ide.annotator.VomlHighlightingAnnotator"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.annotator.VomlHighlightingAnnotator"
 		/>
 		<annotator
-			language="Saha"
-			implementationClass="saha.intellij.ide.annotator.checkers.YggScopeCheckerAnnotator"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.annotator.checkers.YggScopeCheckerAnnotator"
 		/>
 		<annotator
-			language="Saha"
-			implementationClass="saha.intellij.ide.annotator.checkers.YggTableCheckerAnnotator"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.annotator.checkers.YggTableCheckerAnnotator"
 		/>
 
 		<lang.formatter
-			language="Saha"
-			implementationClass="saha.intellij.ide.formatter.FormatModel"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.formatter.FormatModel"
 		/>
 		<lang.smartEnterProcessor
-			language="Saha"
-			implementationClass="saha.intellij.ide.assist.fixers.VomlSmartEnterProcessor"
+			language="DejaVu"
+			implementationClass="djv.intellij.ide.assist.fixers.VomlSmartEnterProcessor"
 		/>
 	</extensions>
 	<actions>
 		<action
-			id="saha.intellij.ide.actions.YggCreateFile"
-			class="saha.intellij.ide.actions.YggCreateFile"
+			id="djv.intellij.ide.actions.YggCreateFile"
+			class="djv.intellij.ide.actions.YggCreateFile"
 			text="Voml File"
 			description="Create new Voml file"
 		>

@@ -1,0 +1,22 @@
+// This is a generated file. Not intended for manual editing.
+package djv.intellij.language.psi;
+
+import java.util.List;
+import org.jetbrains.annotations.*;
+import com.intellij.psi.PsiElement;
+
+public interface DjvSlotForElse extends PsiElement {
+
+  @NotNull
+  DjvSlotElse getSlotElse();
+
+  @Nullable
+  DjvSlotExpression getSlotExpression();
+
+  @Nullable
+  DjvSlotFor getSlotFor();
+
+  @Nullable
+  DjvTextStatement getTextStatement();
+
+}

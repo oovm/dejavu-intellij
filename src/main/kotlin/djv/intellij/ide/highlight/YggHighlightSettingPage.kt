@@ -3,8 +3,8 @@ package djv.intellij.ide.highlight
 
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
-import saha.intellij.language.file.SahaBundle
-import saha.intellij.language.file.SahaIcon
+import djv.intellij.language.file.DJBundle
+import djv.intellij.language.file.DJIcon
 
 class YggHighlightSettingPage : ColorSettingsPage {
     private val attrs = HighlightColor
@@ -20,9 +20,9 @@ class YggHighlightSettingPage : ColorSettingsPage {
 
     override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
 
-    override fun getDisplayName() = SahaBundle.message("filetype.name")
+    override fun getDisplayName() = DJBundle.message("filetype.name")
 
-    override fun getIcon() = SahaIcon.FILE
+    override fun getIcon() = DJIcon.FILE
 
     override fun getHighlighter() = HighlightToken()
 

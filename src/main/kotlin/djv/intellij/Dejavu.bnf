@@ -1,18 +1,18 @@
 {
-    parserClass = "djv.intellij.language.parser.SahaParser"
+    parserClass = "djv.intellij.language.parser.DjvParser"
     parserUtilClass = "com.intellij.lang.parser.GeneratedParserUtilBase"
 
-    psiClassPrefix = "Saha"
+    psiClassPrefix = "Djv"
     psiImplClassSuffix = "Node"
-    psiPackage = "saha.intellij.language.psi"
-    psiImplPackage = "saha.intellij.language.psi_node"
+    psiPackage = "djv.intellij.language.psi"
+    psiImplPackage = "djv.intellij.language.psi_node"
 
-    elementTypeHolderClass = "djv.intellij.language.psi.SahaTypes"
-    elementTypeClass = "saha.intellij.language.psi.SahaElementType"
-    tokenTypeClass = "saha.intellij.language.psi.SahaElementType"
+    elementTypeHolderClass = "djv.intellij.language.psi.DjvTypes"
+    elementTypeClass = "djv.intellij.language.psi.DjvElementType"
+    tokenTypeClass = "djv.intellij.language.psi.DjvElementType"
 
     extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
-    psiImplUtilClass = "saha.intellij.language.psi_node.SahaPsiExtension"
+    psiImplUtilClass = "djv.intellij.language.psi_node.DjvPsiExtension"
 
     tokens = [
         AS = "as"
@@ -52,7 +52,7 @@
     ]
 }
 
-Saha ::= statements*;
+DejaVu ::= statements*;
 // fake used for mixin
 // pri used for syntax highlight
 fake comment_doc ::= COMMENT_DOC;
@@ -158,7 +158,7 @@ object_key ::= identifier | string_literal;
 modifiers ::= (identifier !('('|'{'|ARROW|':'))*;
 namespace ::= identifier (DOUBLE_COLON identifier)*
 identifier ::= SYMBOL {
-    mixin = "saha.intellij.language.mixin.MixinIdentifier"
+    mixin = "djv.intellij.language.mixin.MixinIdentifier"
 }
 // ---------------------------------------------------------------------------------------------------------------------
 meta parenthesis ::= PARENTHESIS_L [<<item>> (<<delimiter>> <<item>>)* [<<delimiter>>]] PARENTHESIS_R;
