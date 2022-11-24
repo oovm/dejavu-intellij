@@ -13,7 +13,7 @@ import saha.intellij.language.psi.YggObjectItem;
 import saha.intellij.language.psi.YggObjectKey;
 import saha.intellij.language.psi.YggValue;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggObjectItemNode extends ASTWrapperPsiElement implements YggObjectItem {
 

@@ -13,7 +13,7 @@ import saha.intellij.language.psi.YggPair;
 import saha.intellij.language.psi.YggSymbolPath;
 import saha.intellij.language.psi.YggValue;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggPairNode extends ASTWrapperPsiElement implements YggPair {
 

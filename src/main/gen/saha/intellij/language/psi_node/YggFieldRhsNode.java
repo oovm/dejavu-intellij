@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static saha.intellij.language.psi.YggTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import saha.intellij.language.psi.*;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggFieldRhsNode extends ASTWrapperPsiElement implements YggFieldRhs {
 

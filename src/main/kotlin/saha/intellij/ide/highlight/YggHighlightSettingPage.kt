@@ -3,8 +3,8 @@ package saha.intellij.ide.highlight
 
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
-import ygg.intellij.language.file.YggdrasilBundle
-import ygg.intellij.language.file.YggdrasilIcon
+import saha.intellij.language.file.YggdrasilBundle
+import saha.intellij.language.file.YggdrasilIcon
 
 class YggHighlightSettingPage : ColorSettingsPage {
     private val attrs = HighlightColor

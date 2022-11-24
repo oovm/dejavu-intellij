@@ -13,7 +13,7 @@ import saha.intellij.language.psi.YggKey;
 import saha.intellij.language.psi.YggKeySymbol;
 import saha.intellij.language.psi.YggStringLiteral;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggKeyNode extends ASTWrapperPsiElement implements YggKey {
 

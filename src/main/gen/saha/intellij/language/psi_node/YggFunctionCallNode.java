@@ -13,7 +13,7 @@ import saha.intellij.language.psi.YggFunctionCall;
 import saha.intellij.language.psi.YggIdentifier;
 import saha.intellij.language.psi.YggParenthesis;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggFunctionCallNode extends ASTWrapperPsiElement implements YggFunctionCall {
 

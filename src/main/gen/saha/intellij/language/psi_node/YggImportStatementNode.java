@@ -13,7 +13,7 @@ import saha.intellij.language.psi.YggImportBody;
 import saha.intellij.language.psi.YggImportStatement;
 import saha.intellij.language.psi.YggStringLiteral;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggImportStatementNode extends ASTWrapperPsiElement implements YggImportStatement {
 

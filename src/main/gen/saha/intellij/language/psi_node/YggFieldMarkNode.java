@@ -13,7 +13,7 @@ import saha.intellij.language.psi.YggFieldMark;
 import saha.intellij.language.psi.YggFieldRhs;
 import saha.intellij.language.psi.YggIdentifier;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggFieldMarkNode extends ASTWrapperPsiElement implements YggFieldMark {
 

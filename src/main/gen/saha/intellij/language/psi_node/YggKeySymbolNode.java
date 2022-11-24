@@ -11,7 +11,7 @@ import static saha.intellij.language.psi.YggTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import saha.intellij.language.psi.YggKeySymbol;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggKeySymbolNode extends ASTWrapperPsiElement implements YggKeySymbol {
 

@@ -1,4 +1,4 @@
-package ygg.intellij.language;
+package saha.intellij.language;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;

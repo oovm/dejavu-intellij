@@ -12,7 +12,7 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import saha.intellij.language.psi.YggMacroStatement;
 import saha.intellij.language.psi.YggParenthesis;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggMacroStatementNode extends ASTWrapperPsiElement implements YggMacroStatement {
 

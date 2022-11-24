@@ -2,7 +2,7 @@ package saha.intellij.language.mixin
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement
 import com.intellij.lang.ASTNode
-import ygg.intellij.language.psi.ancestors
+import saha.intellij.language.psi.ancestors
 import saha.intellij.language.psi_node.YggIdentifierNode
 import saha.intellij.language.psi_node.YggRuleStatementNode
 

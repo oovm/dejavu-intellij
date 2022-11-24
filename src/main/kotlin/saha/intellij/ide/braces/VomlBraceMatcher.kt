@@ -5,7 +5,7 @@ import com.intellij.codeInsight.highlighting.PairedBraceMatcherAdapter
 import com.intellij.openapi.editor.highlighter.HighlighterIterator
 import com.intellij.openapi.fileTypes.FileType
 import saha.intellij.YggdrasilLanguage
-import ygg.intellij.language.file.YggdrasilFileType
+import saha.intellij.language.file.YggdrasilFileType
 
 class VomlBraceMatcher : PairedBraceMatcherAdapter(VomlBaseBraceMatcher(), saha.intellij.YggdrasilLanguage) {
     override fun isLBraceToken(iterator: HighlighterIterator, fileText: CharSequence, fileType: FileType): Boolean =

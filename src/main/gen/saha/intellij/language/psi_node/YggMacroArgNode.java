@@ -13,7 +13,7 @@ import saha.intellij.language.psi.YggMacroArg;
 import saha.intellij.language.psi.YggMacroStatement;
 import saha.intellij.language.psi.YggValue;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggMacroArgNode extends ASTWrapperPsiElement implements YggMacroArg {
 

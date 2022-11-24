@@ -13,7 +13,7 @@ import saha.intellij.language.psi.YggExpr;
 import saha.intellij.language.psi.YggInfix;
 import saha.intellij.language.psi.YggTerm;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.psi.*;
 
 public class YggExprNode extends ASTWrapperPsiElement implements YggExpr {
 

@@ -5,9 +5,9 @@ import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
-import ygg.intellij.language.YggLexerAdapter
+import saha.intellij.language.YggLexerAdapter
 import saha.intellij.language.psi.YggTypes.*
-import ygg.intellij.ide.highlight.HighlightColor as Color
+import saha.intellij.ide.highlight.HighlightColor as Color
 
 class HighlightToken : SyntaxHighlighterBase() {
     override fun getHighlightingLexer(): Lexer {

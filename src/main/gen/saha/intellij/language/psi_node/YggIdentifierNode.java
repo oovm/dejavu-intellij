@@ -12,8 +12,8 @@ import static saha.intellij.language.psi.YggTypes.*;
 import saha.intellij.language.mixin.MixinIdentifier;
 import saha.intellij.language.psi.YggIdentifier;
 import saha.intellij.language.psi.YggVisitor;
-import ygg.intellij.language.mixin.MixinIdentifier;
-import ygg.intellij.language.psi.*;
+import saha.intellij.language.mixin.MixinIdentifier;
+import saha.intellij.language.psi.*;
 
 public class YggIdentifierNode extends MixinIdentifier implements YggIdentifier {
 

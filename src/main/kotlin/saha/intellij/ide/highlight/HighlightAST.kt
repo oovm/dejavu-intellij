@@ -6,8 +6,8 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import ygg.intellij.language.file.YggdrasilFileNode
-import ygg.intellij.language.psi.*
+import saha.intellij.language.file.YggdrasilFileNode
+import saha.intellij.language.psi.*
 
 class HighlightAST : saha.intellij.language.psi.YggVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null

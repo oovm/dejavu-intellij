@@ -4,15 +4,15 @@
 
     psiClassPrefix = "Ygg"
     psiImplClassSuffix = "Node"
-    psiPackage = "ygg.intellij.language.psi"
-    psiImplPackage = "ygg.intellij.language.psi_node"
+    psiPackage = "saha.intellij.language.psi"
+    psiImplPackage = "saha.intellij.language.psi_node"
 
     elementTypeHolderClass = "saha.intellij.language.psi.YggTypes"
-    elementTypeClass = "ygg.intellij.language.psi.YggElementType"
-    tokenTypeClass = "ygg.intellij.language.psi.YggElementType"
+    elementTypeClass = "saha.intellij.language.psi.YggElementType"
+    tokenTypeClass = "saha.intellij.language.psi.YggElementType"
 
     extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
-    psiImplUtilClass = "ygg.intellij.language.psi_node.YggPsiExtension"
+    psiImplUtilClass = "saha.intellij.language.psi_node.YggPsiExtension"
 
     tokens = [
         AS = "as"
@@ -141,7 +141,7 @@ object_key ::= identifier | string_literal;
 modifiers ::= (identifier !('('|'{'|ARROW|':'))*;
 namespace ::= identifier (DOUBLE_COLON identifier)*
 identifier ::= SYMBOL {
-    mixin = "ygg.intellij.language.mixin.MixinIdentifier"
+    mixin = "saha.intellij.language.mixin.MixinIdentifier"
 }
 // ---------------------------------------------------------------------------------------------------------------------
 meta parenthesis ::= PARENTHESIS_L [<<item>> (<<delimiter>> <<item>>)* [<<delimiter>>]] PARENTHESIS_R;

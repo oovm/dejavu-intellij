@@ -7,7 +7,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
-import ygg.intellij.language.YggParserDefinition
+import saha.intellij.language.YggParserDefinition
 import saha.intellij.language.psi.YggTypes.*
 
 class VomlBaseBraceMatcher : PairedBraceMatcher {
