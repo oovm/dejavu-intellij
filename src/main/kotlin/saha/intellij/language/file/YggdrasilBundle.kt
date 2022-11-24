@@ -2,7 +2,7 @@ package saha.intellij.language.file
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.PropertyKey
-import saha.intellij.YggdrasilLanguage.Bundle
+import saha.intellij.SahaLanguage.Bundle
 import java.util.function.Supplier
 
 object YggdrasilBundle : DynamicBundle(Bundle) {

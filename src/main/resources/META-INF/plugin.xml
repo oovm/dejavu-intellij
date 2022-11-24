@@ -4,7 +4,7 @@
 	<vendor>Yggdrasil</vendor>
 	<depends>com.intellij.modules.platform</depends>
 	<!--	<depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
-	<resource-bundle>messages.YggBundle</resource-bundle>
+	<resource-bundle>messages.SahaBundle</resource-bundle>
 	<extensions defaultExtensionNs="com.intellij">
 		<fileType
 			name="Yggdrasil"

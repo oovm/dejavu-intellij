@@ -4,10 +4,9 @@ import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.navigation.ItemPresentation
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.psi.FileViewProvider
-import saha.intellij.YggdrasilLanguage
 import javax.swing.Icon
 
-class YggdrasilFileNode(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, saha.intellij.YggdrasilLanguage),
+class YggdrasilFileNode(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, saha.intellij.SahaLanguage),
     ItemPresentation {
     override fun getFileType(): FileType = YggdrasilFileType
     override fun getPresentableText(): String {

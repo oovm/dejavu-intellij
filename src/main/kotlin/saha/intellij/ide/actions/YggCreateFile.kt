@@ -4,13 +4,12 @@ import com.intellij.ide.actions.CreateFileFromTemplateAction
 import com.intellij.ide.actions.CreateFileFromTemplateDialog
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiDirectory
-import saha.intellij.YggdrasilLanguage
 import saha.intellij.language.file.YggdrasilBundle
 import saha.intellij.language.file.YggdrasilIcon
 
 class YggCreateFile : CreateFileFromTemplateAction(Name, Description, YggdrasilIcon.FILE) {
     companion object {
-        val Name = saha.intellij.YggdrasilLanguage.id
+        val Name = saha.intellij.SahaLanguage.id
         const val TemplateName = "Voml File";
         val Description = YggdrasilBundle.message("action.create.description")
     }

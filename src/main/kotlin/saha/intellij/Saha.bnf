@@ -49,7 +49,7 @@
     ]
 }
 
-Ygg ::= statements*;
+Saha ::= statements*;
 // fake used for mixin
 // pri used for syntax highlight
 fake comment_doc ::= COMMENT_DOC;

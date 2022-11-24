@@ -12,9 +12,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
-import saha.intellij.YggdrasilLanguage
 import saha.intellij.language.file.YggdrasilFileNode
-import saha.intellij.language.parser.YggParser
 import saha.intellij.language.psi.YggTypes.*
 
 
@@ -22,7 +20,7 @@ class YggParserDefinition : ParserDefinition {
     companion object {
         val COMMENTS = TokenSet.create(COMMENT_LINE, COMMENT_BLOCK, COMMENT_BLOCK)
         val STRING_LITERALS = TokenSet.create(STRING_LITERAL)
-        val FILE = IFileElementType(saha.intellij.YggdrasilLanguage)
+        val FILE = IFileElementType(saha.intellij.SahaLanguage)
     }
 
     override fun createLexer(project: Project): Lexer = YggLexerAdapter()

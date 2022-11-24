@@ -8,7 +8,7 @@ import com.intellij.psi.codeStyle.CodeStyleSettings
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider
 
 class LanguageCodeStyleSettingsProvider : LanguageCodeStyleSettingsProvider() {
-    override fun getLanguage() = saha.intellij.YggdrasilLanguage
+    override fun getLanguage() = saha.intellij.SahaLanguage
 
     override fun getIndentOptionsEditor() = SmartIndentOptionsEditor()
 
