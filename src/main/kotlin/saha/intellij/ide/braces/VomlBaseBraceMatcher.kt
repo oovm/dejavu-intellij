@@ -7,7 +7,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
-import saha.intellij.language.YggParserDefinition
+import saha.intellij.language.SahaParserDefinition
 import saha.intellij.language.psi.SahaTypes.*
 
 class VomlBaseBraceMatcher : PairedBraceMatcher {
@@ -27,7 +27,7 @@ class VomlBaseBraceMatcher : PairedBraceMatcher {
         )
 
         private val InsertPairBraceBefore = TokenSet.orSet(
-            YggParserDefinition.COMMENTS,
+            SahaParserDefinition.COMMENTS,
             TokenSet.create(
                 TokenType.WHITE_SPACE,
                 COMMA,

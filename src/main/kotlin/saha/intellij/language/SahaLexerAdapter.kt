@@ -2,4 +2,4 @@ package saha.intellij.language
 
 import com.intellij.lexer.FlexAdapter
 
-class YggLexerAdapter : FlexAdapter(_SahaLexer())
+class SahaLexerAdapter : FlexAdapter(_SahaLexer())

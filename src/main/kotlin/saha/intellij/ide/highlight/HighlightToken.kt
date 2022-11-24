@@ -5,13 +5,13 @@ import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
-import saha.intellij.language.YggLexerAdapter
+import saha.intellij.language.SahaLexerAdapter
 import saha.intellij.language.psi.SahaTypes.*
 import saha.intellij.ide.highlight.HighlightColor as Color
 
 class HighlightToken : SyntaxHighlighterBase() {
     override fun getHighlightingLexer(): Lexer {
-        return YggLexerAdapter()
+        return SahaLexerAdapter()
     }
 
     override fun getTokenHighlights(tokenType: IElementType): Array<TextAttributesKey> {

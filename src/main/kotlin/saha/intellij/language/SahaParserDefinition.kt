@@ -12,19 +12,20 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
+import saha.intellij.SahaLanguage
 import saha.intellij.language.file.YggdrasilFileNode
 import saha.intellij.language.parser.SahaParser
 import saha.intellij.language.psi.SahaTypes.*
 
 
-class YggParserDefinition : ParserDefinition {
+class SahaParserDefinition : ParserDefinition {
     companion object {
         val COMMENTS = TokenSet.create(COMMENT_LINE, COMMENT_BLOCK, COMMENT_BLOCK)
         val STRING_LITERALS = TokenSet.create(STRING_LITERAL)
-        val FILE = IFileElementType(saha.intellij.SahaLanguage)
+        val FILE = IFileElementType(SahaLanguage)
     }
 
-    override fun createLexer(project: Project): Lexer = YggLexerAdapter()
+    override fun createLexer(project: Project): Lexer = SahaLexerAdapter()
 
     override fun createParser(project: Project): PsiParser = SahaParser()
 
