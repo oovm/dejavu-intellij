@@ -24,7 +24,6 @@ public interface DjvTypes {
   IElementType INFIX = new DjvElementType("INFIX");
   IElementType KEY = new DjvElementType("KEY");
   IElementType KEY_SYMBOL = new DjvElementType("KEY_SYMBOL");
-  IElementType KW_FOR = new DjvElementType("KW_FOR");
   IElementType KW_IMPORT = new DjvElementType("KW_IMPORT");
   IElementType KW_IN = new DjvElementType("KW_IN");
   IElementType MACRO_ARG = new DjvElementType("MACRO_ARG");
@@ -50,6 +49,10 @@ public interface DjvTypes {
   IElementType SLOT_FOR_ELSE = new DjvElementType("SLOT_FOR_ELSE");
   IElementType SLOT_FOR_END = new DjvElementType("SLOT_FOR_END");
   IElementType SLOT_FOR_START = new DjvElementType("SLOT_FOR_START");
+  IElementType SLOT_IF = new DjvElementType("SLOT_IF");
+  IElementType SLOT_IF_ELSE = new DjvElementType("SLOT_IF_ELSE");
+  IElementType SLOT_IF_END = new DjvElementType("SLOT_IF_END");
+  IElementType SLOT_IF_START = new DjvElementType("SLOT_IF_START");
   IElementType SLOT_L = new DjvElementType("SLOT_L");
   IElementType SLOT_R = new DjvElementType("SLOT_R");
   IElementType STRING_LITERAL = new DjvElementType("STRING_LITERAL");
@@ -92,8 +95,11 @@ public interface DjvTypes {
   IElementType HYPHEN = new DjvElementType("-");
   IElementType INTEGER = new DjvElementType("INTEGER");
   IElementType KW_ELSE = new DjvElementType("else");
+  IElementType KW_ELSE_IF = new DjvElementType("else-if");
   IElementType KW_END_FOR = new DjvElementType("end-for");
   IElementType KW_END_IF = new DjvElementType("end-if");
+  IElementType KW_FOR = new DjvElementType("for");
+  IElementType KW_IF = new DjvElementType("if");
   IElementType MANY = new DjvElementType("*");
   IElementType MANY1 = new DjvElementType("+");
   IElementType NOT = new DjvElementType("!");
@@ -165,9 +171,6 @@ public interface DjvTypes {
       }
       else if (type == KEY_SYMBOL) {
         return new DjvKeySymbolNode(node);
-      }
-      else if (type == KW_FOR) {
-        return new DjvKwForNode(node);
       }
       else if (type == KW_IMPORT) {
         return new DjvKwImportNode(node);
@@ -243,6 +246,18 @@ public interface DjvTypes {
       }
       else if (type == SLOT_FOR_START) {
         return new DjvSlotForStartNode(node);
+      }
+      else if (type == SLOT_IF) {
+        return new DjvSlotIfNode(node);
+      }
+      else if (type == SLOT_IF_ELSE) {
+        return new DjvSlotIfElseNode(node);
+      }
+      else if (type == SLOT_IF_END) {
+        return new DjvSlotIfEndNode(node);
+      }
+      else if (type == SLOT_IF_START) {
+        return new DjvSlotIfStartNode(node);
       }
       else if (type == SLOT_L) {
         return new DjvSlotLNode(node);

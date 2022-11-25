@@ -75,10 +75,6 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitKwFor(@NotNull DjvKwFor o) {
-    visitPsiElement(o);
-  }
-
   public void visitKwImport(@NotNull DjvKwImport o) {
     visitPsiElement(o);
   }
@@ -176,6 +172,22 @@ public class DjvVisitor extends PsiElementVisitor {
   }
 
   public void visitSlotForStart(@NotNull DjvSlotForStart o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotIf(@NotNull DjvSlotIf o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotIfElse(@NotNull DjvSlotIfElse o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotIfEnd(@NotNull DjvSlotIfEnd o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotIfStart(@NotNull DjvSlotIfStart o) {
     visitPsiElement(o);
   }
 

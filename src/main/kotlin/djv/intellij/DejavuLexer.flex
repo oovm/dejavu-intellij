@@ -49,7 +49,11 @@ COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 SLOT_L = \{%(=-_\!)?
 SLOT_R = (=-_\!)?%\}
 
+KW_IF = if
+KW_ELSE_IF = else-if | ef
 KW_ELSE = "else"
+
+KW_FOR = for
 KW_END_FOR = "end-for" | "end"
 
 SAHA_TEXT = [^{]+
@@ -68,7 +72,10 @@ SAHA_TEXT = [^{]+
 }
 
 <CODE> {
+    {KW_IF}      { return KW_IF; }
+    {KW_ELSE_IF} { return KW_ELSE_IF; }
     {KW_ELSE}    { return KW_ELSE; }
+    {KW_FOR}     { return KW_FOR; }
     {KW_END_FOR} { return KW_END_FOR; }
 }
 

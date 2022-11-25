@@ -5,10 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface DjvSlotForElse extends PsiElement {
-
-  @NotNull
-  DjvSlotElse getSlotElse();
+public interface DjvSlotIf extends PsiElement {
 
   @NotNull
   List<DjvSlotExpression> getSlotExpressionList();
@@ -18,6 +15,15 @@ public interface DjvSlotForElse extends PsiElement {
 
   @NotNull
   List<DjvSlotIf> getSlotIfList();
+
+  @Nullable
+  DjvSlotIfElse getSlotIfElse();
+
+  @Nullable
+  DjvSlotIfEnd getSlotIfEnd();
+
+  @NotNull
+  DjvSlotIfStart getSlotIfStart();
 
   @NotNull
   List<DjvTextStatement> getTextStatementList();

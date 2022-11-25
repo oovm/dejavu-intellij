@@ -5,16 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface DjvSlotForStart extends PsiElement {
+public interface DjvSlotIfStart extends PsiElement {
 
   @NotNull
   DjvExpression getExpression();
-
-  @NotNull
-  DjvKwIn getKwIn();
-
-  @NotNull
-  DjvPattern getPattern();
 
   @NotNull
   DjvSlotL getSlotL();

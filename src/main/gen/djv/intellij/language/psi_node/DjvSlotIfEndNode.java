@@ -11,38 +11,20 @@ import static djv.intellij.language.psi.DjvTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import djv.intellij.language.psi.*;
 
-public class DjvSlotForStartNode extends ASTWrapperPsiElement implements DjvSlotForStart {
+public class DjvSlotIfEndNode extends ASTWrapperPsiElement implements DjvSlotIfEnd {
 
-  public DjvSlotForStartNode(@NotNull ASTNode node) {
+  public DjvSlotIfEndNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull DjvVisitor visitor) {
-    visitor.visitSlotForStart(this);
+    visitor.visitSlotIfEnd(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof DjvVisitor) accept((DjvVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public DjvExpression getExpression() {
-    return findNotNullChildByClass(DjvExpression.class);
-  }
-
-  @Override
-  @NotNull
-  public DjvKwIn getKwIn() {
-    return findNotNullChildByClass(DjvKwIn.class);
-  }
-
-  @Override
-  @NotNull
-  public DjvPattern getPattern() {
-    return findNotNullChildByClass(DjvPattern.class);
   }
 
   @Override

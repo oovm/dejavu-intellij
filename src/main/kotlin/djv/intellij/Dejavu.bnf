@@ -38,9 +38,12 @@
         SAHA_TEXT = "<TEXT>"
         SLOT_START = '{%'
         SLOT_END = '%}'
+        KW_IF = "if"
+        KW_ELSE_IF = 'else-if'
         KW_ELSE = 'else'
-        KW_END_FOR = 'end-for'
         KW_END_IF = 'end-if'
+        KW_FOR = 'for'
+        KW_END_FOR = 'end-for'
         COLON = ':'
         SEMICOLON = ';'
         COMMA = ','
@@ -63,6 +66,7 @@ private comment ::= COMMENT_LINE | COMMENT_BLOCK | COMMENT_DOC;
 
 private statements ::=
       slot_for
+    | slot_if
     | slot_expression
     | text_statement
     ;
@@ -74,15 +78,21 @@ text_statement ::= SAHA_TEXT;
 slot_for ::= slot_for_start statements* slot_for_else? slot_for_end {
     pin = slot_for_start
 };
-slot_for_start ::= slot_l kw_for pattern kw_in expression slot_r;
+slot_for_start ::= slot_l KW_FOR pattern kw_in expression slot_r;
 slot_for_else  ::= slot_else statements* {
     pin = slot_else
 };
 slot_for_end   ::= slot_l KW_END_FOR slot_r;
-
-kw_for     ::= "for";
 kw_in      ::= "in";
 // ---------------------------------------------------------------------------------------------------------------------
+slot_if ::= slot_if_start statements* slot_if_else? slot_if_end {
+    pin = slot_if_start
+};
+slot_if_start ::= slot_l KW_IF expression slot_r;
+slot_if_else  ::= slot_else statements* {
+    pin = slot_else
+};
+slot_if_end   ::= slot_l KW_END_IF slot_r;
 slot_else ::= slot_l KW_ELSE slot_r;
 // ---------------------------------------------------------------------------------------------------------------------
 pattern ::= identifier;
@@ -96,22 +106,6 @@ slot_expression ::= slot_l identifier? slot_r {
 slot_l ::= SLOT_START;
 slot_r ::= SLOT_END;
 // ---------------------------------------------------------------------------------------------------------------------
-// @import
-export_statement ::= "codegen" identifier object {
-    pin = identifier
-    recoverWhile = end_brace
-}
-import_statement ::= kw_import string_literal [import_body] {
-    pin = string_literal
-    recoverWhile = end_brace
-}
-import_body      ::= BRACE_L [identifier (COMMA identifier)* [COMMA]] BRACE_R;
-kw_import        ::= "import" | "use" | "using";
-// ---------------------------------------------------------------------------------------------------------------------
-// @macro("path")
-macro_statement ::= AT SYMBOL <<parenthesis macro_arg COMMA>>;
-macro_arg ::= value | macro_statement;
-// =====================================================================================================================
 // def modifiers rule
 rule_statement ::= define modifiers identifier [rule_argument] [rule_type] rule_body {
     pin = identifier

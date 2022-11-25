@@ -11,14 +11,14 @@ import static djv.intellij.language.psi.DjvTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import djv.intellij.language.psi.*;
 
-public class DjvSlotForStartNode extends ASTWrapperPsiElement implements DjvSlotForStart {
+public class DjvSlotIfStartNode extends ASTWrapperPsiElement implements DjvSlotIfStart {
 
-  public DjvSlotForStartNode(@NotNull ASTNode node) {
+  public DjvSlotIfStartNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull DjvVisitor visitor) {
-    visitor.visitSlotForStart(this);
+    visitor.visitSlotIfStart(this);
   }
 
   @Override
@@ -31,18 +31,6 @@ public class DjvSlotForStartNode extends ASTWrapperPsiElement implements DjvSlot
   @NotNull
   public DjvExpression getExpression() {
     return findNotNullChildByClass(DjvExpression.class);
-  }
-
-  @Override
-  @NotNull
-  public DjvKwIn getKwIn() {
-    return findNotNullChildByClass(DjvKwIn.class);
-  }
-
-  @Override
-  @NotNull
-  public DjvPattern getPattern() {
-    return findNotNullChildByClass(DjvPattern.class);
   }
 
   @Override

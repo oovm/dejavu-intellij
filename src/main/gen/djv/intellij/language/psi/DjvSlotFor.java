@@ -23,6 +23,9 @@ public interface DjvSlotFor extends PsiElement {
   DjvSlotForStart getSlotForStart();
 
   @NotNull
+  List<DjvSlotIf> getSlotIfList();
+
+  @NotNull
   List<DjvTextStatement> getTextStatementList();
 
 }
