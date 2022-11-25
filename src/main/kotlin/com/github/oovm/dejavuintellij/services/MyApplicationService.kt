@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.oovm.dejavuintellij.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.oovm.dejavuintellij.MyBundle
 
 class MyApplicationService {
 
