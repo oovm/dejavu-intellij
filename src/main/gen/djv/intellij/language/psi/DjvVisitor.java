@@ -27,10 +27,6 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitExportStatement(@NotNull DjvExportStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitExpr(@NotNull DjvExpr o) {
     visitPsiElement(o);
   }
@@ -55,14 +51,6 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitImportBody(@NotNull DjvImportBody o) {
-    visitPsiElement(o);
-  }
-
-  public void visitImportStatement(@NotNull DjvImportStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitInfix(@NotNull DjvInfix o) {
     visitPsiElement(o);
   }
@@ -75,23 +63,11 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitKwImport(@NotNull DjvKwImport o) {
-    visitPsiElement(o);
-  }
-
   public void visitKwIn(@NotNull DjvKwIn o) {
     visitPsiElement(o);
   }
 
-  public void visitMacroArg(@NotNull DjvMacroArg o) {
-    visitPsiElement(o);
-  }
-
   public void visitMacroCall(@NotNull DjvMacroCall o) {
-    visitPsiElement(o);
-  }
-
-  public void visitMacroStatement(@NotNull DjvMacroStatement o) {
     visitPsiElement(o);
   }
 
@@ -132,22 +108,6 @@ public class DjvVisitor extends PsiElementVisitor {
   }
 
   public void visitPrefix(@NotNull DjvPrefix o) {
-    visitPsiElement(o);
-  }
-
-  public void visitRuleArgument(@NotNull DjvRuleArgument o) {
-    visitPsiElement(o);
-  }
-
-  public void visitRuleBody(@NotNull DjvRuleBody o) {
-    visitPsiElement(o);
-  }
-
-  public void visitRuleStatement(@NotNull DjvRuleStatement o) {
-    visitPsiElement(o);
-  }
-
-  public void visitRuleType(@NotNull DjvRuleType o) {
     visitPsiElement(o);
   }
 

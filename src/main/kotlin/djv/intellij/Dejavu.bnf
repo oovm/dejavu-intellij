@@ -71,10 +71,9 @@ private statements ::=
     | text_statement
     ;
 // ---------------------------------------------------------------------------------------------------------------------
-// text is not surrounded by `{%   %}`
+// text is these who not surrounded by `{%   %}`
 text_statement ::= SAHA_TEXT;
 // ---------------------------------------------------------------------------------------------------------------------
-// {% slot %}
 slot_for ::= slot_for_start statements* slot_for_else? slot_for_end {
     pin = slot_for_start
 };
@@ -83,7 +82,7 @@ slot_for_else  ::= slot_else statements* {
     pin = slot_else
 };
 slot_for_end   ::= slot_l KW_END_FOR slot_r;
-kw_in      ::= "in";
+kw_in          ::= "in";
 // ---------------------------------------------------------------------------------------------------------------------
 slot_if ::= slot_if_start statements* slot_if_else? slot_if_end {
     pin = slot_if_start
@@ -107,13 +106,6 @@ slot_l ::= SLOT_START;
 slot_r ::= SLOT_END;
 // ---------------------------------------------------------------------------------------------------------------------
 // def modifiers rule
-rule_statement ::= define modifiers identifier [rule_argument] [rule_type] rule_body {
-    pin = identifier
-    recoverWhile = end_brace
-};
-rule_body     ::= BRACE_L [CHOOSE] [expr] BRACE_R;
-rule_argument ::= PARENTHESIS_L PARENTHESIS_R;
-rule_type     ::= (COLON | ARROW) identifier;
 define ::= "def" | "class" | "struct" | "rule" | "enum" | "union" | "function" | "fun";
 expr ::= term (infix term | term)*;
 term ::= (prefix)* atom (suffix)*

@@ -12,23 +12,17 @@ public interface DjvTypes {
   IElementType BRANCH_MARK = new DjvElementType("BRANCH_MARK");
   IElementType CHARSET = new DjvElementType("CHARSET");
   IElementType DEFINE = new DjvElementType("DEFINE");
-  IElementType EXPORT_STATEMENT = new DjvElementType("EXPORT_STATEMENT");
   IElementType EXPR = new DjvElementType("EXPR");
   IElementType EXPRESSION = new DjvElementType("EXPRESSION");
   IElementType FIELD_MARK = new DjvElementType("FIELD_MARK");
   IElementType FIELD_RHS = new DjvElementType("FIELD_RHS");
   IElementType FUNCTION_CALL = new DjvElementType("FUNCTION_CALL");
   IElementType IDENTIFIER = new DjvElementType("IDENTIFIER");
-  IElementType IMPORT_BODY = new DjvElementType("IMPORT_BODY");
-  IElementType IMPORT_STATEMENT = new DjvElementType("IMPORT_STATEMENT");
   IElementType INFIX = new DjvElementType("INFIX");
   IElementType KEY = new DjvElementType("KEY");
   IElementType KEY_SYMBOL = new DjvElementType("KEY_SYMBOL");
-  IElementType KW_IMPORT = new DjvElementType("KW_IMPORT");
   IElementType KW_IN = new DjvElementType("KW_IN");
-  IElementType MACRO_ARG = new DjvElementType("MACRO_ARG");
   IElementType MACRO_CALL = new DjvElementType("MACRO_CALL");
-  IElementType MACRO_STATEMENT = new DjvElementType("MACRO_STATEMENT");
   IElementType MODIFIERS = new DjvElementType("MODIFIERS");
   IElementType NAMESPACE = new DjvElementType("NAMESPACE");
   IElementType NUMBER_SUFFIX = new DjvElementType("NUMBER_SUFFIX");
@@ -39,10 +33,6 @@ public interface DjvTypes {
   IElementType PARENTHESIS = new DjvElementType("PARENTHESIS");
   IElementType PATTERN = new DjvElementType("PATTERN");
   IElementType PREFIX = new DjvElementType("PREFIX");
-  IElementType RULE_ARGUMENT = new DjvElementType("RULE_ARGUMENT");
-  IElementType RULE_BODY = new DjvElementType("RULE_BODY");
-  IElementType RULE_STATEMENT = new DjvElementType("RULE_STATEMENT");
-  IElementType RULE_TYPE = new DjvElementType("RULE_TYPE");
   IElementType SLOT_ELSE = new DjvElementType("SLOT_ELSE");
   IElementType SLOT_EXPRESSION = new DjvElementType("SLOT_EXPRESSION");
   IElementType SLOT_FOR = new DjvElementType("SLOT_FOR");
@@ -136,9 +126,6 @@ public interface DjvTypes {
       else if (type == DEFINE) {
         return new DjvDefineNode(node);
       }
-      else if (type == EXPORT_STATEMENT) {
-        return new DjvExportStatementNode(node);
-      }
       else if (type == EXPR) {
         return new DjvExprNode(node);
       }
@@ -157,12 +144,6 @@ public interface DjvTypes {
       else if (type == IDENTIFIER) {
         return new DjvIdentifierNode(node);
       }
-      else if (type == IMPORT_BODY) {
-        return new DjvImportBodyNode(node);
-      }
-      else if (type == IMPORT_STATEMENT) {
-        return new DjvImportStatementNode(node);
-      }
       else if (type == INFIX) {
         return new DjvInfixNode(node);
       }
@@ -172,20 +153,11 @@ public interface DjvTypes {
       else if (type == KEY_SYMBOL) {
         return new DjvKeySymbolNode(node);
       }
-      else if (type == KW_IMPORT) {
-        return new DjvKwImportNode(node);
-      }
       else if (type == KW_IN) {
         return new DjvKwInNode(node);
       }
-      else if (type == MACRO_ARG) {
-        return new DjvMacroArgNode(node);
-      }
       else if (type == MACRO_CALL) {
         return new DjvMacroCallNode(node);
-      }
-      else if (type == MACRO_STATEMENT) {
-        return new DjvMacroStatementNode(node);
       }
       else if (type == MODIFIERS) {
         return new DjvModifiersNode(node);
@@ -216,18 +188,6 @@ public interface DjvTypes {
       }
       else if (type == PREFIX) {
         return new DjvPrefixNode(node);
-      }
-      else if (type == RULE_ARGUMENT) {
-        return new DjvRuleArgumentNode(node);
-      }
-      else if (type == RULE_BODY) {
-        return new DjvRuleBodyNode(node);
-      }
-      else if (type == RULE_STATEMENT) {
-        return new DjvRuleStatementNode(node);
-      }
-      else if (type == RULE_TYPE) {
-        return new DjvRuleTypeNode(node);
       }
       else if (type == SLOT_ELSE) {
         return new DjvSlotElseNode(node);
