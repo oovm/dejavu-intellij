@@ -29,12 +29,6 @@ public class DjvValueNode extends ASTWrapperPsiElement implements DjvValue {
 
   @Override
   @Nullable
-  public DjvCharset getCharset() {
-    return findChildByClass(DjvCharset.class);
-  }
-
-  @Override
-  @Nullable
   public DjvNamespace getNamespace() {
     return findChildByClass(DjvNamespace.class);
   }

@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface DjvValue extends PsiElement {
 
   @Nullable
-  DjvCharset getCharset();
-
-  @Nullable
   DjvNamespace getNamespace();
 
   @Nullable

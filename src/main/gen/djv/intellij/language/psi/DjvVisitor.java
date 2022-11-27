@@ -15,15 +15,7 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitCharset(@NotNull DjvCharset o) {
-    visitPsiElement(o);
-  }
-
   public void visitCommentDoc(@NotNull DjvCommentDoc o) {
-    visitPsiElement(o);
-  }
-
-  public void visitDefine(@NotNull DjvDefine o) {
     visitPsiElement(o);
   }
 

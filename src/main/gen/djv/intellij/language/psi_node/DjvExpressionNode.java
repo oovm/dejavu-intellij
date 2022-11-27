@@ -29,8 +29,8 @@ public class DjvExpressionNode extends ASTWrapperPsiElement implements DjvExpres
 
   @Override
   @NotNull
-  public DjvIdentifier getIdentifier() {
-    return findNotNullChildByClass(DjvIdentifier.class);
+  public DjvValue getValue() {
+    return findNotNullChildByClass(DjvValue.class);
   }
 
 }

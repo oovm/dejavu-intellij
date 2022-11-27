@@ -10,8 +10,6 @@ public interface DjvTypes {
 
   IElementType ATOM = new DjvElementType("ATOM");
   IElementType BRANCH_MARK = new DjvElementType("BRANCH_MARK");
-  IElementType CHARSET = new DjvElementType("CHARSET");
-  IElementType DEFINE = new DjvElementType("DEFINE");
   IElementType EXPR = new DjvElementType("EXPR");
   IElementType EXPRESSION = new DjvElementType("EXPRESSION");
   IElementType FIELD_MARK = new DjvElementType("FIELD_MARK");
@@ -72,6 +70,7 @@ public interface DjvTypes {
   IElementType BRACKET_R = new DjvElementType("]");
   IElementType BYTE = new DjvElementType("BYTE");
   IElementType CHARACTER = new DjvElementType("CHARACTER");
+  IElementType CHARSET = new DjvElementType("charset");
   IElementType CHOOSE = new DjvElementType("|");
   IElementType COLON = new DjvElementType(":");
   IElementType COMMA = new DjvElementType(",");
@@ -91,6 +90,7 @@ public interface DjvTypes {
   IElementType INTEGER = new DjvElementType("INTEGER");
   IElementType KW_ELSE = new DjvElementType("else");
   IElementType KW_ELSE_IF = new DjvElementType("else-if");
+  IElementType KW_END = new DjvElementType("KW_END");
   IElementType KW_END_FOR = new DjvElementType("end-for");
   IElementType KW_END_IF = new DjvElementType("end-if");
   IElementType KW_FOR = new DjvElementType("for");
@@ -103,7 +103,6 @@ public interface DjvTypes {
   IElementType PARENTHESIS_L = new DjvElementType("(");
   IElementType PARENTHESIS_R = new DjvElementType(")");
   IElementType QUOTATION = new DjvElementType("\"");
-  IElementType REGEX_RANGE = new DjvElementType("REGEX_RANGE");
   IElementType SAHA_TEXT = new DjvElementType("<TEXT>");
   IElementType SEMICOLON = new DjvElementType(";");
   IElementType SIGN = new DjvElementType("SIGN");
@@ -124,12 +123,6 @@ public interface DjvTypes {
       }
       else if (type == BRANCH_MARK) {
         return new DjvBranchMarkNode(node);
-      }
-      else if (type == CHARSET) {
-        return new DjvCharsetNode(node);
-      }
-      else if (type == DEFINE) {
-        return new DjvDefineNode(node);
       }
       else if (type == EXPR) {
         return new DjvExprNode(node);

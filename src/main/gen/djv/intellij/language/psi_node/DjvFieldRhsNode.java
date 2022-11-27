@@ -29,12 +29,6 @@ public class DjvFieldRhsNode extends ASTWrapperPsiElement implements DjvFieldRhs
 
   @Override
   @Nullable
-  public DjvCharset getCharset() {
-    return findChildByClass(DjvCharset.class);
-  }
-
-  @Override
-  @Nullable
   public DjvIdentifier getIdentifier() {
     return findChildByClass(DjvIdentifier.class);
   }

@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface DjvFieldRhs extends PsiElement {
 
   @Nullable
-  DjvCharset getCharset();
-
-  @Nullable
   DjvIdentifier getIdentifier();
 
   @Nullable

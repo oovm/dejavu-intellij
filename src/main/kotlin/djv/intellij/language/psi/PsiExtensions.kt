@@ -76,9 +76,14 @@ val PsiElement.leftSiblings: Sequence<PsiElement>
 val PsiElement.childrenWithLeaves: Sequence<PsiElement>
     get() = generateSequence(this.firstChild) { it.nextSibling }
 
-fun PsiElement?.childElement(target: IElementType): PsiElement? {
+fun PsiElement?.childElement(vararg target: IElementType): PsiElement? {
     if (this == null) return null
-    return this.childrenWithLeaves.firstOrNull { it.elementType == target }
+    for (child in this.childrenWithLeaves) {
+        if (target.contains(child.elementType)) {
+            return child
+        }
+    }
+    return null
 }
 
 inline fun <reified T : PsiElement> PsiElement.ancestorStrict(): T? =
@@ -109,8 +114,7 @@ inline fun <reified T : PsiElement> PsiElement.contextOrSelf(): T? =
     PsiTreeUtil.getContextOfType(this, T::class.java, /* strict */ false)
 
 
-inline fun <reified T : PsiElement> PsiElement.childOfType(): T? =
-    PsiTreeUtil.getChildOfType(this, T::class.java)
+inline fun <reified T : PsiElement> PsiElement.childOfType(): T? = PsiTreeUtil.getChildOfType(this, T::class.java)
 
 inline fun <reified T : PsiElement> PsiElement.childrenOfType(): List<T> =
     PsiTreeUtil.getChildrenOfTypeAsList(this, T::class.java)
@@ -118,29 +122,25 @@ inline fun <reified T : PsiElement> PsiElement.childrenOfType(): List<T> =
 inline fun <reified T : PsiElement> PsiElement.stubChildrenOfType(): List<T> {
     return if (this is PsiFileImpl) {
         stub?.childrenStubs?.mapNotNull { it.psi as? T } ?: return childrenOfType()
-    } else {
+    }
+    else {
         PsiTreeUtil.getStubChildrenOfTypeAsList(this, T::class.java)
     }
 }
 
 /** Finds first sibling that is neither comment, nor whitespace before given element */
-fun PsiElement?.getPrevNonCommentSibling(): PsiElement? =
-    PsiTreeUtil.skipWhitespacesAndCommentsBackward(this)
+fun PsiElement?.getPrevNonCommentSibling(): PsiElement? = PsiTreeUtil.skipWhitespacesAndCommentsBackward(this)
 
 /** Finds first sibling that is neither comment, nor whitespace after given element */
-fun PsiElement?.getNextNonCommentSibling(): PsiElement? =
-    PsiTreeUtil.skipWhitespacesAndCommentsForward(this)
+fun PsiElement?.getNextNonCommentSibling(): PsiElement? = PsiTreeUtil.skipWhitespacesAndCommentsForward(this)
 
 /** Finds first sibling that is not whitespace before given element */
-fun PsiElement?.getPrevNonWhitespaceSibling(): PsiElement? =
-    PsiTreeUtil.skipWhitespacesBackward(this)
+fun PsiElement?.getPrevNonWhitespaceSibling(): PsiElement? = PsiTreeUtil.skipWhitespacesBackward(this)
 
 /** Finds first sibling that is not whitespace after given element */
-fun PsiElement?.getNextNonWhitespaceSibling(): PsiElement? =
-    PsiTreeUtil.skipWhitespacesForward(this)
+fun PsiElement?.getNextNonWhitespaceSibling(): PsiElement? = PsiTreeUtil.skipWhitespacesForward(this)
 
-fun PsiElement.isAncestorOf(child: PsiElement): Boolean =
-    child.ancestors.contains(this)
+fun PsiElement.isAncestorOf(child: PsiElement): Boolean = child.ancestors.contains(this)
 
 val PsiElement.startOffset: Int
     get() = textRange.startOffset

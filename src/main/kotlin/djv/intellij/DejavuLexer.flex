@@ -36,7 +36,6 @@ BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
 INTEGER=(0|[1-9][0-9_]*)
 DECIMAL=([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)
 SIGN=[+-]
-REGEX_RANGE = \[(\\[^\x{00}]|[^\]])*\]
 ESCAPE_SPECIAL = \\[^xuU]
 ESCAPE_UNICODE = \\(x{HEX}{2}|u{HEX}{4}|U\{{HEX}+\})
 HEX = [0-9a-fA-F]
@@ -48,14 +47,6 @@ COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 
 SLOT_L = \{%(=-_\!)?
 SLOT_R = (=-_\!)?%\}
-
-KW_IF = if
-KW_ELSE_IF = else-if | ef
-KW_ELSE = "else"
-KW_END_IF = "end-if" | "end"
-
-KW_FOR = for
-KW_END_FOR = "end-for" | "end"
 
 SAHA_TEXT = [^{]+
 
@@ -73,12 +64,19 @@ SAHA_TEXT = [^{]+
 }
 
 <CODE> {
-    {KW_IF}      { return KW_IF; }
-    {KW_ELSE_IF} { return KW_ELSE_IF; }
-    {KW_ELSE}    { return KW_ELSE; }
-    {KW_END_IF}  { return KW_END_IF; }
-    {KW_FOR}     { return KW_FOR; }
-    {KW_END_FOR} { return KW_END_FOR; }
+    if                      { return KW_IF; }
+    else-if | ef            { return KW_ELSE_IF; }
+    else                    { return KW_ELSE; }
+    end-if                  { return KW_END_IF; }
+
+    for                     { return KW_FOR; }
+    end-for                 { return KW_FOR; }
+
+    end                     { return KW_END; }
+
+    null                    { return NULL; }
+    true                    { return BOOLEAN; }
+    false                   { return BOOLEAN; }
 }
 
 <CODE> {
@@ -124,19 +122,19 @@ SAHA_TEXT = [^{]+
     {SIGN}        { return SIGN; }
 }
 // String Mode =========================================================================================================
-<StringSQ, StringDQ, CODE> {ESCAPE_SPECIAL} {
+<StringSQ, StringDQ> {ESCAPE_SPECIAL} {
     return ESCAPE_SPECIAL;
 }
-<StringSQ, StringDQ, CODE> {ESCAPE_UNICODE} {
+<StringSQ, StringDQ> {ESCAPE_UNICODE} {
     return ESCAPE_UNICODE;
 }
 <StringSQ> {
     [^\\\'] {return CHARACTER;}
-    \' {yybegin(YYINITIAL);return STRING_SQ;}
+    \' {yybegin(CODE);return STRING_SQ;}
 }
 <StringDQ> {
     [^\\\"] {return CHARACTER;}
-    \" {yybegin(YYINITIAL);return STRING_DQ;}
+    \" {yybegin(CODE);return STRING_DQ;}
 }
 // Regex Mode ==========================================================================================================
 //<YYINITIAL> \/ {

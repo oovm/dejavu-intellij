@@ -21,31 +21,15 @@ class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : 
 
     override fun visitSlotIfStatement(o: DjvSlotIfStatement) {
         val start = o.slotIfStart.childElement(DjvTypes.KW_IF)?.endOffset;
-        val end = o.slotIfEnd?.childElement(DjvTypes.KW_IF)?.endOffset;
+        val end = o.slotIfEnd?.childElement(DjvTypes.KW_END_IF, DjvTypes.KW_END)?.startOffset;
         fold(o, start, end, " ... ")
     }
 
     override fun visitSlotForStatement(o: DjvSlotForStatement) {
-        val start = o.slotForStart.childElement(DjvTypes.KW_IF)?.endOffset;
-        val end = o.slotForEnd?.childElement(DjvTypes.KW_IF)?.endOffset;
+        val start = o.slotForStart.childElement(DjvTypes.KW_FOR)?.endOffset;
+        val end = o.slotForEnd?.childElement(DjvTypes.KW_END_FOR, DjvTypes.KW_END)?.startOffset;
         fold(o, start, end, " ... ")
     }
-
-//
-//    override fun visitObject(o: djv.intellij.language.psi.YggObject) {
-//        foldInner(o)
-//    }
-//
-//
-//    override fun visitImportBody(o: djv.intellij.language.psi.YggImportBody) {
-//        foldInner(o)
-//    }
-//
-//
-//    override fun visitRuleBody(o: djv.intellij.language.psi.YggRuleBody) {
-//        foldInner(o)
-//    }
-
 
     private fun fold(element: PsiElement) {
         descriptors += FoldingDescriptor(element.node, element.textRange)

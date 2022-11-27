@@ -77,11 +77,12 @@ text_statement ::= SAHA_TEXT;
 slot_for_statement ::= slot_for_start statements* slot_for_else? slot_for_end {
     pin = slot_for_start
 };
-slot_for_start ::= slot_l KW_FOR pattern kw_in expression slot_r;
 slot_for_else  ::= slot_else statements* {
     pin = slot_else
 };
-slot_for_end   ::= slot_l KW_END_FOR slot_r;
+
+slot_for_start ::= slot_l KW_FOR pattern kw_in expression slot_r;
+slot_for_end   ::= slot_l (KW_END_FOR|KW_END) slot_r;
 // ---------------------------------------------------------------------------------------------------------------------
 inline_for_statement ::= KW_FOR pattern kw_in expression '{' '}' [inline_else] {
 
@@ -101,7 +102,7 @@ slot_if_else  ::= slot_else statements* {
 slot_if_start ::= slot_l KW_IF expression slot_r;
 slot_else_if_start ::= slot_l KW_ELSE_IF expression slot_r;
 slot_else ::= slot_l KW_ELSE slot_r;
-slot_if_end   ::= slot_l KW_END_IF slot_r;
+slot_if_end   ::= slot_l (KW_END_IF|KW_END) slot_r;
 // ---------------------------------------------------------------------------------------------------------------------
 inline_if_statement ::= KW_IF expression '{' '}' [inline_else] {
 
@@ -112,13 +113,20 @@ inline_else ::= KW_ELSE '{' '}' {
 // ---------------------------------------------------------------------------------------------------------------------
 pattern ::= identifier;
 // ---------------------------------------------------------------------------------------------------------------------
-expression ::= identifier;
+expression ::= value;
+expr ::= term (infix term | term)*;
+term ::= (prefix)* atom (suffix)*
+atom ::= '(' [CHOOSE] expr ')' | field_mark | branch_mark | function_call | value;
+
+infix ::= CHOOSE | SOFT_CONNECT;
+prefix ::= ACCENT;
+suffix ::= OPTIONAL | MANY | MANY1;
 // ---------------------------------------------------------------------------------------------------------------------
 // {% slot %}
-slot_expression ::= slot_l [inlined] slot_r {
+slot_expression ::= slot_l inlined_end slot_r {
 
 };
-private inlined ::=
+private inlined_end ::=
     inline_for_statement |
     inline_if_statement |
     identifier
@@ -126,15 +134,6 @@ private inlined ::=
 
 slot_l ::= SLOT_START;
 slot_r ::= SLOT_END;
-// ---------------------------------------------------------------------------------------------------------------------
-// def modifiers rule
-define ::= "def" | "class" | "struct" | "rule" | "enum" | "union" | "function" | "fun";
-expr ::= term (infix term | term)*;
-term ::= (prefix)* atom (suffix)*
-atom ::= '(' [CHOOSE] expr ')' | field_mark | branch_mark | function_call | value;
-infix ::= CHOOSE | SOFT_CONNECT;
-prefix ::= ACCENT;
-suffix ::= OPTIONAL | MANY | MANY1;
 // ---------------------------------------------------------------------------------------------------------------------
 branch_mark ::= HASH identifier;
 field_mark ::= identifier COLON field_rhs;
@@ -145,10 +144,9 @@ function_call ::= AT identifier <<parenthesis expr COMMA>>;
 // ---------------------------------------------------------------------------------------------------------------------
 macro_call  ::= HASH identifier;
 // ---------------------------------------------------------------------------------------------------------------------
-value ::= NULL | BOOLEAN | num | string_literal | table | namespace | charset;
+value ::= NULL | BOOLEAN | num | string_literal | table | namespace;
 type_hint ::= identifier;
 number_suffix ::= identifier;
-charset ::= REGEX_RANGE;
 // ---------------------------------------------------------------------------------------------------------------------
 pair ::= symbol_path eq value;
 symbol_path ::= key (DOT key)*

@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface DjvExpression extends PsiElement {
 
   @NotNull
-  DjvIdentifier getIdentifier();
+  DjvValue getValue();
 
 }
