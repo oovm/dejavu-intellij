@@ -40,8 +40,8 @@ class HighlightToken : SyntaxHighlighterBase() {
             COLON, EQ -> Color.SET
             COMMA -> Color.COMMA
             // atom
-            NULL -> Color.NULL
-            BOOLEAN -> Color.BOOLEAN
+            NULL -> Color.INTEGER
+            BOOLEAN -> Color.INTEGER
             STRING_LITERAL, STRING_SQ, STRING_DQ, CHARACTER -> Color.STRING
             ESCAPE_SPECIAL, ESCAPE_UNICODE -> Color.STRING_ESCAPE
             NUMBER_SUFFIX -> Color.NUMBER_HINT

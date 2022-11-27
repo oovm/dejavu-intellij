@@ -5,8 +5,11 @@
 
 
 {% for k, v in body %}
-
-{% else %}
-
+    {% if condition %}
+        do right
+    {% else %}
+        do wront
+    {% end %}
 {% end %}
+
 

@@ -20,8 +20,6 @@ enum class HighlightColor(
     EXTENSION(OptionsBundle.messagePointer("options.language.defaults.metadata"), Default.METADATA),
 
     // 字面量
-    NULL(keyof("color.token.null"), Default.KEYWORD),
-    BOOLEAN(keyof("color.token.boolean"), Default.KEYWORD),
     NUMBER_HINT(keyof("color.settings.toml.number_hint"), Default.METADATA),
     DECIMAL(keyof("color.literal.decimal"), Default.NUMBER),
     INTEGER(keyof("color.literal.integer"), Default.NUMBER),
@@ -35,15 +33,11 @@ enum class HighlightColor(
     OPTIONAL(keyof("color.token.optional"), KEYWORD.textAttributesKey),
     TAGGED(keyof("color.token.tagged"), OPERATOR.textAttributesKey),
 
-    FIELD_MARK(keyof("color.mark.field"), Default.INSTANCE_FIELD),
-    BRANCH_MARK(keyof("color.mark.branch"), Default.STATIC_FIELD),
-
     PREDEFINED(OptionsBundle.messagePointer("options.language.defaults.predefined"), Default.PREDEFINED_SYMBOL),
     TYPE_HINT(keyof("color.settings.toml.type_hint"), Default.CLASS_NAME),
 
     FUNCTION_SYMBOL(keyof("color.symbol.function"), Default.STATIC_METHOD),
     MACRO_SYMBOL(OptionsBundle.messagePointer("options.java.attribute.descriptor.annotation.name"), Default.METADATA),
-    RULE_SYMBOL(keyof("color.symbol.rule"), Default.CLASS_NAME),
     KEY_SYMBOL(keyof("color.symbol.builtin"), Default.STATIC_FIELD),
 
     // 标点符号
@@ -56,12 +50,12 @@ enum class HighlightColor(
     SET(keyof("color.token.set"), Default.OPERATION_SIGN),
 
     // 模板标记
-    SLOT_MARK_LEVEL_1(keyof("color.mark.slot.level1"), Default.OPERATION_SIGN),
-    SLOT_MARK_LEVEL_2(keyof("color.mark.slot.level2"), Default.OPERATION_SIGN),
-    SLOT_MARK_LEVEL_3(keyof("color.mark.slot.level3"), Default.OPERATION_SIGN),
-    SLOT_MARK_LEVEL_4(keyof("color.mark.slot.level4"), Default.OPERATION_SIGN),
-    SLOT_MARK_LEVEL_5(keyof("color.mark.slot.level5"), Default.OPERATION_SIGN),
-    SLOT_MARK_LEVEL_6(keyof("color.mark.slot.level6"), Default.OPERATION_SIGN),
+    SLOT_MARK_LEVEL_0(keyof("color.mark.slot.level0"), Default.PARAMETER),
+    SLOT_MARK_LEVEL_1(keyof("color.mark.slot.level1"), Default.LOCAL_VARIABLE),
+    SLOT_MARK_LEVEL_2(keyof("color.mark.slot.level2"), Default.CLASS_NAME),
+    SLOT_MARK_LEVEL_3(keyof("color.mark.slot.level3"), Default.INTERFACE_NAME),
+    SLOT_MARK_LEVEL_4(keyof("color.mark.slot.level4"), Default.FUNCTION_DECLARATION),
+    SLOT_MARK_LEVEL_5(keyof("color.mark.slot.level5"), Default.KEYWORD),
 
     // 注释
     COMMENT_INLINE(OptionsBundle.messagePointer("options.language.defaults.line.comment"), Default.LINE_COMMENT),

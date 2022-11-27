@@ -4,11 +4,6 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement
 import com.intellij.lang.ASTNode
 import djv.intellij.language.psi.ancestors
 
-enum class IdentifierKind {
-    Self,
-    Builtin,
-    Function,
-}
 
 open class MixinIdentifier(node: ASTNode) : ASTWrapperPsiElement(node) {
 
