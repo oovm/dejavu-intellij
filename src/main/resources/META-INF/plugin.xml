@@ -51,6 +51,7 @@
 			filetype="Yggdrasil"
 			implementationClass="djv.intellij.ide.todo.VomlTodoIndexer"
 		/>
+		<typedHandler implementation="djv.intellij.ide.completion.CompletionTrigger"/>
 		<completion.contributor
 			language="DejaVu"
 			implementationClass="djv.intellij.ide.completion.CompletionContributor"

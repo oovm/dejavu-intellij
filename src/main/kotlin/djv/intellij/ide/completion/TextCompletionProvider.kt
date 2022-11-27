@@ -14,7 +14,7 @@ class TextCompletionProvider : CompletionProvider<CompletionParameters>() {
         resultSet: CompletionResultSet
     ) {
         resultSet.addElement(
-            LookupElementBuilder.create("{")
+            LookupElementBuilder.create("a")
                 .withInsertHandler { ctx, _ ->
                     EditorModificationUtil.moveCaretRelatively(ctx.editor, -1)
                 }

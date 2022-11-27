@@ -2,7 +2,9 @@ package djv.intellij.ide.completion
 
 import com.intellij.codeInsight.completion.CompletionContributor
 import com.intellij.codeInsight.completion.CompletionType
+import com.intellij.codeInsight.editorActions.TypedHandlerDelegate
 import com.intellij.patterns.PlatformPatterns
+import com.intellij.psi.PsiElement
 import djv.intellij.language.psi.DjvTypes
 
 class CompletionContributor : CompletionContributor() {
@@ -18,5 +20,5 @@ class CompletionContributor : CompletionContributor() {
             TextCompletionProvider()
         )
     }
-}
 
+}
