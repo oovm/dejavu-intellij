@@ -11,10 +11,10 @@ public interface DjvSlotExpression extends PsiElement {
   DjvIdentifier getIdentifier();
 
   @Nullable
-  DjvInlineFor getInlineFor();
+  DjvInlineForStatement getInlineForStatement();
 
   @Nullable
-  DjvInlineIf getInlineIf();
+  DjvInlineIfStatement getInlineIfStatement();
 
   @NotNull
   DjvSlotL getSlotL();

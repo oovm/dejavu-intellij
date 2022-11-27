@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface DjvInlineIf extends PsiElement {
+public interface DjvInlineIfStatement extends PsiElement {
 
   @NotNull
   DjvExpression getExpression();

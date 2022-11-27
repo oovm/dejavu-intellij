@@ -4,8 +4,9 @@ import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiElement
-import com.intellij.psi.tree.IElementType
 import com.intellij.psi.util.elementType
+import com.intellij.refactoring.suggested.endOffset
+import com.intellij.refactoring.suggested.startOffset
 import djv.intellij.language.psi.*
 
 class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : DJRecursiveVisitor() {
@@ -16,6 +17,20 @@ class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : 
             super.visitComment(comment)
         }
     }
+
+
+    override fun visitSlotIfStatement(o: DjvSlotIfStatement) {
+        val start = o.slotIfStart.childElement(DjvTypes.KW_IF)?.endOffset;
+        val end = o.slotIfEnd?.childElement(DjvTypes.KW_IF)?.endOffset;
+        fold(o, start, end, " ... ")
+    }
+
+    override fun visitSlotForStatement(o: DjvSlotForStatement) {
+        val start = o.slotForStart.childElement(DjvTypes.KW_IF)?.endOffset;
+        val end = o.slotForEnd?.childElement(DjvTypes.KW_IF)?.endOffset;
+        fold(o, start, end, " ... ")
+    }
+
 //
 //    override fun visitObject(o: djv.intellij.language.psi.YggObject) {
 //        foldInner(o)
@@ -36,25 +51,18 @@ class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : 
         descriptors += FoldingDescriptor(element.node, element.textRange)
     }
 
-    private fun foldInner(element: PsiElement) {
-        val range = TextRange(element.firstChild.endOffset, element.lastChild.startOffset)
-        descriptors += FoldingDescriptor(element.node, range)
+    private fun fold(element: PsiElement, placeholder: String = "...", collapse: Boolean = false) {
+        descriptors += FoldingDescriptor(element.node, element.textRange, null, setOf(), false, placeholder, collapse)
     }
 
-    private fun foldInner(element: PsiElement, left: IElementType, right: IElementType) {
-        val start = element.childrenWithLeaves.filter { it.elementType == left }.map { it.endOffset }.firstOrNull();
-        val end = element.childrenWithLeaves.filter { it.elementType == right }.map { it.startOffset }.firstOrNull();
+    private fun fold(
+        element: PsiElement, start: Int?, end: Int?, placeholder: String = "...", collapse: Boolean = false
+    ) {
         if (start != null && end != null && start < end) {
             val range = TextRange(start, end)
-            descriptors += FoldingDescriptor(element.node, range)
+            descriptors += FoldingDescriptor(
+                element.node, range, null, setOf(), false, placeholder, collapse
+            )
         }
-    }
-
-    private fun fold(element: PsiElement, text: String) {
-        descriptors += FoldingDescriptor(element.node, element.textRange, null, text)
-    }
-
-    private fun fold(element: PsiElement, text: String, collapsed: Boolean) {
-        descriptors += FoldingDescriptor(element.node, element.textRange, null, text, collapsed, setOf())
     }
 }

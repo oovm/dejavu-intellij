@@ -20,8 +20,8 @@ public interface DjvTypes {
   IElementType IDENTIFIER = new DjvElementType("IDENTIFIER");
   IElementType INFIX = new DjvElementType("INFIX");
   IElementType INLINE_ELSE = new DjvElementType("INLINE_ELSE");
-  IElementType INLINE_FOR = new DjvElementType("INLINE_FOR");
-  IElementType INLINE_IF = new DjvElementType("INLINE_IF");
+  IElementType INLINE_FOR_STATEMENT = new DjvElementType("INLINE_FOR_STATEMENT");
+  IElementType INLINE_IF_STATEMENT = new DjvElementType("INLINE_IF_STATEMENT");
   IElementType KEY = new DjvElementType("KEY");
   IElementType KEY_SYMBOL = new DjvElementType("KEY_SYMBOL");
   IElementType KW_IN = new DjvElementType("KW_IN");
@@ -37,15 +37,17 @@ public interface DjvTypes {
   IElementType PATTERN = new DjvElementType("PATTERN");
   IElementType PREFIX = new DjvElementType("PREFIX");
   IElementType SLOT_ELSE = new DjvElementType("SLOT_ELSE");
+  IElementType SLOT_ELSE_IF = new DjvElementType("SLOT_ELSE_IF");
+  IElementType SLOT_ELSE_IF_START = new DjvElementType("SLOT_ELSE_IF_START");
   IElementType SLOT_EXPRESSION = new DjvElementType("SLOT_EXPRESSION");
-  IElementType SLOT_FOR = new DjvElementType("SLOT_FOR");
   IElementType SLOT_FOR_ELSE = new DjvElementType("SLOT_FOR_ELSE");
   IElementType SLOT_FOR_END = new DjvElementType("SLOT_FOR_END");
   IElementType SLOT_FOR_START = new DjvElementType("SLOT_FOR_START");
-  IElementType SLOT_IF = new DjvElementType("SLOT_IF");
+  IElementType SLOT_FOR_STATEMENT = new DjvElementType("SLOT_FOR_STATEMENT");
   IElementType SLOT_IF_ELSE = new DjvElementType("SLOT_IF_ELSE");
   IElementType SLOT_IF_END = new DjvElementType("SLOT_IF_END");
   IElementType SLOT_IF_START = new DjvElementType("SLOT_IF_START");
+  IElementType SLOT_IF_STATEMENT = new DjvElementType("SLOT_IF_STATEMENT");
   IElementType SLOT_L = new DjvElementType("SLOT_L");
   IElementType SLOT_R = new DjvElementType("SLOT_R");
   IElementType STRING_LITERAL = new DjvElementType("STRING_LITERAL");
@@ -153,11 +155,11 @@ public interface DjvTypes {
       else if (type == INLINE_ELSE) {
         return new DjvInlineElseNode(node);
       }
-      else if (type == INLINE_FOR) {
-        return new DjvInlineForNode(node);
+      else if (type == INLINE_FOR_STATEMENT) {
+        return new DjvInlineForStatementNode(node);
       }
-      else if (type == INLINE_IF) {
-        return new DjvInlineIfNode(node);
+      else if (type == INLINE_IF_STATEMENT) {
+        return new DjvInlineIfStatementNode(node);
       }
       else if (type == KEY) {
         return new DjvKeyNode(node);
@@ -204,11 +206,14 @@ public interface DjvTypes {
       else if (type == SLOT_ELSE) {
         return new DjvSlotElseNode(node);
       }
+      else if (type == SLOT_ELSE_IF) {
+        return new DjvSlotElseIfNode(node);
+      }
+      else if (type == SLOT_ELSE_IF_START) {
+        return new DjvSlotElseIfStartNode(node);
+      }
       else if (type == SLOT_EXPRESSION) {
         return new DjvSlotExpressionNode(node);
-      }
-      else if (type == SLOT_FOR) {
-        return new DjvSlotForNode(node);
       }
       else if (type == SLOT_FOR_ELSE) {
         return new DjvSlotForElseNode(node);
@@ -219,8 +224,8 @@ public interface DjvTypes {
       else if (type == SLOT_FOR_START) {
         return new DjvSlotForStartNode(node);
       }
-      else if (type == SLOT_IF) {
-        return new DjvSlotIfNode(node);
+      else if (type == SLOT_FOR_STATEMENT) {
+        return new DjvSlotForStatementNode(node);
       }
       else if (type == SLOT_IF_ELSE) {
         return new DjvSlotIfElseNode(node);
@@ -230,6 +235,9 @@ public interface DjvTypes {
       }
       else if (type == SLOT_IF_START) {
         return new DjvSlotIfStartNode(node);
+      }
+      else if (type == SLOT_IF_STATEMENT) {
+        return new DjvSlotIfStatementNode(node);
       }
       else if (type == SLOT_L) {
         return new DjvSlotLNode(node);

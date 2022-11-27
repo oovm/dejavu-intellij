@@ -11,14 +11,14 @@ import static djv.intellij.language.psi.DjvTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import djv.intellij.language.psi.*;
 
-public class DjvSlotIfElseNode extends ASTWrapperPsiElement implements DjvSlotIfElse {
+public class DjvSlotIfStatementNode extends ASTWrapperPsiElement implements DjvSlotIfStatement {
 
-  public DjvSlotIfElseNode(@NotNull ASTNode node) {
+  public DjvSlotIfStatementNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull DjvVisitor visitor) {
-    visitor.visitSlotIfElse(this);
+    visitor.visitSlotIfStatement(this);
   }
 
   @Override
@@ -29,8 +29,8 @@ public class DjvSlotIfElseNode extends ASTWrapperPsiElement implements DjvSlotIf
 
   @Override
   @NotNull
-  public DjvSlotElse getSlotElse() {
-    return findNotNullChildByClass(DjvSlotElse.class);
+  public List<DjvSlotElseIf> getSlotElseIfList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvSlotElseIf.class);
   }
 
   @Override
@@ -43,6 +43,24 @@ public class DjvSlotIfElseNode extends ASTWrapperPsiElement implements DjvSlotIf
   @NotNull
   public List<DjvSlotForStatement> getSlotForStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvSlotForStatement.class);
+  }
+
+  @Override
+  @Nullable
+  public DjvSlotIfElse getSlotIfElse() {
+    return findChildByClass(DjvSlotIfElse.class);
+  }
+
+  @Override
+  @Nullable
+  public DjvSlotIfEnd getSlotIfEnd() {
+    return findChildByClass(DjvSlotIfEnd.class);
+  }
+
+  @Override
+  @NotNull
+  public DjvSlotIfStart getSlotIfStart() {
+    return findNotNullChildByClass(DjvSlotIfStart.class);
   }
 
   @Override

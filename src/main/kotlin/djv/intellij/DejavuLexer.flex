@@ -31,7 +31,7 @@ EOL=\R
 WHITE_SPACE=\s+
 
 BOOLEAN=true|false|null
-SYMBOL=[\p{XID_Start}_-][\p{XID_Continue}-]*
+SYMBOL=[\p{XID_Start}_][\p{XID_Continue}]*
 BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
 INTEGER=(0|[1-9][0-9_]*)
 DECIMAL=([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)
@@ -52,6 +52,7 @@ SLOT_R = (=-_\!)?%\}
 KW_IF = if
 KW_ELSE_IF = else-if | ef
 KW_ELSE = "else"
+KW_END_IF = "end-if" | "end"
 
 KW_FOR = for
 KW_END_FOR = "end-for" | "end"
@@ -75,6 +76,7 @@ SAHA_TEXT = [^{]+
     {KW_IF}      { return KW_IF; }
     {KW_ELSE_IF} { return KW_ELSE_IF; }
     {KW_ELSE}    { return KW_ELSE; }
+    {KW_END_IF}  { return KW_END_IF; }
     {KW_FOR}     { return KW_FOR; }
     {KW_END_FOR} { return KW_END_FOR; }
 }

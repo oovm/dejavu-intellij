@@ -7,7 +7,9 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.*
 import com.intellij.psi.impl.source.PsiFileImpl
 import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.tree.IElementType
 import com.intellij.psi.util.PsiTreeUtil
+import com.intellij.psi.util.elementType
 import com.intellij.psi.util.prevLeaf
 
 //val VomlK?.keyText get() = this?.namedField?.ident?.text
@@ -73,6 +75,11 @@ val PsiElement.leftSiblings: Sequence<PsiElement>
 
 val PsiElement.childrenWithLeaves: Sequence<PsiElement>
     get() = generateSequence(this.firstChild) { it.nextSibling }
+
+fun PsiElement?.childElement(target: IElementType): PsiElement? {
+    if (this == null) return null
+    return this.childrenWithLeaves.firstOrNull { it.elementType == target }
+}
 
 inline fun <reified T : PsiElement> PsiElement.ancestorStrict(): T? =
     PsiTreeUtil.getParentOfType(this, T::class.java, /* strict */ true)

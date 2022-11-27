@@ -35,14 +35,14 @@ public class DjvSlotExpressionNode extends ASTWrapperPsiElement implements DjvSl
 
   @Override
   @Nullable
-  public DjvInlineFor getInlineFor() {
-    return findChildByClass(DjvInlineFor.class);
+  public DjvInlineForStatement getInlineForStatement() {
+    return findChildByClass(DjvInlineForStatement.class);
   }
 
   @Override
   @Nullable
-  public DjvInlineIf getInlineIf() {
-    return findChildByClass(DjvInlineIf.class);
+  public DjvInlineIfStatement getInlineIfStatement() {
+    return findChildByClass(DjvInlineIfStatement.class);
   }
 
   @Override

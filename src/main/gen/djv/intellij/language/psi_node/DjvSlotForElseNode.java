@@ -41,14 +41,14 @@ public class DjvSlotForElseNode extends ASTWrapperPsiElement implements DjvSlotF
 
   @Override
   @NotNull
-  public List<DjvSlotFor> getSlotForList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvSlotFor.class);
+  public List<DjvSlotForStatement> getSlotForStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvSlotForStatement.class);
   }
 
   @Override
   @NotNull
-  public List<DjvSlotIf> getSlotIfList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvSlotIf.class);
+  public List<DjvSlotIfStatement> getSlotIfStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvSlotIfStatement.class);
   }
 
   @Override

@@ -65,8 +65,8 @@ fake comment_doc ::= COMMENT_DOC;
 private comment ::= COMMENT_LINE | COMMENT_BLOCK | COMMENT_DOC;
 
 private statements ::=
-      slot_for
-    | slot_if
+      slot_for_statement
+    | slot_if_statement
     | slot_expression
     | text_statement
     ;
@@ -74,7 +74,7 @@ private statements ::=
 // text is these who not surrounded by `{%   %}`
 text_statement ::= SAHA_TEXT;
 // ---------------------------------------------------------------------------------------------------------------------
-slot_for ::= slot_for_start statements* slot_for_else? slot_for_end {
+slot_for_statement ::= slot_for_start statements* slot_for_else? slot_for_end {
     pin = slot_for_start
 };
 slot_for_start ::= slot_l KW_FOR pattern kw_in expression slot_r;
@@ -83,22 +83,27 @@ slot_for_else  ::= slot_else statements* {
 };
 slot_for_end   ::= slot_l KW_END_FOR slot_r;
 // ---------------------------------------------------------------------------------------------------------------------
-inline_for ::= KW_FOR pattern kw_in expression '{' '}' [inline_else] {
+inline_for_statement ::= KW_FOR pattern kw_in expression '{' '}' [inline_else] {
 
 };
 kw_in          ::= "in";
 // ---------------------------------------------------------------------------------------------------------------------
-slot_if ::= slot_if_start statements* slot_if_else? slot_if_end {
+slot_if_statement ::= slot_if_start statements* slot_else_if* slot_if_else? slot_if_end {
     pin = slot_if_start
 };
-slot_if_start ::= slot_l KW_IF expression slot_r;
+slot_else_if  ::= slot_else_if_start statements* {
+    pin = slot_else_if_start
+};
 slot_if_else  ::= slot_else statements* {
     pin = slot_else
 };
-slot_if_end   ::= slot_l KW_END_IF slot_r;
+
+slot_if_start ::= slot_l KW_IF expression slot_r;
+slot_else_if_start ::= slot_l KW_ELSE_IF expression slot_r;
 slot_else ::= slot_l KW_ELSE slot_r;
+slot_if_end   ::= slot_l KW_END_IF slot_r;
 // ---------------------------------------------------------------------------------------------------------------------
-inline_if ::= KW_IF expression '{' '}' [inline_else] {
+inline_if_statement ::= KW_IF expression '{' '}' [inline_else] {
 
 };
 inline_else ::= KW_ELSE '{' '}' {
@@ -114,8 +119,8 @@ slot_expression ::= slot_l [inlined] slot_r {
 
 };
 private inlined ::=
-    inline_for |
-    inline_if |
+    inline_for_statement |
+    inline_if_statement |
     identifier
     ;
 

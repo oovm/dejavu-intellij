@@ -59,11 +59,11 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitInlineFor(@NotNull DjvInlineFor o) {
+  public void visitInlineForStatement(@NotNull DjvInlineForStatement o) {
     visitPsiElement(o);
   }
 
-  public void visitInlineIf(@NotNull DjvInlineIf o) {
+  public void visitInlineIfStatement(@NotNull DjvInlineIfStatement o) {
     visitPsiElement(o);
   }
 
@@ -127,11 +127,15 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitSlotExpression(@NotNull DjvSlotExpression o) {
+  public void visitSlotElseIf(@NotNull DjvSlotElseIf o) {
     visitPsiElement(o);
   }
 
-  public void visitSlotFor(@NotNull DjvSlotFor o) {
+  public void visitSlotElseIfStart(@NotNull DjvSlotElseIfStart o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotExpression(@NotNull DjvSlotExpression o) {
     visitPsiElement(o);
   }
 
@@ -147,7 +151,7 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitSlotIf(@NotNull DjvSlotIf o) {
+  public void visitSlotForStatement(@NotNull DjvSlotForStatement o) {
     visitPsiElement(o);
   }
 
@@ -160,6 +164,10 @@ public class DjvVisitor extends PsiElementVisitor {
   }
 
   public void visitSlotIfStart(@NotNull DjvSlotIfStart o) {
+    visitPsiElement(o);
+  }
+
+  public void visitSlotIfStatement(@NotNull DjvSlotIfStatement o) {
     visitPsiElement(o);
   }
 

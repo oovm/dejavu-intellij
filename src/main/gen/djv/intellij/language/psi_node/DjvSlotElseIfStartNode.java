@@ -11,14 +11,14 @@ import static djv.intellij.language.psi.DjvTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import djv.intellij.language.psi.*;
 
-public class DjvInlineForNode extends ASTWrapperPsiElement implements DjvInlineFor {
+public class DjvSlotElseIfStartNode extends ASTWrapperPsiElement implements DjvSlotElseIfStart {
 
-  public DjvInlineForNode(@NotNull ASTNode node) {
+  public DjvSlotElseIfStartNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull DjvVisitor visitor) {
-    visitor.visitInlineFor(this);
+    visitor.visitSlotElseIfStart(this);
   }
 
   @Override
@@ -34,21 +34,15 @@ public class DjvInlineForNode extends ASTWrapperPsiElement implements DjvInlineF
   }
 
   @Override
-  @Nullable
-  public DjvInlineElse getInlineElse() {
-    return findChildByClass(DjvInlineElse.class);
+  @NotNull
+  public DjvSlotL getSlotL() {
+    return findNotNullChildByClass(DjvSlotL.class);
   }
 
   @Override
   @NotNull
-  public DjvKwIn getKwIn() {
-    return findNotNullChildByClass(DjvKwIn.class);
-  }
-
-  @Override
-  @NotNull
-  public DjvPattern getPattern() {
-    return findNotNullChildByClass(DjvPattern.class);
+  public DjvSlotR getSlotR() {
+    return findNotNullChildByClass(DjvSlotR.class);
   }
 
 }
