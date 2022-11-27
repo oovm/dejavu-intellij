@@ -10,7 +10,7 @@ class YCompletionContributor : CompletionContributor() {
         extend(
             CompletionType.BASIC,
             PlatformPatterns.psiElement(DjvTypes.SYMBOL),
-            SymbolCompletionProvider()
+            SlotCompletionProvider()
         )
     }
 }

@@ -31,11 +31,9 @@ enum class HighlightColor(
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
 
     //
-    OPERATION(keyof("color.token.operation"), Default.OPERATION_SIGN),
+    OPERATOR(keyof("color.token.operation"), Default.OPERATION_SIGN),
     OPTIONAL(keyof("color.token.optional"), KEYWORD.textAttributesKey),
-    MANY(keyof("color.token.many"), KEYWORD.textAttributesKey),
-    MANY1(keyof("color.token.many1"), KEYWORD.textAttributesKey),
-    TAGGED(keyof("color.token.tagged"), OPERATION.textAttributesKey),
+    TAGGED(keyof("color.token.tagged"), OPERATOR.textAttributesKey),
 
     FIELD_MARK(keyof("color.mark.field"), Default.INSTANCE_FIELD),
     BRANCH_MARK(keyof("color.mark.branch"), Default.STATIC_FIELD),

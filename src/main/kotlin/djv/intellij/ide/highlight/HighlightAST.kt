@@ -31,6 +31,9 @@ class HighlightAST : DjvVisitor(), HighlightVisitor {
 //        }
 //    }
 
+    override fun visitFunctionCall(o: DjvFunctionCall) {
+        highlight(o.identifier, HighlightColor.FUNCTION_SYMBOL)
+    }
 
     override fun visitKwIn(o: DjvKwIn) {
         highlight(o, HighlightColor.KEYWORD)

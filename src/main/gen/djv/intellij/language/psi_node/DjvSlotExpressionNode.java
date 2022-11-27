@@ -47,6 +47,12 @@ public class DjvSlotExpressionNode extends ASTWrapperPsiElement implements DjvSl
 
   @Override
   @NotNull
+  public List<DjvInlineLetStatement> getInlineLetStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvInlineLetStatement.class);
+  }
+
+  @Override
+  @NotNull
   public DjvSlotL getSlotL() {
     return findNotNullChildByClass(DjvSlotL.class);
   }

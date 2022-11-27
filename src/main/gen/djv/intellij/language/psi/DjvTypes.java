@@ -16,6 +16,7 @@ public interface DjvTypes {
   IElementType INLINE_ELSE = new DjvElementType("INLINE_ELSE");
   IElementType INLINE_FOR_STATEMENT = new DjvElementType("INLINE_FOR_STATEMENT");
   IElementType INLINE_IF_STATEMENT = new DjvElementType("INLINE_IF_STATEMENT");
+  IElementType INLINE_LET_STATEMENT = new DjvElementType("INLINE_LET_STATEMENT");
   IElementType KEY = new DjvElementType("KEY");
   IElementType KEY_SYMBOL = new DjvElementType("KEY_SYMBOL");
   IElementType KW_IN = new DjvElementType("KW_IN");
@@ -54,6 +55,7 @@ public interface DjvTypes {
   IElementType VALUE = new DjvElementType("VALUE");
 
   IElementType ACCENT = new DjvElementType("^");
+  IElementType ADD = new DjvElementType("ADD");
   IElementType ANGLE_L = new DjvElementType("<");
   IElementType ANGLE_R = new DjvElementType(">");
   IElementType ARROW = new DjvElementType("ARROW");
@@ -73,6 +75,7 @@ public interface DjvTypes {
   IElementType COMMENT_DOC = new DjvElementType("COMMENT_DOC");
   IElementType COMMENT_LINE = new DjvElementType("COMMENT_LINE");
   IElementType DECIMAL = new DjvElementType("DECIMAL");
+  IElementType DIV = new DjvElementType("DIV");
   IElementType DOLLAR = new DjvElementType("$");
   IElementType DOT = new DjvElementType(".");
   IElementType DOUBLE_COLON = new DjvElementType("DOUBLE_COLON");
@@ -90,8 +93,12 @@ public interface DjvTypes {
   IElementType KW_END_IF = new DjvElementType("end-if");
   IElementType KW_FOR = new DjvElementType("for");
   IElementType KW_IF = new DjvElementType("if");
+  IElementType KW_LET = new DjvElementType("KW_LET");
   IElementType MANY = new DjvElementType("*");
   IElementType MANY1 = new DjvElementType("+");
+  IElementType MOD = new DjvElementType("MOD");
+  IElementType MUL = new DjvElementType("MUL");
+  IElementType NE = new DjvElementType("NE");
   IElementType NOT = new DjvElementType("!");
   IElementType NULL = new DjvElementType("NULL");
   IElementType OPTIONAL = new DjvElementType("?");
@@ -106,6 +113,7 @@ public interface DjvTypes {
   IElementType SOFT_CONNECT = new DjvElementType("~");
   IElementType STRING_DQ = new DjvElementType("STRING_DQ");
   IElementType STRING_SQ = new DjvElementType("STRING_SQ");
+  IElementType SUB = new DjvElementType("SUB");
   IElementType SYMBOL = new DjvElementType("SYMBOL");
   IElementType TAGGED = new DjvElementType("<-");
   IElementType TO = new DjvElementType("->");
@@ -136,6 +144,9 @@ public interface DjvTypes {
       }
       else if (type == INLINE_IF_STATEMENT) {
         return new DjvInlineIfStatementNode(node);
+      }
+      else if (type == INLINE_LET_STATEMENT) {
+        return new DjvInlineLetStatementNode(node);
       }
       else if (type == KEY) {
         return new DjvKeyNode(node);

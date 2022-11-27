@@ -43,6 +43,10 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitInlineLetStatement(@NotNull DjvInlineLetStatement o) {
+    visitPsiElement(o);
+  }
+
   public void visitKey(@NotNull DjvKey o) {
     visitPsiElement(o);
   }

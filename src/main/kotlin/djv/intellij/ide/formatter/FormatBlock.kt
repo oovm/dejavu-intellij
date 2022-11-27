@@ -28,7 +28,7 @@ class FormatBlock(
 
     override fun getAlignment() = alignment
 
-    override fun getSpacing(child1: Block?, child2: Block) = computeSpacing(child1, child2, ctx)
+    override fun getSpacing(child1: Block?, child2: Block) = ctx.spacingBuilder.getSpacing(this, child1, child2)
 
     override fun getSubBlocks(): List<Block> = mySubBlocks
 
@@ -50,25 +50,6 @@ class FormatBlock(
     }
 
     private val mySubBlocks: List<Block> by lazy { buildChildren() }
-}
-
-fun createSpacingBuilder(commonSettings: CommonCodeStyleSettings): SpacingBuilder =
-    SpacingBuilder(commonSettings)
-        // ,
-        .after(DjvTypes.COMMA).spacing(1, 1, 0, true, 0)
-        .before(DjvTypes.COMMA).spaceIf(false)
-        // [ ]
-        .after(DjvTypes.BRACKET_L).spaceIf(false)
-        .before(DjvTypes.BRACKET_R).spaceIf(false)
-        // { }
-        .after(DjvTypes.BRACE_L).spaceIf(false)
-        .before(DjvTypes.BRACE_R).spaceIf(false)
-        // ( )
-        .after(DjvTypes.PARENTHESIS_L).spaceIf(false)
-        .before(DjvTypes.PARENTHESIS_R).spaceIf(false)
-
-private fun Block.computeSpacing(child1: Block?, child2: Block, ctx: FormatContext): Spacing? {
-    return ctx.spacingBuilder.getSpacing(this, child1, child2)
 }
 
 private fun ASTNode?.isWhitespaceOrEmpty() = this == null || textLength == 0 || elementType == TokenType.WHITE_SPACE

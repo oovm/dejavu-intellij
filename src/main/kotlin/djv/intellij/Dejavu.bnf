@@ -111,12 +111,19 @@ inline_else ::= KW_ELSE '{' '}' {
 
 };
 // ---------------------------------------------------------------------------------------------------------------------
+inline_let_statement ::= KW_LET pattern '=' expr {
+
+};
+// ---------------------------------------------------------------------------------------------------------------------
 pattern ::= identifier;
 // ---------------------------------------------------------------------------------------------------------------------
 // {% slot %}
-slot_expression ::= slot_l inlined_end slot_r {
+slot_expression ::= slot_l inline_normal* inlined_end? slot_r {
 
 };
+private inline_normal ::=
+    inline_let_statement
+    ;
 private inlined_end ::=
     inline_for_statement |
     inline_if_statement |
@@ -129,9 +136,9 @@ slot_r ::= SLOT_END;
 expr ::= term (infix term)*;
 term ::= (prefix)* atom (suffix)*
 atom ::= '(' expr ')' | function_call | value;
-infix ::= CHOOSE | SOFT_CONNECT;
-prefix ::= ACCENT;
-suffix ::= OPTIONAL | MANY | MANY1;
+infix ::= ADD | SUB | MUL | DIV | MOD | EQ | NE;
+prefix ::= ADD;
+suffix ::= OPTIONAL;
 // ---------------------------------------------------------------------------------------------------------------------
 // @function("path")
 function_call ::= identifier <<parenthesis expr COMMA>>;

@@ -17,6 +17,9 @@ public interface DjvSlotExpression extends PsiElement {
   DjvInlineIfStatement getInlineIfStatement();
 
   @NotNull
+  List<DjvInlineLetStatement> getInlineLetStatementList();
+
+  @NotNull
   DjvSlotL getSlotL();
 
   @NotNull

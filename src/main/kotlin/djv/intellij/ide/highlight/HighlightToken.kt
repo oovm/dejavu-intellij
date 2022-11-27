@@ -24,10 +24,11 @@ class HighlightToken : SyntaxHighlighterBase() {
             AS, KW_END -> Color.KEYWORD
             KW_IF, KW_ELSE_IF, KW_ELSE, KW_END_IF -> Color.KEYWORD
             KW_FOR, KW_END_FOR -> Color.KEYWORD
+            KW_LET -> Color.KEYWORD
             // ANNOTATION, ANNOTATION_MARK -> Color.ANNOTATION
             OPTIONAL -> Color.KEYWORD
-            MANY -> Color.MANY
-            MANY1 -> Color.MANY1
+            ADD, SUB, MUL, DIV, MOD -> Color.OPERATOR
+            EQ, NE -> Color.OPERATOR
             //
             NUMBER_SUFFIX -> Color.NUMBER_HINT
             TYPE_HINT -> Color.TYPE_HINT

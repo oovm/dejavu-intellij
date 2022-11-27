@@ -1,0 +1,19 @@
+{% if true %}
+    true branch
+{% end %}
+
+
+{% if true %}
+    true branch
+{% else %}
+    false branch
+{% end %}
+
+
+{% if add(0 + "1") %}
+    0 branch
+{% else-if 1 %}
+    1 branch
+{% else %}
+    other branch
+{% end %}

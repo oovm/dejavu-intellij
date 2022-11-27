@@ -7,30 +7,30 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.openapi.editor.EditorModificationUtil
 import com.intellij.util.ProcessingContext
 
-class SymbolCompletionProvider : CompletionProvider<CompletionParameters>() {
+class SlotCompletionProvider : CompletionProvider<CompletionParameters>() {
     override fun addCompletions(
         parameters: CompletionParameters,
         context: ProcessingContext,
         resultSet: CompletionResultSet
     ) {
         resultSet.addElement(
-            LookupElementBuilder.create("@include")
+            LookupElementBuilder.create("let")
                 .withInsertHandler { ctx, _ ->
                     EditorModificationUtil.moveCaretRelatively(ctx.editor, -1)
                 }
         )
         resultSet.addElement(
-            LookupElementBuilder.create("@inherit")
+            LookupElementBuilder.create("for-end")
                 .withInsertHandler { ctx, _ ->
                     EditorModificationUtil.moveCaretRelatively(ctx.editor, -1)
                 }
         )
         resultSet.addElement(
-            LookupElementBuilder.create("Some()")
+            LookupElementBuilder.create("for-else-end")
                 .withInsertHandler { ctx, _ ->
                     EditorModificationUtil.moveCaretRelatively(ctx.editor, -1)
                 }
         )
-        resultSet.addElement(LookupElementBuilder.create("None()"))
+        resultSet.addElement(LookupElementBuilder.create("if-end"))
     }
 }

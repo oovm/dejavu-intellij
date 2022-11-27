@@ -72,6 +72,9 @@ SAHA_TEXT = [^{]+
     for                     { return KW_FOR; }
     end-for                 { return KW_FOR; }
 
+    let                     { return KW_LET; }
+
+
     end                     { return KW_END; }
 
     null                    { return NULL; }
@@ -96,6 +99,17 @@ SAHA_TEXT = [^{]+
     ,    { return COMMA; }
     @    { return AT; }
     #    { return HASH; }
+
+
+    \?   { return OPTIONAL;}
+    \+   { return ADD; }
+    \-   { return SUB; }
+    \*   { return MUL; }
+    \/   { return DIV; }
+    %    { return MOD; }
+    ==   { return EQ; }
+    \!=  { return NE; }
+
     \^   { return ACCENT; }
     \~   { return SOFT_CONNECT;}
     \|   { return CHOOSE;}
@@ -103,11 +117,6 @@ SAHA_TEXT = [^{]+
     \\   { return ESCAPE; }
     \$   { return DOLLAR; }
     \.   { return DOT; }
-
-    \?   { return OPTIONAL;}
-    \+   { return MANY1; }
-    \-   { return HYPHEN; }
-    \*   { return MANY; }
 }
 <CODE> [\^\]$@]*= {
     return EQ;
