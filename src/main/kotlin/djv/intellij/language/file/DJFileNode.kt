@@ -14,6 +14,6 @@ class DJFileNode(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, Djv
         return DjvBundle.message("action.create")
     }
     override fun getIcon(unused: Boolean): Icon {
-        return DJIcon.FILE
+        return DjvIcon.FILE
     }
 }

@@ -6,9 +6,9 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiDirectory
 import djv.intellij.language.DjvLanguage
 import djv.intellij.language.file.DjvBundle
-import djv.intellij.language.file.DJIcon
+import djv.intellij.language.file.DjvIcon
 
-class YggCreateFile : CreateFileFromTemplateAction(Name, Description, DJIcon.FILE) {
+class YggCreateFile : CreateFileFromTemplateAction(Name, Description, DjvIcon.FILE) {
     companion object {
         val Name = DjvLanguage.id
         const val TemplateName = "Voml File";
@@ -16,7 +16,7 @@ class YggCreateFile : CreateFileFromTemplateAction(Name, Description, DJIcon.FIL
     }
 
     override fun buildDialog(project: Project, directory: PsiDirectory, builder: CreateFileFromTemplateDialog.Builder) {
-        builder.setTitle(Name).addKind("Empty file", DJIcon.FILE, TemplateName)
+        builder.setTitle(Name).addKind("Empty file", DjvIcon.FILE, TemplateName)
     }
 
     override fun getActionName(directory: PsiDirectory, newName: String, templateName: String): String = Name

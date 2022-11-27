@@ -4,7 +4,7 @@ package djv.intellij.ide.highlight
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
 import djv.intellij.language.file.DjvBundle
-import djv.intellij.language.file.DJIcon
+import djv.intellij.language.file.DjvIcon
 
 class YggHighlightSettingPage : ColorSettingsPage {
     private val attrs = HighlightColor
@@ -22,7 +22,7 @@ class YggHighlightSettingPage : ColorSettingsPage {
 
     override fun getDisplayName() = DjvBundle.message("filetype.name")
 
-    override fun getIcon() = DJIcon.FILE
+    override fun getIcon() = DjvIcon.FILE
 
     override fun getHighlighter() = HighlightToken()
 

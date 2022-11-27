@@ -1,5 +1,12 @@
-{% for index, v in b %}
+{% for item in body %}
     text
 {% end %}
 
+
+
+{% for k, v in body %}
+
+{% else %}
+
+{% end %}
 
