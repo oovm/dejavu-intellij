@@ -55,9 +55,15 @@ enum class HighlightColor(
     DOT(OptionsBundle.messagePointer("options.language.defaults.dot"), Default.DOT),
     COMMA(OptionsBundle.messagePointer("options.language.defaults.comma"), Default.COMMA),
     SEMICOLON(OptionsBundle.messagePointer("options.language.defaults.semicolon"), Default.SEMICOLON),
-
-
     SET(keyof("color.token.set"), Default.OPERATION_SIGN),
+
+    // 模板标记
+    SLOT_MARK_LEVEL_1(keyof("color.mark.slot.level1"), Default.OPERATION_SIGN),
+    SLOT_MARK_LEVEL_2(keyof("color.mark.slot.level2"), Default.OPERATION_SIGN),
+    SLOT_MARK_LEVEL_3(keyof("color.mark.slot.level3"), Default.OPERATION_SIGN),
+    SLOT_MARK_LEVEL_4(keyof("color.mark.slot.level4"), Default.OPERATION_SIGN),
+    SLOT_MARK_LEVEL_5(keyof("color.mark.slot.level5"), Default.OPERATION_SIGN),
+    SLOT_MARK_LEVEL_6(keyof("color.mark.slot.level6"), Default.OPERATION_SIGN),
 
     // 注释
     COMMENT_INLINE(OptionsBundle.messagePointer("options.language.defaults.line.comment"), Default.LINE_COMMENT),

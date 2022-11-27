@@ -169,20 +169,6 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "codegen" identifier object
-  public static boolean export_statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "export_statement")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, EXPORT_STATEMENT, "<export statement>");
-    r = consumeToken(b, "codegen");
-    r = r && identifier(b, l + 1);
-    p = r; // pin = identifier
-    r = r && object(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  /* ********************************************************** */
   // term (infix term | term)*
   public static boolean expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr")) return false;
@@ -293,89 +279,6 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BRACE_L [identifier (COMMA identifier)* [COMMA]] BRACE_R
-  public static boolean import_body(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "import_body")) return false;
-    if (!nextTokenIs(b, BRACE_L)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, BRACE_L);
-    r = r && import_body_1(b, l + 1);
-    r = r && consumeToken(b, BRACE_R);
-    exit_section_(b, m, IMPORT_BODY, r);
-    return r;
-  }
-
-  // [identifier (COMMA identifier)* [COMMA]]
-  private static boolean import_body_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "import_body_1")) return false;
-    import_body_1_0(b, l + 1);
-    return true;
-  }
-
-  // identifier (COMMA identifier)* [COMMA]
-  private static boolean import_body_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "import_body_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = identifier(b, l + 1);
-    r = r && import_body_1_0_1(b, l + 1);
-    r = r && import_body_1_0_2(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (COMMA identifier)*
-  private static boolean import_body_1_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "import_body_1_0_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!import_body_1_0_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "import_body_1_0_1", c)) break;
-    }
-    return true;
-  }
-
-  // COMMA identifier
-  private static boolean import_body_1_0_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "import_body_1_0_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, COMMA);
-    r = r && identifier(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // [COMMA]
-  private static boolean import_body_1_0_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "import_body_1_0_2")) return false;
-    consumeToken(b, COMMA);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // kw_import string_literal [import_body]
-  public static boolean import_statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "import_statement")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, IMPORT_STATEMENT, "<import statement>");
-    r = kw_import(b, l + 1);
-    r = r && string_literal(b, l + 1);
-    p = r; // pin = string_literal
-    r = r && import_statement_2(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  // [import_body]
-  private static boolean import_statement_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "import_statement_2")) return false;
-    import_body(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
   // CHOOSE | SOFT_CONNECT
   public static boolean infix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "infix")) return false;
@@ -385,6 +288,101 @@ public class DjvParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, CHOOSE);
     if (!r) r = consumeToken(b, SOFT_CONNECT);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // KW_ELSE '{' '}' {
+  // }
+  public static boolean inline_else(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inline_else")) return false;
+    if (!nextTokenIs(b, KW_ELSE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, KW_ELSE, BRACE_L, BRACE_R);
+    r = r && inline_else_3(b, l + 1);
+    exit_section_(b, m, INLINE_ELSE, r);
+    return r;
+  }
+
+  // {
+  // }
+  private static boolean inline_else_3(PsiBuilder b, int l) {
+    return true;
+  }
+
+  /* ********************************************************** */
+  // KW_FOR pattern kw_in expression '{' '}' [inline_else] {
+  // }
+  public static boolean inline_for(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inline_for")) return false;
+    if (!nextTokenIs(b, KW_FOR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, KW_FOR);
+    r = r && pattern(b, l + 1);
+    r = r && kw_in(b, l + 1);
+    r = r && expression(b, l + 1);
+    r = r && consumeTokens(b, 0, BRACE_L, BRACE_R);
+    r = r && inline_for_6(b, l + 1);
+    r = r && inline_for_7(b, l + 1);
+    exit_section_(b, m, INLINE_FOR, r);
+    return r;
+  }
+
+  // [inline_else]
+  private static boolean inline_for_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inline_for_6")) return false;
+    inline_else(b, l + 1);
+    return true;
+  }
+
+  // {
+  // }
+  private static boolean inline_for_7(PsiBuilder b, int l) {
+    return true;
+  }
+
+  /* ********************************************************** */
+  // KW_IF expression '{' '}' [inline_else] {
+  // }
+  public static boolean inline_if(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inline_if")) return false;
+    if (!nextTokenIs(b, KW_IF)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, KW_IF);
+    r = r && expression(b, l + 1);
+    r = r && consumeTokens(b, 0, BRACE_L, BRACE_R);
+    r = r && inline_if_4(b, l + 1);
+    r = r && inline_if_5(b, l + 1);
+    exit_section_(b, m, INLINE_IF, r);
+    return r;
+  }
+
+  // [inline_else]
+  private static boolean inline_if_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inline_if_4")) return false;
+    inline_else(b, l + 1);
+    return true;
+  }
+
+  // {
+  // }
+  private static boolean inline_if_5(PsiBuilder b, int l) {
+    return true;
+  }
+
+  /* ********************************************************** */
+  // inline_for |
+  //     inline_if |
+  //     identifier
+  static boolean inlined(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlined")) return false;
+    boolean r;
+    r = inline_for(b, l + 1);
+    if (!r) r = inline_if(b, l + 1);
+    if (!r) r = identifier(b, l + 1);
     return r;
   }
 
@@ -414,37 +412,12 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "import" | "use" | "using"
-  public static boolean kw_import(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_import")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_IMPORT, "<kw import>");
-    r = consumeToken(b, "import");
-    if (!r) r = consumeToken(b, "use");
-    if (!r) r = consumeToken(b, "using");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // "in"
   public static boolean kw_in(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_in")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KW_IN, "<kw in>");
     r = consumeToken(b, "in");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // value | macro_statement
-  public static boolean macro_arg(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macro_arg")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, MACRO_ARG, "<macro arg>");
-    r = value(b, l + 1);
-    if (!r) r = macro_statement(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -459,19 +432,6 @@ public class DjvParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, HASH);
     r = r && identifier(b, l + 1);
     exit_section_(b, m, MACRO_CALL, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // AT SYMBOL <<parenthesis macro_arg COMMA>>
-  public static boolean macro_statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macro_statement")) return false;
-    if (!nextTokenIs(b, AT)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, AT, SYMBOL);
-    r = r && parenthesis(b, l + 1, DjvParser::macro_arg, COMMA_parser_);
-    exit_section_(b, m, MACRO_STATEMENT, r);
     return r;
   }
 
@@ -861,100 +821,6 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // PARENTHESIS_L PARENTHESIS_R
-  public static boolean rule_argument(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rule_argument")) return false;
-    if (!nextTokenIs(b, PARENTHESIS_L)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, PARENTHESIS_L, PARENTHESIS_R);
-    exit_section_(b, m, RULE_ARGUMENT, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // BRACE_L [CHOOSE] [expr] BRACE_R
-  public static boolean rule_body(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rule_body")) return false;
-    if (!nextTokenIs(b, BRACE_L)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, BRACE_L);
-    r = r && rule_body_1(b, l + 1);
-    r = r && rule_body_2(b, l + 1);
-    r = r && consumeToken(b, BRACE_R);
-    exit_section_(b, m, RULE_BODY, r);
-    return r;
-  }
-
-  // [CHOOSE]
-  private static boolean rule_body_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rule_body_1")) return false;
-    consumeToken(b, CHOOSE);
-    return true;
-  }
-
-  // [expr]
-  private static boolean rule_body_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rule_body_2")) return false;
-    expr(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // define modifiers identifier [rule_argument] [rule_type] rule_body
-  public static boolean rule_statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rule_statement")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, RULE_STATEMENT, "<rule statement>");
-    r = define(b, l + 1);
-    r = r && modifiers(b, l + 1);
-    r = r && identifier(b, l + 1);
-    p = r; // pin = identifier
-    r = r && report_error_(b, rule_statement_3(b, l + 1));
-    r = p && report_error_(b, rule_statement_4(b, l + 1)) && r;
-    r = p && rule_body(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  // [rule_argument]
-  private static boolean rule_statement_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rule_statement_3")) return false;
-    rule_argument(b, l + 1);
-    return true;
-  }
-
-  // [rule_type]
-  private static boolean rule_statement_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rule_statement_4")) return false;
-    rule_type(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // (COLON | ARROW) identifier
-  public static boolean rule_type(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rule_type")) return false;
-    if (!nextTokenIs(b, "<rule type>", ARROW, COLON)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, RULE_TYPE, "<rule type>");
-    r = rule_type_0(b, l + 1);
-    r = r && identifier(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // COLON | ARROW
-  private static boolean rule_type_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rule_type_0")) return false;
-    boolean r;
-    r = consumeToken(b, COLON);
-    if (!r) r = consumeToken(b, ARROW);
-    return r;
-  }
-
-  /* ********************************************************** */
   // slot_l KW_ELSE slot_r
   public static boolean slot_else(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_else")) return false;
@@ -969,7 +835,7 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_l identifier? slot_r {
+  // slot_l inlined slot_r {
   // }
   public static boolean slot_expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_expression")) return false;
@@ -977,18 +843,11 @@ public class DjvParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = slot_l(b, l + 1);
-    r = r && slot_expression_1(b, l + 1);
+    r = r && inlined(b, l + 1);
     r = r && slot_r(b, l + 1);
     r = r && slot_expression_3(b, l + 1);
     exit_section_(b, m, SLOT_EXPRESSION, r);
     return r;
-  }
-
-  // identifier?
-  private static boolean slot_expression_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slot_expression_1")) return false;
-    identifier(b, l + 1);
-    return true;
   }
 
   // {

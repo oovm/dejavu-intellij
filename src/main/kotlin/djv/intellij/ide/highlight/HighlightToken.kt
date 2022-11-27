@@ -22,8 +22,8 @@ class HighlightToken : SyntaxHighlighterBase() {
         return when (tokenType) {
             //
             AS -> Color.KEYWORD
-            KW_IF, KW_ELSE_IF, KW_ELSE -> Color.KEYWORD
-            KW_FOR, -> Color.KEYWORD
+            KW_IF, KW_ELSE_IF, KW_ELSE, KW_END_IF -> Color.KEYWORD
+            KW_FOR, KW_END_FOR -> Color.KEYWORD
             // ANNOTATION, ANNOTATION_MARK -> Color.ANNOTATION
             OPTIONAL -> Color.KEYWORD
             MANY -> Color.MANY

@@ -55,6 +55,18 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitInlineElse(@NotNull DjvInlineElse o) {
+    visitPsiElement(o);
+  }
+
+  public void visitInlineFor(@NotNull DjvInlineFor o) {
+    visitPsiElement(o);
+  }
+
+  public void visitInlineIf(@NotNull DjvInlineIf o) {
+    visitPsiElement(o);
+  }
+
   public void visitKey(@NotNull DjvKey o) {
     visitPsiElement(o);
   }

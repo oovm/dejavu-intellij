@@ -11,14 +11,14 @@ import static djv.intellij.language.psi.DjvTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import djv.intellij.language.psi.*;
 
-public class DjvSlotExpressionNode extends ASTWrapperPsiElement implements DjvSlotExpression {
+public class DjvInlineForNode extends ASTWrapperPsiElement implements DjvInlineFor {
 
-  public DjvSlotExpressionNode(@NotNull ASTNode node) {
+  public DjvInlineForNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull DjvVisitor visitor) {
-    visitor.visitSlotExpression(this);
+    visitor.visitInlineFor(this);
   }
 
   @Override
@@ -28,33 +28,27 @@ public class DjvSlotExpressionNode extends ASTWrapperPsiElement implements DjvSl
   }
 
   @Override
-  @Nullable
-  public DjvIdentifier getIdentifier() {
-    return findChildByClass(DjvIdentifier.class);
+  @NotNull
+  public DjvExpression getExpression() {
+    return findNotNullChildByClass(DjvExpression.class);
   }
 
   @Override
   @Nullable
-  public DjvInlineFor getInlineFor() {
-    return findChildByClass(DjvInlineFor.class);
-  }
-
-  @Override
-  @Nullable
-  public DjvInlineIf getInlineIf() {
-    return findChildByClass(DjvInlineIf.class);
+  public DjvInlineElse getInlineElse() {
+    return findChildByClass(DjvInlineElse.class);
   }
 
   @Override
   @NotNull
-  public DjvSlotL getSlotL() {
-    return findNotNullChildByClass(DjvSlotL.class);
+  public DjvKwIn getKwIn() {
+    return findNotNullChildByClass(DjvKwIn.class);
   }
 
   @Override
   @NotNull
-  public DjvSlotR getSlotR() {
-    return findNotNullChildByClass(DjvSlotR.class);
+  public DjvPattern getPattern() {
+    return findNotNullChildByClass(DjvPattern.class);
   }
 
 }

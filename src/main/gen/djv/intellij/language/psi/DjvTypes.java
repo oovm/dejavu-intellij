@@ -19,6 +19,9 @@ public interface DjvTypes {
   IElementType FUNCTION_CALL = new DjvElementType("FUNCTION_CALL");
   IElementType IDENTIFIER = new DjvElementType("IDENTIFIER");
   IElementType INFIX = new DjvElementType("INFIX");
+  IElementType INLINE_ELSE = new DjvElementType("INLINE_ELSE");
+  IElementType INLINE_FOR = new DjvElementType("INLINE_FOR");
+  IElementType INLINE_IF = new DjvElementType("INLINE_IF");
   IElementType KEY = new DjvElementType("KEY");
   IElementType KEY_SYMBOL = new DjvElementType("KEY_SYMBOL");
   IElementType KW_IN = new DjvElementType("KW_IN");
@@ -146,6 +149,15 @@ public interface DjvTypes {
       }
       else if (type == INFIX) {
         return new DjvInfixNode(node);
+      }
+      else if (type == INLINE_ELSE) {
+        return new DjvInlineElseNode(node);
+      }
+      else if (type == INLINE_FOR) {
+        return new DjvInlineForNode(node);
+      }
+      else if (type == INLINE_IF) {
+        return new DjvInlineIfNode(node);
       }
       else if (type == KEY) {
         return new DjvKeyNode(node);

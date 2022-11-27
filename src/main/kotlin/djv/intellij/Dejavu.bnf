@@ -82,6 +82,10 @@ slot_for_else  ::= slot_else statements* {
     pin = slot_else
 };
 slot_for_end   ::= slot_l KW_END_FOR slot_r;
+// ---------------------------------------------------------------------------------------------------------------------
+inline_for ::= KW_FOR pattern kw_in expression '{' '}' [inline_else] {
+
+};
 kw_in          ::= "in";
 // ---------------------------------------------------------------------------------------------------------------------
 slot_if ::= slot_if_start statements* slot_if_else? slot_if_end {
@@ -94,14 +98,27 @@ slot_if_else  ::= slot_else statements* {
 slot_if_end   ::= slot_l KW_END_IF slot_r;
 slot_else ::= slot_l KW_ELSE slot_r;
 // ---------------------------------------------------------------------------------------------------------------------
+inline_if ::= KW_IF expression '{' '}' [inline_else] {
+
+};
+inline_else ::= KW_ELSE '{' '}' {
+
+};
+// ---------------------------------------------------------------------------------------------------------------------
 pattern ::= identifier;
 // ---------------------------------------------------------------------------------------------------------------------
 expression ::= identifier;
 // ---------------------------------------------------------------------------------------------------------------------
 // {% slot %}
-slot_expression ::= slot_l identifier? slot_r {
+slot_expression ::= slot_l [inlined] slot_r {
 
 };
+private inlined ::=
+    inline_for |
+    inline_if |
+    identifier
+    ;
+
 slot_l ::= SLOT_START;
 slot_r ::= SLOT_END;
 // ---------------------------------------------------------------------------------------------------------------------
