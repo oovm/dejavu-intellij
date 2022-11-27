@@ -8,13 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface DjvAtom extends PsiElement {
 
   @Nullable
-  DjvBranchMark getBranchMark();
-
-  @Nullable
   DjvExpr getExpr();
-
-  @Nullable
-  DjvFieldMark getFieldMark();
 
   @Nullable
   DjvFunctionCall getFunctionCall();

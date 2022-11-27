@@ -29,20 +29,8 @@ public class DjvAtomNode extends ASTWrapperPsiElement implements DjvAtom {
 
   @Override
   @Nullable
-  public DjvBranchMark getBranchMark() {
-    return findChildByClass(DjvBranchMark.class);
-  }
-
-  @Override
-  @Nullable
   public DjvExpr getExpr() {
     return findChildByClass(DjvExpr.class);
-  }
-
-  @Override
-  @Nullable
-  public DjvFieldMark getFieldMark() {
-    return findChildByClass(DjvFieldMark.class);
   }
 
   @Override

@@ -11,27 +11,11 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitBranchMark(@NotNull DjvBranchMark o) {
-    visitPsiElement(o);
-  }
-
   public void visitCommentDoc(@NotNull DjvCommentDoc o) {
     visitPsiElement(o);
   }
 
   public void visitExpr(@NotNull DjvExpr o) {
-    visitPsiElement(o);
-  }
-
-  public void visitExpression(@NotNull DjvExpression o) {
-    visitPsiElement(o);
-  }
-
-  public void visitFieldMark(@NotNull DjvFieldMark o) {
-    visitPsiElement(o);
-  }
-
-  public void visitFieldRhs(@NotNull DjvFieldRhs o) {
     visitPsiElement(o);
   }
 

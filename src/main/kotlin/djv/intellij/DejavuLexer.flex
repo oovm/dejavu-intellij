@@ -113,7 +113,6 @@ SAHA_TEXT = [^{]+
     return EQ;
 }
 <CODE> {
-    // literal
     {BOOLEAN}     { return BOOLEAN; }
     {SYMBOL}      { return SYMBOL; }
     {BYTE}        { return BYTE; }

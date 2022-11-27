@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface DjvInlineIfStatement extends PsiElement {
 
   @NotNull
-  DjvExpression getExpression();
+  DjvExpr getExpr();
 
   @Nullable
   DjvInlineElse getInlineElse();

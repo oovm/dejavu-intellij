@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface DjvSlotIfStart extends PsiElement {
 
   @NotNull
-  DjvExpression getExpression();
+  DjvExpr getExpr();
 
   @NotNull
   DjvSlotL getSlotL();

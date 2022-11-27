@@ -29,8 +29,8 @@ public class DjvSlotForStartNode extends ASTWrapperPsiElement implements DjvSlot
 
   @Override
   @NotNull
-  public DjvExpression getExpression() {
-    return findNotNullChildByClass(DjvExpression.class);
+  public DjvExpr getExpr() {
+    return findNotNullChildByClass(DjvExpr.class);
   }
 
   @Override

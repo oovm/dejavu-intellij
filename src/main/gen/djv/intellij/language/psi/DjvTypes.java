@@ -9,11 +9,7 @@ import djv.intellij.language.psi_node.*;
 public interface DjvTypes {
 
   IElementType ATOM = new DjvElementType("ATOM");
-  IElementType BRANCH_MARK = new DjvElementType("BRANCH_MARK");
   IElementType EXPR = new DjvElementType("EXPR");
-  IElementType EXPRESSION = new DjvElementType("EXPRESSION");
-  IElementType FIELD_MARK = new DjvElementType("FIELD_MARK");
-  IElementType FIELD_RHS = new DjvElementType("FIELD_RHS");
   IElementType FUNCTION_CALL = new DjvElementType("FUNCTION_CALL");
   IElementType IDENTIFIER = new DjvElementType("IDENTIFIER");
   IElementType INFIX = new DjvElementType("INFIX");
@@ -70,7 +66,6 @@ public interface DjvTypes {
   IElementType BRACKET_R = new DjvElementType("]");
   IElementType BYTE = new DjvElementType("BYTE");
   IElementType CHARACTER = new DjvElementType("CHARACTER");
-  IElementType CHARSET = new DjvElementType("charset");
   IElementType CHOOSE = new DjvElementType("|");
   IElementType COLON = new DjvElementType(":");
   IElementType COMMA = new DjvElementType(",");
@@ -121,20 +116,8 @@ public interface DjvTypes {
       if (type == ATOM) {
         return new DjvAtomNode(node);
       }
-      else if (type == BRANCH_MARK) {
-        return new DjvBranchMarkNode(node);
-      }
       else if (type == EXPR) {
         return new DjvExprNode(node);
-      }
-      else if (type == EXPRESSION) {
-        return new DjvExpressionNode(node);
-      }
-      else if (type == FIELD_MARK) {
-        return new DjvFieldMarkNode(node);
-      }
-      else if (type == FIELD_RHS) {
-        return new DjvFieldRhsNode(node);
       }
       else if (type == FUNCTION_CALL) {
         return new DjvFunctionCallNode(node);
