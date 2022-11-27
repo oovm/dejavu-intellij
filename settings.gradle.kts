@@ -1,1 +1,1 @@
-rootProject.name = "Saha Intellij"
+rootProject.name = "déjà-vu Intellij"
