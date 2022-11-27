@@ -40,13 +40,13 @@ ESCAPE_SPECIAL = \\[^xuU]
 ESCAPE_UNICODE = \\(x{HEX}{2}|u{HEX}{4}|U\{{HEX}+\})
 HEX = [0-9a-fA-F]
 
-RAW_L = \{#(=-_\!)?
-RAW_R = (=-_\!)?#\}
+RAW_L = \{#[=_!\-]?
+RAW_R = [=_!\-]?#\}
 
 COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 
-SLOT_L = \{%(=-_\!)?
-SLOT_R = (=-_\!)?%\}
+SLOT_L = \{%[=_!\-]?
+SLOT_R = [=_!\-]?%\}
 
 SAHA_TEXT = [^{]+
 

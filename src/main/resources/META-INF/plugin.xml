@@ -53,7 +53,7 @@
 		/>
 		<completion.contributor
 			language="DejaVu"
-			implementationClass="djv.intellij.ide.completion.YCompletionContributor"
+			implementationClass="djv.intellij.ide.completion.CompletionContributor"
 		/>
 		<annotator
 			language="DejaVu"

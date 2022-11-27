@@ -726,14 +726,37 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identifier
+  // identifier (COMMA identifier)*
   public static boolean pattern(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "pattern")) return false;
     if (!nextTokenIs(b, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = identifier(b, l + 1);
+    r = r && pattern_1(b, l + 1);
     exit_section_(b, m, PATTERN, r);
+    return r;
+  }
+
+  // (COMMA identifier)*
+  private static boolean pattern_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pattern_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!pattern_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "pattern_1", c)) break;
+    }
+    return true;
+  }
+
+  // COMMA identifier
+  private static boolean pattern_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pattern_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && identifier(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -804,7 +827,7 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_l inline_normal* inlined_end? slot_r {
+  // slot_l (inline_normal SEMICOLON?)* inlined_end? slot_r {
   // }
   public static boolean slot_expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_expression")) return false;
@@ -820,14 +843,32 @@ public class DjvParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // inline_normal*
+  // (inline_normal SEMICOLON?)*
   private static boolean slot_expression_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_expression_1")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!inline_normal(b, l + 1)) break;
+      if (!slot_expression_1_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "slot_expression_1", c)) break;
     }
+    return true;
+  }
+
+  // inline_normal SEMICOLON?
+  private static boolean slot_expression_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_expression_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = inline_normal(b, l + 1);
+    r = r && slot_expression_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // SEMICOLON?
+  private static boolean slot_expression_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_expression_1_0_1")) return false;
+    consumeToken(b, SEMICOLON);
     return true;
   }
 
@@ -1077,17 +1118,17 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_for_statement
+  // slot_expression
+  //     | slot_for_statement
   //     | slot_if_statement
-  //     | slot_expression
   //     | text_statement
   static boolean statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statements")) return false;
     if (!nextTokenIs(b, "", SAHA_TEXT, SLOT_START)) return false;
     boolean r;
-    r = slot_for_statement(b, l + 1);
+    r = slot_expression(b, l + 1);
+    if (!r) r = slot_for_statement(b, l + 1);
     if (!r) r = slot_if_statement(b, l + 1);
-    if (!r) r = slot_expression(b, l + 1);
     if (!r) r = text_statement(b, l + 1);
     return r;
   }

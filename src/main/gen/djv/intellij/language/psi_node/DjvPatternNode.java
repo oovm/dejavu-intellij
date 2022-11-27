@@ -29,8 +29,8 @@ public class DjvPatternNode extends ASTWrapperPsiElement implements DjvPattern {
 
   @Override
   @NotNull
-  public DjvIdentifier getIdentifier() {
-    return findNotNullChildByClass(DjvIdentifier.class);
+  public List<DjvIdentifier> getIdentifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvIdentifier.class);
   }
 
 }

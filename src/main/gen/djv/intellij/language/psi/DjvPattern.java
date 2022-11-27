@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface DjvPattern extends PsiElement {
 
   @NotNull
-  DjvIdentifier getIdentifier();
+  List<DjvIdentifier> getIdentifierList();
 
 }
