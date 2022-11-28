@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import djv.intellij.language.file.DjvFileNode
 
-class VomlSmartEnterProcessor : SmartEnterProcessorWithFixers() {
+class SmartEnterProcessor : SmartEnterProcessorWithFixers() {
     init {
         addFixers(
             CommaFixer()

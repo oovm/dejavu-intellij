@@ -12,8 +12,8 @@ import djv.intellij.language.psi.getNextNonCommentSibling
 import djv.intellij.language.psi.getPrevNonCommentSibling
 import djv.intellij.language.psi.getPrevNonWhitespaceSibling
 
-class CommaFixer : SmartEnterProcessorWithFixers.Fixer<VomlSmartEnterProcessor>() {
-    override fun apply(editor: Editor, processor: VomlSmartEnterProcessor, element: PsiElement) {
+class CommaFixer : SmartEnterProcessorWithFixers.Fixer<SmartEnterProcessor>() {
+    override fun apply(editor: Editor, processor: SmartEnterProcessor, element: PsiElement) {
         element.isValid
         val current = if (element is LeafPsiElement && element.parent !is PsiFile) {
             element.parent

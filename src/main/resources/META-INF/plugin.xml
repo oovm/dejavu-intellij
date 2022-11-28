@@ -74,7 +74,7 @@
 			implementationClass="djv.intellij.ide.formatter.FormatModel"/>
 		<lang.smartEnterProcessor
 			language="DejaVu"
-			implementationClass="djv.intellij.ide.assist.fixers.VomlSmartEnterProcessor"/>
+			implementationClass="djv.intellij.ide.assist.fixers.SmartEnterProcessor"/>
 	</extensions>
 	<actions>
 		<action

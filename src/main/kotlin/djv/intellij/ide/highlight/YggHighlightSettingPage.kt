@@ -26,6 +26,6 @@ class YggHighlightSettingPage : ColorSettingsPage {
 
     override fun getHighlighter() = HighlightToken()
 
-    override fun getDemoText() = javaClass.getResource("/fileTemplates/demoColor.vos")!!.readText()
+    override fun getDemoText() = javaClass.getResource("/fileTemplates/demoColor.html")!!.readText()
     override fun getAdditionalHighlightingTagToDescriptorMap() = annotatorTags
 }

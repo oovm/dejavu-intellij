@@ -38,7 +38,9 @@ enum class HighlightColor(
 
     SYM_FUNCTION(keyof("color.symbol.function"), Default.STATIC_METHOD),
     SYM_PROPERTY(keyof("color.symbol.property"), Default.STATIC_FIELD),
-    MACRO_SYMBOL(OptionsBundle.messagePointer("options.java.attribute.descriptor.annotation.name"), Default.METADATA),
+    SYM_VARIABLE(keyof("color.symbol.variable"), Default.LOCAL_VARIABLE),
+
+    SYM_MACRO(OptionsBundle.messagePointer("options.java.attribute.descriptor.annotation.name"), Default.METADATA),
     KEY_SYMBOL(keyof("color.symbol.builtin"), Default.STATIC_FIELD),
 
     // 标点符号
