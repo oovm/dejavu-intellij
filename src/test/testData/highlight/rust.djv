@@ -1,0 +1,11 @@
+#![allow(unused_imports)]
+use core::fmt::{Display, Formatter, Write};
+
+use dejavu_engine::{ForLooper, Result, Template, TemplateDisplay, XmlEscaper};
+
+impl{% target.generic %} Display for {% target.path %} {
+    #[inline]
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+        {% dejavu.namespace %}Template::render_into(self, f).map_err(|_| core::fmt::Error {})
+    }
+}

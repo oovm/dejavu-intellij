@@ -41,19 +41,20 @@ ESCAPE_UNICODE = \\(x{HEX}{2}|u{HEX}{4}|U\{{HEX}+\})
 HEX = [0-9a-fA-F]
 
 RAW_L = \{#[=_!\-]?
-RAW_R = [=_!\-]?#\}
+RAW_R = [=_!\-]?#}
 
 COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 
 SLOT_L = \{%[=_!\-]?
-SLOT_R = [=_!\-]?%\}
+SLOT_R = [=_!\-]?%}
 
-SAHA_TEXT = [^{]+
+SAHA_TEXT = [^{]+ // catch all
 
 %%
 <YYINITIAL> {
-    {SLOT_L}    { yybegin(CODE); return SLOT_START; }
     {SAHA_TEXT} { return SAHA_TEXT; }
+    {SLOT_L}    { yybegin(CODE); return SLOT_START; }
+    \{          { return SAHA_TEXT;}
 }
 
 <CODE> {

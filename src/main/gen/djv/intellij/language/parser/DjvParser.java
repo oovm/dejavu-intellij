@@ -1372,13 +1372,18 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // SAHA_TEXT
+  // SAHA_TEXT+
   public static boolean text_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "text_statement")) return false;
     if (!nextTokenIs(b, SAHA_TEXT)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, SAHA_TEXT);
+    while (r) {
+      int c = current_position_(b);
+      if (!consumeToken(b, SAHA_TEXT)) break;
+      if (!empty_element_parsed_guard_(b, "text_statement", c)) break;
+    }
     exit_section_(b, m, TEXT_STATEMENT, r);
     return r;
   }

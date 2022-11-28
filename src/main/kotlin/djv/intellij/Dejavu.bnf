@@ -72,7 +72,7 @@ private statements ::=
     ;
 // ---------------------------------------------------------------------------------------------------------------------
 // text is these who not surrounded by `{%   %}`
-text_statement ::= SAHA_TEXT;
+text_statement ::= SAHA_TEXT+;
 // ---------------------------------------------------------------------------------------------------------------------
 slot_for_statement ::= slot_for_start statements* slot_for_else? slot_for_end {
     pin = slot_for_start
