@@ -6,15 +6,18 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import djv.intellij.language.file.DJFileNode
-import djv.intellij.language.psi.*
+import djv.intellij.language.file.DjvFileNode
+import djv.intellij.language.psi.DjvDotCall
+import djv.intellij.language.psi.DjvFunctionCall
+import djv.intellij.language.psi.DjvKwIn
+import djv.intellij.language.psi.DjvVisitor
 
 class HighlightAST : DjvVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
     override fun clone(): HighlightVisitor = HighlightAST()
 
-    override fun suitableForFile(file: PsiFile): Boolean = file is DJFileNode
+    override fun suitableForFile(file: PsiFile): Boolean = file is DjvFileNode
 
     override fun visit(element: PsiElement) = element.accept(this)
 
@@ -48,7 +51,6 @@ class HighlightAST : DjvVisitor(), HighlightVisitor {
     }
 
 
-
     override fun analyze(
         file: PsiFile,
         updateWholeFile: Boolean,
@@ -66,5 +68,4 @@ class HighlightAST : DjvVisitor(), HighlightVisitor {
         builder.range(element)
         infoHolder?.add(builder.create())
     }
-
 }

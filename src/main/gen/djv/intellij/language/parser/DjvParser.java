@@ -1213,6 +1213,18 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // KW_USE
+  public static boolean slot_use(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_use")) return false;
+    if (!nextTokenIs(b, KW_USE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, KW_USE);
+    exit_section_(b, m, SLOT_USE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // slot_expression
   //     | slot_for_statement
   //     | slot_if_statement
@@ -1487,13 +1499,12 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // NULL | BOOLEAN | num | string_literal | table | namespace
+  // KW_SPECIAL | num | string_literal | table | namespace
   public static boolean value(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "value")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, VALUE, "<value>");
-    r = consumeToken(b, NULL);
-    if (!r) r = consumeToken(b, BOOLEAN);
+    r = consumeToken(b, KW_SPECIAL);
     if (!r) r = num(b, l + 1);
     if (!r) r = string_literal(b, l + 1);
     if (!r) r = table(b, l + 1);

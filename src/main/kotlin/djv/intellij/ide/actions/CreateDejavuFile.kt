@@ -8,10 +8,10 @@ import djv.intellij.language.DjvLanguage
 import djv.intellij.language.file.DjvBundle
 import djv.intellij.language.file.DjvIcon
 
-class YggCreateFile : CreateFileFromTemplateAction(Name, Description, DjvIcon.FILE) {
+class CreateDejavuFile : CreateFileFromTemplateAction(Name, Description, DjvIcon.FILE) {
     companion object {
         val Name = DjvLanguage.id
-        const val TemplateName = "Voml File";
+        const val TemplateName = "Dejavu File";
         val Description = DjvBundle.message("action.create.description")
     }
 

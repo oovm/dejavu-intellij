@@ -49,6 +49,7 @@ SLOT_L = \{%[=_!\-]?
 SLOT_R = [=_!\-]?%}
 
 SAHA_TEXT = [^{]+ // catch all
+KW_SPECIAL = true | false | null | nil
 
 %%
 <YYINITIAL> {
@@ -74,13 +75,10 @@ SAHA_TEXT = [^{]+ // catch all
     end-for                 { return KW_FOR; }
 
     let                     { return KW_LET; }
-
+    use                     { return KW_USE; }
 
     end                     { return KW_END; }
-
-    null                    { return NULL; }
-    true                    { return BOOLEAN; }
-    false                   { return BOOLEAN; }
+    {KW_SPECIAL}            { return KW_SPECIAL; }
 }
 
 <CODE> {

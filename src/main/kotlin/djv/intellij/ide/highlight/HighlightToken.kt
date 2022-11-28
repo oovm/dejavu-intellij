@@ -21,7 +21,7 @@ class HighlightToken : SyntaxHighlighterBase() {
     private fun getTokenColor(tokenType: IElementType): Color? {
         return when (tokenType) {
             //
-            AS, KW_END -> Color.KEYWORD
+            KW_USE, AS, KW_END -> Color.KEYWORD
             KW_IF, KW_ELSE_IF, KW_ELSE, KW_END_IF -> Color.KEYWORD
             KW_FOR, KW_END_FOR -> Color.KEYWORD
             KW_LET -> Color.KEYWORD
@@ -40,8 +40,7 @@ class HighlightToken : SyntaxHighlighterBase() {
             COLON, EQ -> Color.SET
             COMMA -> Color.COMMA
             // atom
-            NULL -> Color.INTEGER
-            BOOLEAN -> Color.INTEGER
+            KW_SPECIAL -> Color.INTEGER
             STRING_LITERAL, STRING_SQ, STRING_DQ, CHARACTER -> Color.STRING
             ESCAPE_SPECIAL, ESCAPE_UNICODE -> Color.STRING_ESCAPE
             NUMBER_SUFFIX -> Color.NUMBER_HINT

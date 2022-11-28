@@ -8,6 +8,6 @@ use {% dejavu.namespace %}::{{% dejavu.imports.join(', ') %}};
 impl{% target.generic %} Display for {% target.path %} {
     #[inline]
     fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
-        {% dejavu.namespace %}Template::render_into(self, f).map_err(|_| core::fmt::Error {})
+        Template::render_into(self, f).map_err(|_| core::fmt::Error {})
     }
 }

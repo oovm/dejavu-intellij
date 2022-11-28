@@ -48,6 +48,7 @@ public interface DjvTypes {
   IElementType SLOT_IF_STATEMENT = new DjvElementType("SLOT_IF_STATEMENT");
   IElementType SLOT_L = new DjvElementType("SLOT_L");
   IElementType SLOT_R = new DjvElementType("SLOT_R");
+  IElementType SLOT_USE = new DjvElementType("SLOT_USE");
   IElementType STRING_LITERAL = new DjvElementType("STRING_LITERAL");
   IElementType SUFFIX = new DjvElementType("SUFFIX");
   IElementType SYMBOL_PATH = new DjvElementType("SYMBOL_PATH");
@@ -64,7 +65,6 @@ public interface DjvTypes {
   IElementType ARROW = new DjvElementType("ARROW");
   IElementType AS = new DjvElementType("as");
   IElementType AT = new DjvElementType("@");
-  IElementType BOOLEAN = new DjvElementType("BOOLEAN");
   IElementType BRACE_L = new DjvElementType("{");
   IElementType BRACE_R = new DjvElementType("}");
   IElementType BRACKET_L = new DjvElementType("[");
@@ -97,13 +97,14 @@ public interface DjvTypes {
   IElementType KW_FOR = new DjvElementType("for");
   IElementType KW_IF = new DjvElementType("if");
   IElementType KW_LET = new DjvElementType("KW_LET");
+  IElementType KW_SPECIAL = new DjvElementType("KW_SPECIAL");
+  IElementType KW_USE = new DjvElementType("KW_USE");
   IElementType MANY = new DjvElementType("*");
   IElementType MANY1 = new DjvElementType("+");
   IElementType MOD = new DjvElementType("MOD");
   IElementType MUL = new DjvElementType("MUL");
   IElementType NE = new DjvElementType("NE");
   IElementType NOT = new DjvElementType("!");
-  IElementType NULL = new DjvElementType("NULL");
   IElementType OPTIONAL = new DjvElementType("?");
   IElementType PARENTHESIS_L = new DjvElementType("(");
   IElementType PARENTHESIS_R = new DjvElementType(")");
@@ -243,6 +244,9 @@ public interface DjvTypes {
       }
       else if (type == SLOT_R) {
         return new DjvSlotRNode(node);
+      }
+      else if (type == SLOT_USE) {
+        return new DjvSlotUseNode(node);
       }
       else if (type == STRING_LITERAL) {
         return new DjvStringLiteralNode(node);

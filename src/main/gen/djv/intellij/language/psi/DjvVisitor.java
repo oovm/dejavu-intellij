@@ -171,6 +171,10 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitSlotUse(@NotNull DjvSlotUse o) {
+    visitPsiElement(o);
+  }
+
   public void visitStringLiteral(@NotNull DjvStringLiteral o) {
     visitPsiElement(o);
   }

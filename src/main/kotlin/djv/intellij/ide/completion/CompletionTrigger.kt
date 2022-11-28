@@ -10,6 +10,7 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.EditorModificationUtil
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
+import djv.intellij.language.file.DjvFileNode
 
 class CompletionTrigger : TypedHandlerDelegate() {
     override fun checkAutoPopup(charTyped: Char, project: Project, editor: Editor, file: PsiFile): Result {
@@ -22,7 +23,7 @@ class CompletionTrigger : TypedHandlerDelegate() {
             return Result.STOP
         }
         val trigger = setOf('_', '{', '\\')
-        if (Character.isLetterOrDigit(charTyped) || trigger.contains(charTyped)) {
+        if (Character.isLetterOrDigit(charTyped) || (trigger.contains(charTyped) && file is DjvFileNode)) {
             if (phase is EmptyAutoPopup && phase.allowsSkippingNewAutoPopup(editor, charTyped)) {
                 return Result.CONTINUE
             }

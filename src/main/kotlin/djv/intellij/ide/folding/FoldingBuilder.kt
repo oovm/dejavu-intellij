@@ -9,7 +9,7 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
-import djv.intellij.language.file.DJFileNode
+import djv.intellij.language.file.DjvFileNode
 
 class FoldingBuilder : CustomFoldingBuilder(), DumbAware {
     override fun buildLanguageFoldRegions(
@@ -18,7 +18,7 @@ class FoldingBuilder : CustomFoldingBuilder(), DumbAware {
         document: Document,
         quick: Boolean,
     ) {
-        if (root !is DJFileNode) return
+        if (root !is DjvFileNode) return
         val visitor = FoldingVisitor(descriptors)
         PsiTreeUtil.processElements(root) {
             it.accept(visitor);

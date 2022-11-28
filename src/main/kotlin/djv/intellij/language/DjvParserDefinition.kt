@@ -12,7 +12,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
-import djv.intellij.language.file.DJFileNode
+import djv.intellij.language.file.DjvFileNode
 import djv.intellij.language.parser.DjvParser
 import djv.intellij.language.psi.DjvTypes.*
 
@@ -36,7 +36,7 @@ class DjvParserDefinition : ParserDefinition {
 
     override fun createElement(node: ASTNode): PsiElement = Factory.createElement(node)
 
-    override fun createFile(viewProvider: FileViewProvider): PsiFile = DJFileNode(viewProvider)
+    override fun createFile(viewProvider: FileViewProvider): PsiFile = DjvFileNode(viewProvider)
 
     override fun spaceExistenceTypeBetweenTokens(left: ASTNode, right: ASTNode): SpaceRequirements {
         return SpaceRequirements.MAY

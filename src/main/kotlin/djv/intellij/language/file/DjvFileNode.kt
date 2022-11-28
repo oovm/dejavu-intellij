@@ -7,7 +7,7 @@ import com.intellij.psi.FileViewProvider
 import djv.intellij.language.DjvLanguage
 import javax.swing.Icon
 
-class DJFileNode(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, DjvLanguage),
+class DjvFileNode(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, DjvLanguage),
     ItemPresentation {
     override fun getFileType(): FileType = DjvFileType
     override fun getPresentableText(): String {

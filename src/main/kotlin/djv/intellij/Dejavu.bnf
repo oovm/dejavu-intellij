@@ -74,6 +74,8 @@ private statements ::=
 // text is these who not surrounded by `{%   %}`
 text_statement ::= SAHA_TEXT+;
 // ---------------------------------------------------------------------------------------------------------------------
+slot_use ::= KW_USE;
+// ---------------------------------------------------------------------------------------------------------------------
 slot_for_statement ::= slot_for_start statements* slot_for_else? slot_for_end {
     pin = slot_for_start
 };
@@ -148,7 +150,7 @@ function_args ::= PARENTHESIS_L [expr (COMMA expr)* [COMMA]] PARENTHESIS_R;
 // ---------------------------------------------------------------------------------------------------------------------
 macro_call  ::= HASH identifier;
 // ---------------------------------------------------------------------------------------------------------------------
-value ::= NULL | BOOLEAN | num | string_literal | table | namespace;
+value ::= KW_SPECIAL | num | string_literal | table | namespace;
 type_hint ::= identifier;
 number_suffix ::= identifier;
 // ---------------------------------------------------------------------------------------------------------------------
