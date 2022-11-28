@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface DjvFunctionCall extends PsiElement {
 
   @NotNull
-  DjvIdentifier getIdentifier();
+  DjvFunctionArgs getFunctionArgs();
 
   @NotNull
-  DjvParenthesis getParenthesis();
+  DjvIdentifier getIdentifier();
 
 }

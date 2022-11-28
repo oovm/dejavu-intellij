@@ -26,7 +26,7 @@ enum class HighlightColor(
     STRING_HINT(keyof("color.settings.toml.string_hint"), Default.KEYWORD),
     STRING(OptionsBundle.messagePointer("options.language.defaults.string"), Default.STRING),
     STRING_ESCAPE(OptionsBundle.messagePointer("options.language.defaults.string"), Default.VALID_STRING_ESCAPE),
-    IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
+    IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.PARAMETER),
 
     //
     OPERATOR(keyof("color.token.operation"), Default.OPERATION_SIGN),
@@ -36,7 +36,8 @@ enum class HighlightColor(
     PREDEFINED(OptionsBundle.messagePointer("options.language.defaults.predefined"), Default.PREDEFINED_SYMBOL),
     TYPE_HINT(keyof("color.settings.toml.type_hint"), Default.CLASS_NAME),
 
-    FUNCTION_SYMBOL(keyof("color.symbol.function"), Default.STATIC_METHOD),
+    SYM_FUNCTION(keyof("color.symbol.function"), Default.STATIC_METHOD),
+    SYM_PROPERTY(keyof("color.symbol.property"), Default.STATIC_FIELD),
     MACRO_SYMBOL(OptionsBundle.messagePointer("options.java.attribute.descriptor.annotation.name"), Default.METADATA),
     KEY_SYMBOL(keyof("color.symbol.builtin"), Default.STATIC_FIELD),
 

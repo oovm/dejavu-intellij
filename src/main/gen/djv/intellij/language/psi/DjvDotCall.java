@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface DjvSuffix extends PsiElement {
+public interface DjvDotCall extends PsiElement {
 
   @Nullable
-  DjvDotCall getDotCall();
+  DjvFunctionArgs getFunctionArgs();
 
-  @Nullable
-  DjvOpSuffix getOpSuffix();
+  @NotNull
+  DjvIdentifier getIdentifier();
 
 }

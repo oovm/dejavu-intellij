@@ -29,8 +29,8 @@ public class DjvSlotExpressionNode extends ASTWrapperPsiElement implements DjvSl
 
   @Override
   @Nullable
-  public DjvIdentifier getIdentifier() {
-    return findChildByClass(DjvIdentifier.class);
+  public DjvExpr getExpr() {
+    return findChildByClass(DjvExpr.class);
   }
 
   @Override

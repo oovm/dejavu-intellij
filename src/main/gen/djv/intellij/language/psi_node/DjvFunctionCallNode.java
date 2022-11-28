@@ -29,14 +29,14 @@ public class DjvFunctionCallNode extends ASTWrapperPsiElement implements DjvFunc
 
   @Override
   @NotNull
-  public DjvIdentifier getIdentifier() {
-    return findNotNullChildByClass(DjvIdentifier.class);
+  public DjvFunctionArgs getFunctionArgs() {
+    return findNotNullChildByClass(DjvFunctionArgs.class);
   }
 
   @Override
   @NotNull
-  public DjvParenthesis getParenthesis() {
-    return findNotNullChildByClass(DjvParenthesis.class);
+  public DjvIdentifier getIdentifier() {
+    return findNotNullChildByClass(DjvIdentifier.class);
   }
 
 }

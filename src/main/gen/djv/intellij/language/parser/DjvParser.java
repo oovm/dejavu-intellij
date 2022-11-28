@@ -94,6 +94,27 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // DOT identifier [function_args]
+  public static boolean dot_call(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "dot_call")) return false;
+    if (!nextTokenIs(b, DOT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DOT);
+    r = r && identifier(b, l + 1);
+    r = r && dot_call_2(b, l + 1);
+    exit_section_(b, m, DOT_CALL, r);
+    return r;
+  }
+
+  // [function_args]
+  private static boolean dot_call_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "dot_call_2")) return false;
+    function_args(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // EQ | COLON
   static boolean eq(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "eq")) return false;
@@ -150,14 +171,76 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identifier <<parenthesis expr COMMA>>
+  // PARENTHESIS_L [expr (COMMA expr)* [COMMA]] PARENTHESIS_R
+  public static boolean function_args(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "function_args")) return false;
+    if (!nextTokenIs(b, PARENTHESIS_L)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PARENTHESIS_L);
+    r = r && function_args_1(b, l + 1);
+    r = r && consumeToken(b, PARENTHESIS_R);
+    exit_section_(b, m, FUNCTION_ARGS, r);
+    return r;
+  }
+
+  // [expr (COMMA expr)* [COMMA]]
+  private static boolean function_args_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "function_args_1")) return false;
+    function_args_1_0(b, l + 1);
+    return true;
+  }
+
+  // expr (COMMA expr)* [COMMA]
+  private static boolean function_args_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "function_args_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expr(b, l + 1);
+    r = r && function_args_1_0_1(b, l + 1);
+    r = r && function_args_1_0_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (COMMA expr)*
+  private static boolean function_args_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "function_args_1_0_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!function_args_1_0_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "function_args_1_0_1", c)) break;
+    }
+    return true;
+  }
+
+  // COMMA expr
+  private static boolean function_args_1_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "function_args_1_0_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && expr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // [COMMA]
+  private static boolean function_args_1_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "function_args_1_0_2")) return false;
+    consumeToken(b, COMMA);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // identifier function_args
   public static boolean function_call(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "function_call")) return false;
     if (!nextTokenIs(b, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = identifier(b, l + 1);
-    r = r && parenthesis(b, l + 1, DjvParser::expr, COMMA_parser_);
+    r = r && function_args(b, l + 1);
     exit_section_(b, m, FUNCTION_CALL, r);
     return r;
   }
@@ -305,13 +388,13 @@ public class DjvParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // inline_for_statement |
   //     inline_if_statement |
-  //     identifier
+  //     expr
   static boolean inlined_end(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "inlined_end")) return false;
     boolean r;
     r = inline_for_statement(b, l + 1);
     if (!r) r = inline_if_statement(b, l + 1);
-    if (!r) r = identifier(b, l + 1);
+    if (!r) r = expr(b, l + 1);
     return r;
   }
 
@@ -596,6 +679,18 @@ public class DjvParser implements PsiParser, LightPsiParser {
     r = identifier(b, l + 1);
     if (!r) r = string_literal(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // OPTIONAL
+  public static boolean op_suffix(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_suffix")) return false;
+    if (!nextTokenIs(b, OPTIONAL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, OPTIONAL);
+    exit_section_(b, m, OP_SUFFIX, r);
     return r;
   }
 
@@ -1193,14 +1288,15 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // OPTIONAL
+  // op_suffix | dot_call
   public static boolean suffix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "suffix")) return false;
-    if (!nextTokenIs(b, OPTIONAL)) return false;
+    if (!nextTokenIs(b, "<suffix>", DOT, OPTIONAL)) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, OPTIONAL);
-    exit_section_(b, m, SUFFIX, r);
+    Marker m = enter_section_(b, l, _NONE_, SUFFIX, "<suffix>");
+    r = op_suffix(b, l + 1);
+    if (!r) r = dot_call(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -1317,7 +1413,7 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (prefix)* atom (suffix)*
+  // (prefix)* atom suffix*
   public static boolean term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term")) return false;
     boolean r;
@@ -1350,25 +1446,15 @@ public class DjvParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (suffix)*
+  // suffix*
   private static boolean term_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term_2")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!term_2_0(b, l + 1)) break;
+      if (!suffix(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "term_2", c)) break;
     }
     return true;
-  }
-
-  // (suffix)
-  private static boolean term_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "term_2_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = suffix(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */
@@ -1416,5 +1502,4 @@ public class DjvParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  static final Parser COMMA_parser_ = (b, l) -> consumeToken(b, COMMA);
 }

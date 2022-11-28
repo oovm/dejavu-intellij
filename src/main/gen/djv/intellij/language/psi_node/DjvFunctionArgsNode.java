@@ -11,14 +11,14 @@ import static djv.intellij.language.psi.DjvTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import djv.intellij.language.psi.*;
 
-public class DjvSuffixNode extends ASTWrapperPsiElement implements DjvSuffix {
+public class DjvFunctionArgsNode extends ASTWrapperPsiElement implements DjvFunctionArgs {
 
-  public DjvSuffixNode(@NotNull ASTNode node) {
+  public DjvFunctionArgsNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull DjvVisitor visitor) {
-    visitor.visitSuffix(this);
+    visitor.visitFunctionArgs(this);
   }
 
   @Override
@@ -28,15 +28,9 @@ public class DjvSuffixNode extends ASTWrapperPsiElement implements DjvSuffix {
   }
 
   @Override
-  @Nullable
-  public DjvDotCall getDotCall() {
-    return findChildByClass(DjvDotCall.class);
-  }
-
-  @Override
-  @Nullable
-  public DjvOpSuffix getOpSuffix() {
-    return findChildByClass(DjvOpSuffix.class);
+  @NotNull
+  public List<DjvExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, DjvExpr.class);
   }
 
 }

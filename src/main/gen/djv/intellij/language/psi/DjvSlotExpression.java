@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface DjvSlotExpression extends PsiElement {
 
   @Nullable
-  DjvIdentifier getIdentifier();
+  DjvExpr getExpr();
 
   @Nullable
   DjvInlineForStatement getInlineForStatement();

@@ -127,21 +127,24 @@ private inline_normal ::=
 private inlined_end ::=
     inline_for_statement |
     inline_if_statement |
-    identifier
+    expr
     ;
-
 slot_l ::= SLOT_START;
 slot_r ::= SLOT_END;
 // ---------------------------------------------------------------------------------------------------------------------
 expr ::= term (infix term)*;
-term ::= (prefix)* atom (suffix)*
+term ::= (prefix)* atom suffix*
 atom ::= '(' expr ')' | function_call | value;
 infix ::= ADD | SUB | MUL | DIV | MOD | EQ | NE;
 prefix ::= ADD;
-suffix ::= OPTIONAL;
+// ---------------------------------------------------------------------------------------------------------------------
+suffix ::= op_suffix | dot_call;
+op_suffix ::= OPTIONAL;
+dot_call ::= DOT identifier [function_args];
 // ---------------------------------------------------------------------------------------------------------------------
 // @function("path")
-function_call ::= identifier <<parenthesis expr COMMA>>;
+function_call ::= identifier function_args;
+function_args ::= PARENTHESIS_L [expr (COMMA expr)* [COMMA]] PARENTHESIS_R;
 // ---------------------------------------------------------------------------------------------------------------------
 macro_call  ::= HASH identifier;
 // ---------------------------------------------------------------------------------------------------------------------

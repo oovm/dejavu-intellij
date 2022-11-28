@@ -15,7 +15,15 @@ public class DjvVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDotCall(@NotNull DjvDotCall o) {
+    visitPsiElement(o);
+  }
+
   public void visitExpr(@NotNull DjvExpr o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFunctionArgs(@NotNull DjvFunctionArgs o) {
     visitPsiElement(o);
   }
 
@@ -84,6 +92,10 @@ public class DjvVisitor extends PsiElementVisitor {
   }
 
   public void visitObjectKey(@NotNull DjvObjectKey o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOpSuffix(@NotNull DjvOpSuffix o) {
     visitPsiElement(o);
   }
 

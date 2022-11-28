@@ -1,7 +1,9 @@
 #![allow(unused_imports)]
 use core::fmt::{Display, Formatter, Write};
 
-use dejavu_engine::{ForLooper, Result, Template, TemplateDisplay, XmlEscaper};
+{% if condition %}
+use {% dejavu.namespace %}::{{% dejavu.imports.join(', ') %}};
+{% end %}
 
 impl{% target.generic %} Display for {% target.path %} {
     #[inline]

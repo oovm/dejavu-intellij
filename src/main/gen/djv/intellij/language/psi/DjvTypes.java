@@ -9,7 +9,9 @@ import djv.intellij.language.psi_node.*;
 public interface DjvTypes {
 
   IElementType ATOM = new DjvElementType("ATOM");
+  IElementType DOT_CALL = new DjvElementType("DOT_CALL");
   IElementType EXPR = new DjvElementType("EXPR");
+  IElementType FUNCTION_ARGS = new DjvElementType("FUNCTION_ARGS");
   IElementType FUNCTION_CALL = new DjvElementType("FUNCTION_CALL");
   IElementType IDENTIFIER = new DjvElementType("IDENTIFIER");
   IElementType INFIX = new DjvElementType("INFIX");
@@ -27,6 +29,7 @@ public interface DjvTypes {
   IElementType OBJECT = new DjvElementType("OBJECT");
   IElementType OBJECT_ITEM = new DjvElementType("OBJECT_ITEM");
   IElementType OBJECT_KEY = new DjvElementType("OBJECT_KEY");
+  IElementType OP_SUFFIX = new DjvElementType("OP_SUFFIX");
   IElementType PAIR = new DjvElementType("PAIR");
   IElementType PARENTHESIS = new DjvElementType("PARENTHESIS");
   IElementType PATTERN = new DjvElementType("PATTERN");
@@ -124,8 +127,14 @@ public interface DjvTypes {
       if (type == ATOM) {
         return new DjvAtomNode(node);
       }
+      else if (type == DOT_CALL) {
+        return new DjvDotCallNode(node);
+      }
       else if (type == EXPR) {
         return new DjvExprNode(node);
+      }
+      else if (type == FUNCTION_ARGS) {
+        return new DjvFunctionArgsNode(node);
       }
       else if (type == FUNCTION_CALL) {
         return new DjvFunctionCallNode(node);
@@ -177,6 +186,9 @@ public interface DjvTypes {
       }
       else if (type == OBJECT_KEY) {
         return new DjvObjectKeyNode(node);
+      }
+      else if (type == OP_SUFFIX) {
+        return new DjvOpSuffixNode(node);
       }
       else if (type == PAIR) {
         return new DjvPairNode(node);

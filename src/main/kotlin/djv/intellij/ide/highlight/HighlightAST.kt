@@ -32,7 +32,15 @@ class HighlightAST : DjvVisitor(), HighlightVisitor {
 //    }
 
     override fun visitFunctionCall(o: DjvFunctionCall) {
-        highlight(o.identifier, HighlightColor.FUNCTION_SYMBOL)
+        highlight(o.identifier, HighlightColor.SYM_FUNCTION)
+    }
+
+    override fun visitDotCall(o: DjvDotCall) {
+        val color = when (o.functionArgs == null) {
+            true -> HighlightColor.SYM_PROPERTY
+            false -> HighlightColor.SYM_FUNCTION
+        }
+        highlight(o.identifier, color)
     }
 
     override fun visitKwIn(o: DjvKwIn) {
