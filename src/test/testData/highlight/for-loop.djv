@@ -9,7 +9,7 @@
         do right
     {% else %}
         do wront
-    {% end %}
-{% end %}
+    {% end-if %}
+{% end-for %}
 
 

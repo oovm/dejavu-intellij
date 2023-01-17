@@ -10,11 +10,10 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static djv.intellij.language.psi.DjvTypes.*;
 import djv.intellij.language.mixin.MixinIdentifier;
 import djv.intellij.language.psi.*;
-import error.NonExistentClass;
 
 public class DjvIdentifierNode extends MixinIdentifier implements DjvIdentifier {
 
-  public DjvIdentifierNode(NonExistentClass node) {
+  public DjvIdentifierNode(@NotNull ASTNode node) {
     super(node);
   }
 
