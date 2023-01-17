@@ -26,7 +26,7 @@ enum class HighlightColor(
     STRING_HINT(keyof("color.settings.toml.string_hint"), Default.KEYWORD),
     STRING(OptionsBundle.messagePointer("options.language.defaults.string"), Default.STRING),
     STRING_ESCAPE(OptionsBundle.messagePointer("options.language.defaults.string"), Default.VALID_STRING_ESCAPE),
-    IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.PARAMETER),
+    IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
 
     //
     OPERATOR(keyof("color.token.operation"), Default.OPERATION_SIGN),

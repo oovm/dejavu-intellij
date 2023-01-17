@@ -1006,7 +1006,7 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_l (KW_END_FOR|KW_END) slot_r
+  // slot_l (KW_END_FOR|KW_END KW_FOR?) slot_r
   public static boolean slot_for_end(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_for_end")) return false;
     if (!nextTokenIs(b, SLOT_START)) return false;
@@ -1019,13 +1019,33 @@ public class DjvParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // KW_END_FOR|KW_END
+  // KW_END_FOR|KW_END KW_FOR?
   private static boolean slot_for_end_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_for_end_1")) return false;
     boolean r;
+    Marker m = enter_section_(b);
     r = consumeToken(b, KW_END_FOR);
-    if (!r) r = consumeToken(b, KW_END);
+    if (!r) r = slot_for_end_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
+  }
+
+  // KW_END KW_FOR?
+  private static boolean slot_for_end_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_for_end_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, KW_END);
+    r = r && slot_for_end_1_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // KW_FOR?
+  private static boolean slot_for_end_1_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_for_end_1_1_1")) return false;
+    consumeToken(b, KW_FOR);
+    return true;
   }
 
   /* ********************************************************** */
@@ -1105,7 +1125,7 @@ public class DjvParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // slot_l (KW_END_IF|KW_END) slot_r
+  // slot_l (KW_END_IF|KW_END KW_IF?) slot_r
   public static boolean slot_if_end(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_if_end")) return false;
     if (!nextTokenIs(b, SLOT_START)) return false;
@@ -1118,13 +1138,33 @@ public class DjvParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // KW_END_IF|KW_END
+  // KW_END_IF|KW_END KW_IF?
   private static boolean slot_if_end_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "slot_if_end_1")) return false;
     boolean r;
+    Marker m = enter_section_(b);
     r = consumeToken(b, KW_END_IF);
-    if (!r) r = consumeToken(b, KW_END);
+    if (!r) r = slot_if_end_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
+  }
+
+  // KW_END KW_IF?
+  private static boolean slot_if_end_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_if_end_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, KW_END);
+    r = r && slot_if_end_1_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // KW_IF?
+  private static boolean slot_if_end_1_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "slot_if_end_1_1_1")) return false;
+    consumeToken(b, KW_IF);
+    return true;
   }
 
   /* ********************************************************** */

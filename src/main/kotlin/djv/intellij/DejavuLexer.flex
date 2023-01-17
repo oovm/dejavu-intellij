@@ -67,12 +67,12 @@ KW_SPECIAL = true | false | null | nil
 
 <CODE> {
     if                      { return KW_IF; }
-    else-if | ef            { return KW_ELSE_IF; }
+    else-if | elseif | ef   { return KW_ELSE_IF; }
     else                    { return KW_ELSE; }
-    end-if                  { return KW_END_IF; }
+    end-if | endif          { return KW_END_IF; }
 
     for                     { return KW_FOR; }
-    end-for                 { return KW_FOR; }
+    end-for | endfor        { return KW_END_FOR; }
 
     let                     { return KW_LET; }
     use                     { return KW_USE; }

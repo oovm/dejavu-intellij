@@ -84,7 +84,7 @@ slot_for_else  ::= slot_else statements* {
 };
 
 slot_for_start ::= slot_l KW_FOR pattern kw_in expr slot_r;
-slot_for_end   ::= slot_l (KW_END_FOR|KW_END) slot_r;
+slot_for_end   ::= slot_l (KW_END_FOR|KW_END KW_FOR?) slot_r;
 // ---------------------------------------------------------------------------------------------------------------------
 inline_for_statement ::= KW_FOR pattern kw_in expr '{' '}' [inline_else] {
 
@@ -104,7 +104,7 @@ slot_if_else  ::= slot_else statements* {
 slot_if_start ::= slot_l KW_IF expr slot_r;
 slot_else_if_start ::= slot_l KW_ELSE_IF expr slot_r;
 slot_else ::= slot_l KW_ELSE slot_r;
-slot_if_end   ::= slot_l (KW_END_IF|KW_END) slot_r;
+slot_if_end   ::= slot_l (KW_END_IF|KW_END KW_IF?) slot_r;
 // ---------------------------------------------------------------------------------------------------------------------
 inline_if_statement ::= KW_IF expr '{' '}' [inline_else] {
 
